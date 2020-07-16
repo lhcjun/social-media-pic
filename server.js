@@ -1,6 +1,6 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const { MONGO_URI } = require("./config/public_key");
+const express = require('express');
+const mongoose = require('mongoose');
+const { MONGO_URI } = require('./config/public_key');
 
 require('./models/user');
 
@@ -24,7 +24,7 @@ db.on('error', error => {
 });
 
 app.use(express.json());
-app.use(require('./routes/sign'));
+app.use(require('./routes/auth'));
 
 
 app.listen(PORT, () => {

@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config/public_key');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 const User = mongoose.model('User');
 
 
-router.get('/protected', (req, res) => {
+router.get('/protected', requireAuth, (req, res) => {
   res.send('hello user')
 });
 

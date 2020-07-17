@@ -11,7 +11,8 @@ const app = express();
 // connect to db
 mongoose.connect(MONGO_URI, {    // options for deprecation warning
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 const db = mongoose.connection;
 // connection success

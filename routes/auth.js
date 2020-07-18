@@ -9,10 +9,7 @@ const router = express.Router();
 const User = mongoose.model('User');
 
 
-router.get('/protected', requireAuth, (req, res) => {
-  res.send('hello user')
-});
-
+// sign up
 router.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
   if (!email || !password || !name) {
@@ -28,8 +25,8 @@ router.post('/signup', (req, res) => {
       bcrypt.hash(password, 10)
         .then(hashedPassword => {
             // create new user if email doesn't exist
-            const user = new User({ name, email, password: hashedPassword });
-            user
+            const newUser = new User({ name, email, password: hashedPassword });
+            newUser
               .save()
               .then(user =>
                 res.status(200).json({ message: 'User successfully saved' })
@@ -40,6 +37,7 @@ router.post('/signup', (req, res) => {
     .catch(console.log);
 });
 
+// sign in
 router.post('/signin', (req, res) => {
     const { email, password } = req.body;
     if(!email || !password){

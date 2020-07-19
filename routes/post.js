@@ -9,8 +9,8 @@ const Post = mongoose.model('Post');
 // get all posts
 router.get('/allposts', requireAuth, (req, res) => {
     Post
-      .find()    // all matching result
-      .populate('postedBy','_id name')
+      .find()                                    // all matching result
+      .populate('postedBy', '_id name')          // replace postedBy(only user id) with ref user id, name
       .then(allPosts => res.json({ allPosts }))
       .catch(console.log);
 });
@@ -32,5 +32,16 @@ router.post('/createpost', requireAuth, (req, res) => {
       )
       .catch(console.log);
 });
+
+
+// get all the posts created by the user
+router.get('/myposts', requireAuth, (req, res) => {
+    Post
+      .find({ postedBy: req.user._id })
+      .populate('postedBy', '_id name')       // replace postedBy(only user id) with user model
+      .then(myPosts => res.json({ myPosts }))
+      .catch(console.log);
+});
+
 
 module.exports = router;

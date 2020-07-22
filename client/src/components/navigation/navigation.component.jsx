@@ -4,7 +4,7 @@ import './navigation.styles.scss';
 
 const Navigation = () => (
   <nav className='navigation'>
-    <Link to='/' className='logo-container'>Logo</Link>
+    <Link to='/' className='logo logo-font'>Instagram</Link>
       <div className='options'>
         <Link to='/signin' className='option'>Sign In</Link>
         <Link to='/signup' className='option'>Sign Up</Link>

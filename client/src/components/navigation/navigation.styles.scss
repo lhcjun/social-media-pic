@@ -5,10 +5,11 @@
     justify-content: space-between; // logo & options
     margin-bottom: 25px;
 
-    .logo-container {
+    .logo {
         height: 100%;
         width: 70px;
         margin: 25px; // padding
+        font-size: 36px;
     }
 
     .options {
@@ -28,8 +29,4 @@
 // html
 a {
     text-decoration: none;
-};
-
-li {
-    list-style: none;
-};
+}

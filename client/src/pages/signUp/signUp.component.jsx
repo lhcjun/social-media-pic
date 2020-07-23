@@ -10,7 +10,7 @@ const SignUpPage = () => (
               <form className='form-content'>
                 <fieldset id='sign_up' className='sign-field'>
                   <legend className='title center logo-font'>Instagram</legend>
-                {/* Input field - name */}
+                  {/* Input field - name */}
                     <div className='input-field-top'>
                       <label className='input-label' htmlFor='name'>Name</label>
                       <input 

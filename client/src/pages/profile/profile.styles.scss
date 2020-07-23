@@ -1,0 +1,104 @@
+.profile-page {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0 5rem;
+
+  @media screen and (max-width: 550px) {
+    padding: 0 3rem;
+  }
+  @media screen and (max-width: 430px) {
+    padding: 0 1.8rem;
+  }
+
+  .user-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid rgb(170, 170, 170);
+
+    .profile-img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 100%;
+      margin-right: 1rem;
+
+      @media screen and (max-width: 600px) {
+        width: 8rem;
+        height: 8rem;
+      }
+      @media screen and (max-width: 480px) {
+        width: 6rem;
+        height: 6rem;
+        margin-top: 1.5rem;
+      }
+    }
+
+    .introduction {
+      @media screen and (max-width: 625px) {
+        h2 {
+          font-size: 1.3rem;
+        }
+        h4 {
+          font-size: 0.9rem;
+        }
+      }
+      @media screen and (max-width: 435px) {
+        h2 {
+          font-size: 1.2rem;
+        }
+        h4 {
+          font-size: 0.8rem;
+        }
+      }
+
+      .user-activity {
+        display: flex;
+        justify-content: space-between;
+        width: 116%; // for space between
+
+        @media screen and (max-width: 625px) {
+          width: 108%;
+        }
+      }
+    }
+  }
+
+  .gallery {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-gap: 20px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-around;
+
+    .item {
+      width: 100%;
+
+      .img-container {
+        // aspect-ratio
+        height: 0;
+        position: relative;
+        // aspect-ratio--1x1
+        padding-bottom: 100%;
+
+        .item-img {
+          display: block;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: cover;
+          // aspect-ratio--object
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 100;
+        }
+      }
+    }
+  }
+}

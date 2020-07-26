@@ -111,8 +111,8 @@
           //   height: 80px;
           // }
 
-          background-position: center;
-          object-fit: cover; // (img, video tag)  vs  background-size: cover; (only bg-img)
+          object-fit: cover;          // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
+          object-position: center;    // background-position: center;
           background-repeat: no-repeat;
         }
       }

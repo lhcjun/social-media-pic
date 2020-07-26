@@ -6,6 +6,7 @@ import HomePage from '../pages/homepage/homepage.component';
 import ProfilePage from '../pages/profile/profile.component';
 import SignInPage from '../pages/signIn/signIn.component';
 import SignUpPage from '../pages/signUp/signUp.component';
+import CreatePostPage from '../pages/createPost/createPost.component';
 import './App.css';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path='/signup'>
           <SignUpPage />
+        </Route>
+        <Route exact path='/createpost'>
+          <CreatePostPage />
         </Route>
       </Switch>
     </Router>

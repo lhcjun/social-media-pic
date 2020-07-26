@@ -1,8 +1,8 @@
 import React from 'react';
 import './profile.styles.scss';
 
-const ProfilePage = () => (
-    <div className='profile-page'>
+const Profile = () => (
+    <div className='profile'>
         <div className='user-info'>
             <img className='profile-img' src='https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='avatars'  />
             <div className='introduction'>
@@ -12,7 +12,7 @@ const ProfilePage = () => (
                     <h4>20 followers</h4>
                     <h4>20 following</h4>
                 </div>
-                <div>Live in Calerfornia</div>
+                <div>Live in California</div>
             </div>
         </div>
         <div className='gallery'>
@@ -44,4 +44,4 @@ const ProfilePage = () => (
     </div>
 );
 
-export default ProfilePage;  
+export default Profile;

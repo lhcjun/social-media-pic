@@ -10,12 +10,14 @@
     width: 100%;
     border: 1px solid;
     background-color: transparent;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
     // input reset - remove platform default styling to an element
     -webkit-appearance: none;
     -moz-appearance: none;
 
     &:hover {
-        background-color: #000;
+        background-color: rgb(78, 80, 79);
         color: #fff;
     }
 }

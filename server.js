@@ -1,9 +1,12 @@
 const express = require('express');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { MONGO_URI } = require('./config/public_key');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
+
+app.use(morgan('combined')); // HTTP req logger  
 
 // connect to db
 mongoose.connect(MONGO_URI, {    // options for deprecation warning

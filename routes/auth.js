@@ -13,7 +13,7 @@ const User = mongoose.model('User');
 router.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
   if (!email || !password || !name) {
-    return res.status(422).json({ error: 'Incorrect form submission' });
+    return res.status(422).json({ error: 'Please fill in your details' });
   }
   User
     .findOne({ email: email })
@@ -41,7 +41,7 @@ router.post('/signup', (req, res) => {
 router.post('/signin', (req, res) => {
     const { email, password } = req.body;
     if(!email || !password){
-        return res.status(422).json({ error: 'Incorrect form submission' });
+        return res.status(422).json({ error: 'Please fill in your details' });
     }
     User
       .findOne({ email: email })

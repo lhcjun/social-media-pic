@@ -94,6 +94,17 @@
                 }
             }
 
+            #signin-error,
+            #signup-error {
+                display: none;
+                opacity: 1;
+                justify-content: center;
+                color: rgb(155, 12, 36);
+                margin-bottom: 1em;
+                letter-spacing: .04rem;
+                font-size: 1rem;
+            }
+
             .submit-button {
                 font-weight: bold;
                 padding: 0.5rem 1rem;

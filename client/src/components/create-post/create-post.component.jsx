@@ -54,7 +54,8 @@ const CreatePost = () => (
                 InputLabelProps={{style: {fontSize: '1.2rem'}}}    // font size of input label
             />
             <TextField  
-                id='post-content' label='Content' multiline variant='outlined' margin='normal' inputProps={{style: {fontSize: '1.2rem'}}}         // input text
+                id='post-content' label='Content' multiline variant='outlined' margin='normal' 
+                inputProps={{style: {fontSize: '1.2rem'}}}         // input text
                 InputLabelProps={{style: {fontSize: '1.2rem'}}}    // input label
             />
         </div>

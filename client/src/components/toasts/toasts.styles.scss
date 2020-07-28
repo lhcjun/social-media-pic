@@ -1,0 +1,146 @@
+.toast-container {
+    // top right of the screen
+    top: 1rem;
+    right: 1rem;
+    overflow: hidden;
+    position: fixed; // absolute positioning the element in relation to the browser window
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1.3rem rgba(0, 0, 0, 0.2);
+    animation: open-toast 0.3s linear;
+    z-index: 10000;
+
+    .toast-frame {
+        padding: 0.1rem 1rem;
+        display: flex;
+        min-width: 100px;
+        height: 3.9rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .toast-img {
+            height: 2.5rem;
+        }
+
+        .toast-message {
+            font-size: 1rem;
+            font-family: 'Recursive', sans-serif;
+            font-weight: 600;
+            color: #fff;
+            margin-left: 1rem;
+        }
+
+        .toast-close {
+            color: rgba(0, 0, 0, 0.2);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 1.5rem;
+            transition: color 0.25s;
+
+            &:hover {
+                color: rgba(0, 0, 0, 0.6);
+                // grow
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    .toast-timer {
+        width: 1%;
+        height: 0.2rem;
+    }
+}
+
+@keyframes open-toast {
+    0% {
+        transform: scaleX(1) scaleY(1);
+    }
+
+    20%,
+    45% {
+        transform: scaleX(1.35) scaleY(0.1);
+    }
+
+    65% {
+        transform: scaleX(0.8) scaleY(1.7);
+    }
+
+    80% {
+        transform: scaleX(0.6) scaleY(0.85);
+    }
+
+    100% {
+        transform: scaleX(1) scaleY(1);
+    }
+}
+
+@keyframes timer {
+    0% {
+        width: 100%;
+    }
+
+    25% {
+        width: 75%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    75% {
+        width: 25%;
+    }
+
+    100% {
+        width: 1%;
+    }
+}
+
+.success-bg {
+    background: #54e09e;
+}
+
+.error-bg {
+    background: #d85261;
+}
+
+.warning-bg {
+    background: #fada5e;
+}
+
+.info-bg {
+    background: #88cef7;
+}
+
+.question-bg {
+    background: #779ecb;
+}
+
+.success-timer {
+    background: #92f1c5;
+}
+
+.error-timer {
+    background: #e5a4b4;
+}
+
+.warning-timer {
+    background: #fcecae;
+}
+
+.info-timer {
+    background: #c3e6fb;
+}
+
+.question-timer {
+    background: #8fb4df;
+}
+
+@font-face {
+    font-family: 'Recursive';
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/recursive/v20/8vJN7wMr0mhh-RQChyHEH06TlXhq_gukbYrFMk1QuAIcyEwG_X-dpEfaE5YaERmK-CImKsvxvU-MXGX2fSqasNfUvz2xbXfn1uEQadCCk317tQ0.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

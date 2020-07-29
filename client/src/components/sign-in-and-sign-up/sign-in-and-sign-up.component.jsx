@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import { API_CALL } from '../../assets/api-call';
 import Toast from '../toasts/toasts.component';
 import './sign-in-and-sign-up.styles.scss';
 
@@ -9,51 +8,50 @@ const SignInAndSignUp = ({ path }) => {
   const [ userCredentials, setCredentials ] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
-  const { name, email, password } = userCredentials;
-  const [showToast, setShowToast] = useState(false);
-  const [toastMsg, setToastMsg] = useState('');
+  const { name, email, password, confirmPassword } = userCredentials;
+  const [ showToast, setShowToast ] = useState(false);
+  const [ toastMsg, setToastMsg ] = useState('');
 
   const handleChange = event =>{
     const { name, value } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
-    console.log(value);
   }
 
-  // const emailFormatValidation = () => {
-  //   // regex email format validation
-  //   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const showErrorMsg = error => {
+    const signUpError = document.querySelector('#signup-error');
+    signUpError.style.display='flex';
+    signUpError.textContent = error;
+  }
 
-  //   if(!emailRegex.test(email)){
-  //     const signUpError = document.querySelector('#signup-error');
-  //     signUpError.style.display='flex';
-  //     signUpError.textContent = 'Invalid Email Format';
-  //     return;
-  //   }
-  // }
 
   const postData = event => {
     // event.preventDefault();
     
+    // check password match
+    if(password !== confirmPassword){
+      alert("Passwords don't match");
+      return; // exit
+    }
+
     fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),
     })
-      .then(res => res.json())
-      .then(data => {
-        // regex email format validation
-        // emailFormatValidation();
-        
+    .then(res => res.json())
+    .then(data => {
         if(data.error){ // from backend
-          const signUpError = document.querySelector('#signup-error');
-          signUpError.style.display='flex';
-          signUpError.textContent = data.error;
+          showErrorMsg(data.error);
+          setShowToast(true);
+          setToastMsg(data.error);
+          console.log(showToast);
         }else{
           // sign up success
-          setShowToast(true);
-          setToastMsg(data.message);
+          // setShowToast(true);
+          // setToastMsg(data.message);
           history.push('/signin');
         }
         console.log(data);
@@ -81,23 +79,30 @@ const SignInAndSignUp = ({ path }) => {
             ) : null}
             {/* Input field - email */}
             <div className='input-field-top'>
-              <label className='input-label' htmlFor='email-address'>Email</label>
-              <input className='input-box' type='email' name='email-address' id='email-address'
+              <label className='input-label' htmlFor='email'>Email</label>
+              <input className='input-box' type='email' name='email' id='email'
                 value={email} onChange={handleChange}
               />
             </div>
             {/* Input field - password */}
-            <div className='input-field'>
+            <div className='input-field-top'>
               <label className='input-label' htmlFor='password'>Password</label>
               <input className='input-box' type='password' name='password' id='password'
                 autoComplete='off' value={password} onChange={handleChange}
               />
             </div>
+            {/* Input field - confirm password */}
+            {path === '/signup' ? (
+              <div className='input-field'>
+                <label className='input-label' htmlFor='confirmPassword'>Confirm Password</label>
+                <input className='input-box' type='password' name='confirmPassword'   
+                  id='confirmPassword' value={confirmPassword} onChange={handleChange}
+                />
+              </div>
+            ) : null}
           </fieldset>
-          {/* Error sign in */}
-          {/* <label id='signin-error' className='center'>Incorrect email or password</label> */}
-          {/* Error sign up */}
-          <label id='signup-error' className='center'></label>
+          {/* Error msg */}
+          <label id={path === '/signup' ? 'signup-error' : 'signin-error'} className='center'></label>
           {/* Submit */}
           <div className='center'>
             {path === '/signup' 
@@ -111,7 +116,7 @@ const SignInAndSignUp = ({ path }) => {
               : <Link to='/signup' className='link'>Sign Up !</Link>
             }
           </div>
-          {showToast ? <Toast type='success' message={toastMsg} /> : null}
+          {/* {showToast && <Toast type='success' message={toastMsg} />} */}
         </div>
       </main>
     </article>

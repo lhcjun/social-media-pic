@@ -12,9 +12,20 @@ const User = mongoose.model('User');
 // sign up
 router.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
+  // Incorrect form submission
   if (!email || !password || !name) {
     return res.status(422).json({ error: 'Please fill in your details' });
   }
+  // check email - regex email format validation
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(!emailRegex.test(email)){
+    return res.status(422).json({ error: 'Invalid Email Format' });
+  }
+  // check password - length
+  if(password.length < 6){
+    return res.status(422).json({ error: 'Password must be at least 6 characters' });
+  }
+  // create new user
   User
     .findOne({ email: email })
     .then(savedUser => {
@@ -48,7 +59,7 @@ router.post('/signin', (req, res) => {
       .then(savedUser => {
         // check email
         if(!savedUser){
-            return res.status(422).json({ error: 'Invalid email or password' });
+            return res.status(422).json({ error: 'Incorrect email or password' });
         }
         // check password
         bcrypt.compare(password, savedUser.password)
@@ -58,7 +69,7 @@ router.post('/signin', (req, res) => {
                     const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET); // _id = from MongoDB
                     res.json({ token })
                 }
-                return res.status(422).json({ error: 'Invalid email or password' });
+                return res.status(422).json({ error: 'Incorrect email or password' });
             })
             .catch(console.log)
       })

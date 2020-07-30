@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Toast from '../toasts/toasts.component';
+import { showSignInErrorMsg } from './sign-in.utils';
+import { showSignUpErrorMsg } from './sign-up.utils';
 import './sign-in-and-sign-up.styles.scss';
 
 const SignInAndSignUp = ({ path }) => {
@@ -12,24 +13,14 @@ const SignInAndSignUp = ({ path }) => {
     confirmPassword: ''
   });
   const { name, email, password, confirmPassword } = userCredentials;
-  const [ showToast, setShowToast ] = useState(false);
-  const [ toastMsg, setToastMsg ] = useState('');
 
   const handleChange = event =>{
     const { name, value } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
   }
 
-  const showErrorMsg = error => {
-    const signUpError = document.querySelector('#signup-error');
-    signUpError.style.display='flex';
-    signUpError.textContent = error;
-  }
-
-
-  const postData = event => {
+  const onSubmitSignUp = () => {
     // event.preventDefault();
-    
     // check password match
     if(password !== confirmPassword){
       alert("Passwords don't match");
@@ -39,24 +30,42 @@ const SignInAndSignUp = ({ path }) => {
     fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password })
     })
     .then(res => res.json())
     .then(data => {
+      console.log(data);
         if(data.error){ // from backend
-          showErrorMsg(data.error);
-          setShowToast(true);
-          setToastMsg(data.error);
-          console.log(showToast);
+          showSignUpErrorMsg(data.error);
         }else{
           // sign up success
-          // setShowToast(true);
-          // setToastMsg(data.message);
+          showSignUpErrorMsg('');
           history.push('/signin');
         }
-        console.log(data);
-      });
-  };
+      })
+    .catch(console.log);
+};
+
+const onSubmitSignIn = () => {
+    // event.preventDefault();
+    fetch('/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+        if(data.error){ // from backend
+          showSignInErrorMsg(data.error);
+        }else{
+          // sign in success
+          showSignInErrorMsg('');
+          history.push('/');
+        }
+      })
+    .catch(console.log);
+};
 
   return (
     <article className='card-frame center'>
@@ -106,8 +115,8 @@ const SignInAndSignUp = ({ path }) => {
           {/* Submit */}
           <div className='center'>
             {path === '/signup' 
-              ? <button className='submit-button center' onClick={() => postData()}>Sign Up</button>
-              : <button className='submit-button center'>Sign In</button>
+              ? <button className='submit-button center' onClick={() => onSubmitSignUp()}>Sign Up</button>
+              : <button className='submit-button center' onClick={() => onSubmitSignIn()}>Sign In</button>
             }
           </div>
           <div className='link-container center'>
@@ -116,7 +125,6 @@ const SignInAndSignUp = ({ path }) => {
               : <Link to='/signup' className='link'>Sign Up !</Link>
             }
           </div>
-          {/* {showToast && <Toast type='success' message={toastMsg} />} */}
         </div>
       </main>
     </article>

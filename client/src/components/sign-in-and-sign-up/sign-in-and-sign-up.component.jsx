@@ -94,7 +94,7 @@ const onSubmitSignIn = () => {
               />
             </div>
             {/* Input field - password */}
-            <div className='input-field-top'>
+            <div className={path === '/signup' ? 'input-field-top' : 'input-field'}>
               <label className='input-label' htmlFor='password'>Password</label>
               <input className='input-box' type='password' name='password' id='password'
                 autoComplete='off' value={password} onChange={handleChange}

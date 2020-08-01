@@ -17,14 +17,19 @@ router.get('/allposts', requireAuth, (req, res) => {
 
 // create a new post
 router.post('/createpost', requireAuth, (req, res) => {
-    const { title, body } = req.body;
-    if(!title || !body){
+    const { title, content, imgURL } = req.body;
+    if(!title || !content || !imgURL){
         return res.status(422).json({ error: 'Incorrect form submission' });
     };
     // remove password (when created new post)
     req.user.password = undefined;
     // create new post
-    const newPost = new Post({ title, body, postedBy: req.user });  // return from requireAuth middleware
+    const newPost = new Post({ 
+      title, 
+      content, 
+      photo: imgURL, 
+      postedBy: req.user        // req.user － return from requireAuth middleware
+    });
     newPost
       .save()
       .then(result =>

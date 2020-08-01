@@ -80,6 +80,7 @@
     .post-input {
         display: flex;
         flex-direction: column;
+        margin-bottom: 2.5rem;
 
         // #post-title,
         // #post-content {
@@ -87,8 +88,18 @@
         // }
     }
 
+    #create-post-error {
+        display: none;
+        opacity: 1;
+        justify-content: center;
+        color: #9b0c24;
+        margin-bottom: 1em;
+        letter-spacing: .06rem;
+        font-size: 1.1rem;
+    }
+
     .post-btn {
-        margin-top: 2.8rem;
+        margin-top: 2rem;
 
         .publish {
             padding: 0.5rem 1rem;

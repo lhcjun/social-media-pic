@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
@@ -28,17 +29,49 @@ const showThumbnail = thumbnailURL => {
     thumbnailContainer.src = thumbnailURL;
 }
 
+const showErrorMsg = error => {
+    const createPostError = document.querySelector('#create-post-error');
+    createPostError.style.display='flex';
+    createPostError.textContent = error;
+};
+
 
 const CreatePost = () => {
+    const history = useHistory();
     const [ title, setTitle ] = useState(''); 
     const [ content, setContent ] = useState(''); 
     const [ postImg, setPostImg ] = useState('');
     const [ imgURL, setImgURL ] = useState('');
 
+    useEffect(() => {
+        if(imgURL){
+            fetch('/createpost', {
+                method: 'post',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, content, imgURL })
+            })
+              .then(res => res.json())
+              .then(data => {
+                console.log(data);
+                  if(data.error){   // from backend
+                    showErrorMsg(data.error);
+                  }else{
+                    // successfully upload new post 
+                    showErrorMsg('');
+                    history.push('/');
+                  }
+                })
+              .catch(console.log);
+            
+        }
+    }, [imgURL]);
+
     const onImgSubmit = () => {
-        // upload file with FormData() & fetch()
+        // upload file with FormData & fetch
         const formData = new FormData();
-        // append data into formData obj
+        // append data into formData obj (convert into a data format that can be sent to the backend)
         formData.append('file', postImg);
         formData.append('upload_preset', 'social-media-pic');   // cloudinary
         formData.append('cloud_name', 'jl');                    // cloudinary
@@ -90,6 +123,8 @@ const CreatePost = () => {
                 InputLabelProps={{style: {fontSize: '1.2rem'}}}    // input label
             />
         </div>
+        {/* Error msg */}
+        <p id='create-post-error' className='center'></p>
         <div className='post-btn center'>
             <button className='publish' onClick={() => onImgSubmit()}>Publish</button>
         </div>

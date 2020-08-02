@@ -19,7 +19,7 @@ router.get('/allposts', requireAuth, (req, res) => {
 router.post('/createpost', requireAuth, (req, res) => {
     const { title, content, imgURL } = req.body;
     if(!title || !content || !imgURL){
-        return res.status(422).json({ error: 'Incorrect form submission' });
+        return res.status(422).json({ error: 'Please add some details to the post' }); // Incorrect form submission
     };
     // remove password (when created new post)
     req.user.password = undefined;

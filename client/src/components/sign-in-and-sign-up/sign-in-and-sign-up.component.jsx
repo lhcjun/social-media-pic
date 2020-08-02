@@ -53,18 +53,21 @@ const onSubmitSignIn = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
         if(data.error){ // from backend
           showSignInErrorMsg(data.error);
         }else{
           // sign in success
+          // set JWT token & user obj into session storage
+          sessionStorage.setItem('jwt', data.token);
+          sessionStorage.setItem('user', JSON.stringify(data.user));  // can only store string
           showSignInErrorMsg('');
           history.push('/');
         }
       })
-    .catch(console.log);
+      .catch(console.log);
 };
 
   return (

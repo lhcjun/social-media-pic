@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
     // extract token from Bearer format(Bearer + JWT token)
     const token = authorization.replace('Bearer ', '')    // authorization === Bearer token123
     // verify token
-    jwt.verify(token, JWT_SECRET, (err, payload) => {
+    jwt.verify(token, JWT_SECRET, (err, payload) => {     // decode(from Base64 back to JSON) & verify token
         if(err){
             return res.status(401).json({ error: 'Unauthorized' });
         }

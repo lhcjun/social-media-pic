@@ -44,19 +44,21 @@ const CreatePost = () => {
     const [ imgURL, setImgURL ] = useState('');
 
     useEffect(() => {
+        // upload post only when imgURL is changed
         if(imgURL){
             fetch('/createpost', {
                 method: 'post',
                 headers:{
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 },
                 body: JSON.stringify({ title, content, imgURL })
             })
               .then(res => res.json())
-              .then(data => {
-                console.log(data);
-                  if(data.error){   // from backend
-                    showErrorMsg(data.error);
+              .then(newPost => {
+                console.log(newPost);
+                  if(newPost.error){   // from backend
+                    showErrorMsg(newPost.error);
                   }else{
                     // successfully upload new post 
                     showErrorMsg('');
@@ -64,9 +66,9 @@ const CreatePost = () => {
                   }
                 })
               .catch(console.log);
-            
         }
-    }, [imgURL]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [imgURL]);                                                       // (for dependencies warning)
 
     const onImgSubmit = () => {
         // upload file with FormData & fetch
@@ -75,14 +77,19 @@ const CreatePost = () => {
         formData.append('file', postImg);
         formData.append('upload_preset', 'social-media-pic');   // cloudinary
         formData.append('cloud_name', 'jl');                    // cloudinary
-        // upload img > get uploaded img url
-        fetch(API_CALL.IMG_UPLOAD, {
-            method: 'post',
-            body: formData
-        })
-          .then(res => res.json())
-          .then(postedImg => setImgURL(postedImg.secure_url))
-          .catch(console.log);
+        
+        if(!postImg){
+            return showErrorMsg('Please add an image to your new post');
+        }else{
+            // upload img > get uploaded img url
+            fetch(API_CALL.IMG_UPLOAD, {
+                method: 'post',
+                body: formData
+            })
+              .then(res => res.json())
+              .then(postedImg => setImgURL(postedImg.secure_url))
+              .catch(console.log);
+        }
     }
 
     return (

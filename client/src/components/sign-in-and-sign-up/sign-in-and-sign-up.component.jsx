@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { showSignInErrorMsg } from './sign-in.utils';
 import { showSignUpErrorMsg } from './sign-up.utils';
+import UserContext from '../../contexts/user/user.context';
+import { setCurrentUser } from '../../reducers/user/user.reducer';
 import './sign-in-and-sign-up.styles.scss';
 
 const SignInAndSignUp = ({ path }) => {
   const history = useHistory();
+  const { state, dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
+
   const [ userCredentials, setCredentials ] = useState({
     name: '',
     email: '',
@@ -34,7 +38,6 @@ const SignInAndSignUp = ({ path }) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
         if(data.error){ // from backend
           showSignUpErrorMsg(data.error);
         }else{
@@ -55,7 +58,6 @@ const onSubmitSignIn = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if(data.error){ // from backend
           showSignInErrorMsg(data.error);
         }else{
@@ -63,6 +65,8 @@ const onSubmitSignIn = () => {
           // set JWT token & user obj into session storage
           sessionStorage.setItem('jwt', data.token);
           sessionStorage.setItem('user', JSON.stringify(data.user));  // can only store string
+          // set user state
+          dispatch(setCurrentUser(data.user));
           showSignInErrorMsg('');
           history.push('/');
         }

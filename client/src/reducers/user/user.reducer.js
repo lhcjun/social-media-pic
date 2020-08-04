@@ -1,19 +1,14 @@
-const INITIAL_STATE = {
+export const initialState = {
     user: null
 }
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
     switch (action.type) {
-        case 'SET_USER':
+        case 'SET_CURRENT_USER':
             return{
                 ...state,
                 user: action.payload
             }
-        // case 'SET_SEARCH_QUERY':
-        //     return {
-        //         ...state,
-        //         searchQuery: action.payload
-        //     }
         default:
             return state;
     }
@@ -21,7 +16,7 @@ const reducer = (state, action) => {
 
 
 // action creator
-const setUser = user => ({          
-    type: 'SET_USER',
+export const setCurrentUser = user => ({          
+    type: 'SET_CURRENT_USER',
     payload: user
 })

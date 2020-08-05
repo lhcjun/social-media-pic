@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import UserContext from '../../contexts/user/user.context';
+import AvatarMenu from '../avatar-menu/avatar-menu.component';
 import './navigation.styles.scss';
 
-const Navigation = () => (
-  <nav className='navigation'>
-    <Link to='/' className='logo logo-font'>Instagram</Link>
+const Navigation = () => {
+  const { state, dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
+  const { user } = state;                               // to get current state in reducer
+
+
+  return(
+    <nav className='navigation'>
+      <Link to={user ? '/' : '/signin'} className='logo logo-font'>Instagram</Link>
       <div className='options'>
-        <Link to='/signin' className='option'>Sign In</Link>
-        <Link to='/signup' className='option'>Sign Up</Link>
-        <Link to='/profile' className='option'>Profile</Link>
-        <Link to='/createpost' className='option'>Create post</Link>
+        { user 
+          ? <AvatarMenu />
+          :(
+            <div className='sign-options'>
+              <Link to='/signin' className='option'>Sign In</Link>
+              <Link to='/signup' className='option'>Sign Up</Link>
+            </div>
+          )
+        }
       </div>
-  </nav>
-);
+    </nav>
+  )
+};
 
 export default Navigation;

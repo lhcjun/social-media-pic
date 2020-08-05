@@ -19,14 +19,13 @@
         align-items: center;
         justify-content: flex-end;
 
-        .option {
-            padding: 10px 15px;
-            cursor: pointer;
+        .sign-options {
+            margin-right: 1rem;
+
+            .option {
+                padding: 10px 15px;
+                cursor: pointer;
+            }
         }
     }
-}
-
-// html
-a {
-    text-decoration: none;
 }

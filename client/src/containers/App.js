@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Navigation from '../components/navigation/navigation.component';
 import HomePage from '../pages/homepage/homepage.component';
@@ -16,7 +16,8 @@ import './App.css';
 const App = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
-  // const { user } = state;                            // to get current state in reducer
+  const { user } = state;                               // to get current state in reducer
+
 
   useEffect(() => {
     // check if user has signed in
@@ -35,19 +36,19 @@ const App = () => {
         <Navigation />
         <Switch>
           <Route exact={true} path='/'>       
-            <HomePage />
+            {user ? <HomePage /> : <Redirect to='/signin' />}
           </Route>
           <Route exact path='/profile'>       
-            <ProfilePage />
+            {user ? <ProfilePage /> : <Redirect to='/signin' />}
           </Route>
           <Route exact path='/signin'>
-            <SignInPage />
+            {user ? <Redirect to='/' /> : <SignInPage />}
           </Route>
           <Route exact path='/signup'>
-            <SignUpPage />
+            {user ? <Redirect to='/' /> : <SignUpPage />}
           </Route>
           <Route exact path='/createpost'>
-            <CreatePostPage />
+            {user ? <CreatePostPage /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
       </Router>

@@ -1,14 +1,21 @@
 .navigation {
-    height: 70px;
+    height: 4rem;
     width: 100%;
     display: flex;
     justify-content: space-between; // logo & options
-    margin-bottom: 25px;
+    padding-bottom: 1rem;
+    margin-bottom: 0.7rem;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    // position
+    position: fixed;
+    top: 0;
+    z-index: 5000;
 
     .logo {
         height: 100%;
-        width: 70px;
-        margin: 25px; // padding
+        width: auto;
+        margin: 1rem 1.5rem; // padding
         font-size: 36px;
     }
 

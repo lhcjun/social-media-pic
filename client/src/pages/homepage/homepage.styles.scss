@@ -1,8 +1,76 @@
 .homepage {
-    margin: 2rem auto;
+    margin: 6rem auto 5rem;
 
     .all-posts {
         display: flex;
         flex-direction: column;
+
+        .empty-post {
+            font-size: 1.8rem;
+            margin-top: 9rem;
+            text-transform: capitalize;
+            font-family: 'Ubuntu Mono';
+            color: rgb(109, 109, 109);
+
+            @media screen and (max-width: 550px) {
+                font-size: 1.5rem;
+            }
+
+            @media screen and (max-width: 320px) {
+                font-size: 1.3rem;
+            }
+        }
     }
+
+    .add-post-btn {
+        align-items: center;
+        cursor: pointer;
+        outline: none; // outline when clicked
+        background-color: #610f4b93;
+        // shape
+        border-radius: 100%;
+        border: 1px solid #410d3363;
+        height: 3.2rem;
+        width: 3.2rem;
+        // position
+        position: fixed;
+        bottom: 10%;
+        right: 5%;
+        z-index: 1000;
+
+        .add-icon {
+            color: #ffebf9d7;
+            font-size: 2.3rem;
+        }
+
+        &:hover {
+            background-color: #610f4b;
+            border-color: #da67bb;
+            // grow
+            transform: scale(1.05);
+
+            .add-icon {
+                color: #fff;
+            }
+        }
+
+        @media screen and (max-width: 1025px) {
+            bottom: 9%;
+            right: 9%;
+        }
+
+        @media screen and (max-width: 500px) {
+            bottom: 5%;
+            right: 5%;
+        }
+    }
+}
+
+
+
+@font-face {
+    font-family: 'Ubuntu Mono';
+    font-display: swap;
+    src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(https://fonts.gstatic.com/s/ubuntumono/v9/KFOjCneDtsqEr0keqCMhbCc6CsQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

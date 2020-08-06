@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email:{ type: String, required: true, unique: true },
     password:{ type: String, required: true },
-});
+},{ timestamps: true });
 
 // compile model from schema (a document instance > for creating a new user)
 mongoose.model('User', userSchema);

@@ -56,7 +56,6 @@ const CreatePost = () => {
             })
               .then(res => res.json())
               .then(newPost => {
-                console.log(newPost);
                   if(newPost.error){   // from backend
                     showErrorMsg(newPost.error);
                   }else{

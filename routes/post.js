@@ -28,7 +28,7 @@ router.post('/createpost', requireAuth, (req, res) => {
       title, 
       content, 
       photo: imgURL, 
-      postedBy: req.user        // req.user － return from requireAuth middleware
+      postedBy: req.user
     });
     newPost
       .save()

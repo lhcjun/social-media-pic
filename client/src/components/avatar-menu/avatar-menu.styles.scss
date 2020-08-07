@@ -5,6 +5,10 @@
         margin-top: 1.2rem;
         cursor: pointer;
 
+        @media screen and (max-width: 370px) {
+            padding: 1rem;
+        }
+
         .avatar-img {
             border-radius: 100%;
             padding: 0.25rem;
@@ -14,6 +18,16 @@
 
             &:hover {
                 border-color: rgba(0, 0, 0, 0.3);
+            }
+
+            @media screen and (max-width: 465px) {
+                height: 3.1rem;
+                width: 3.1rem;
+            }
+
+            @media screen and (max-width: 370px) {
+                height: 2.9rem;
+                width: 2.9rem;
             }
         }
     }

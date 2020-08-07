@@ -17,6 +17,20 @@
         width: auto;
         margin: 1rem 1.5rem; // padding
         font-size: 36px;
+
+        @media screen and (max-width: 465px) {
+            font-size: 30px;
+        }
+
+        @media screen and (max-width: 370px) {
+            font-size: 28px;
+            margin: 1rem;
+        }
+
+        @media screen and (max-width: 295px) {
+            font-size: 26px;
+            margin: 1rem 0.8rem;
+        }
     }
 
     .options {
@@ -27,11 +41,46 @@
         justify-content: flex-end;
 
         .sign-options {
-            margin-right: 1rem;
+            margin: 1rem 1rem 0 0;
+
+            @media screen and (max-width: 370px) {
+                margin: 0.9rem 0.6rem 0 0;
+            }
+
+            @media screen and (max-width: 295px) {
+                margin: 0.7rem 0.5rem 0 0;
+            }
 
             .option {
-                padding: 10px 15px;
+                padding: 0.63rem 0.8rem;
                 cursor: pointer;
+                white-space: nowrap;
+                font-size: 1.2rem;
+                text-transform: uppercase;
+                font-family: 'Julius Sans One';
+                // dim
+                opacity: 1;
+                transition: opacity 0.1s ease-in;
+
+                &:hover {
+                    // dim
+                    opacity: 0.55;
+                    transition: opacity 0.1s ease-in;
+                }
+
+                @media screen and (max-width: 465px) {
+                    padding: 0.63rem 0.5rem;
+                    font-size: 1rem;
+                }
+
+                @media screen and (max-width: 370px) {
+                    padding: 0.63rem 0.4rem;
+                    font-size: 0.9rem;
+                }
+
+                @media screen and (max-width: 295px) {
+                    font-size: 0.8rem;
+                }
             }
         }
     }

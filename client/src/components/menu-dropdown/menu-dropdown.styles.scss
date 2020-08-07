@@ -1,14 +1,27 @@
+@mixin optionFont {
+    font-family: 'Julius Sans One';
+    text-transform: uppercase;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
 .menu-dropdown {
     margin: 1rem;
+    width: 12rem;
+    background-color: #fff;
     // position
     position: absolute;
-    top: 4.1rem;
+    top: 4rem;
     right: 1.1rem;
     z-index: 1000;
 
+    @media screen and (max-width: 465px) {
+        width: 92%;
+        right: 0rem;
+    }
+
     .dropdown-list {
-        width: 12rem;
-        background-color: #fff;
         display: flex;
         flex-direction: column;
         // card frame - light
@@ -16,13 +29,36 @@
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.1);
 
-
         .dropdown-item {
             padding: 0.6rem 1.2rem;
-            line-height: 1.5;
+            @include optionFont();
 
             &:hover {
                 background-color: rgba(61, 64, 66, 0.75);
+                color: #fff;
+            }
+        }
+
+        hr {
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            margin: 0.38rem 0;
+        }
+
+        .sign-out {
+            display: flex;
+            justify-content: flex-start;
+            background-color: #fff;
+            border: none;
+            padding: 0.6rem;
+            padding-left: 1.3rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            outline: none; // outline when clicked
+            @include optionFont();
+
+            &:hover {
+                background-color: rgba(204, 31, 0, 0.65);
                 color: #fff;
             }
         }

@@ -9,6 +9,11 @@ export const reducer = (state, action) => {
                 ...state,
                 user: action.payload
             }
+        case 'CLEAR_USER_STATE':
+            return{
+                ...state,
+                user: null
+            }
         default:
             return state;
     }
@@ -19,4 +24,8 @@ export const reducer = (state, action) => {
 export const setCurrentUser = user => ({          
     type: 'SET_CURRENT_USER',
     payload: user
-})
+});
+
+export const clearUserState = () => ({          
+    type: 'CLEAR_USER_STATE'
+});

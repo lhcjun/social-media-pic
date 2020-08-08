@@ -22,13 +22,6 @@
     }
 }
 
-@mixin margin-horizontal {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
-}
-
 
 .card-frame {
     border-radius: 0.5rem;
@@ -58,13 +51,13 @@
 
             .sign-field {
                 border: 1px solid transparent;
-                @include margin-horizontal();
+                margin: 0 auto;
 
                 .title {
                     font-weight: 550;
                     font-size: 3rem;
                     color: rgb(63, 65, 64);
-                    @include margin-horizontal();
+                    margin: 0 auto;
                 }
 
                 .input-field-top {

@@ -20,18 +20,20 @@ const Profile = () => {
 
     return(
         <div className='profile'>
-            <div className='user-info'>
-                <img className='profile-img' src='https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='avatars'  />
-                <div className='introduction'>
+            <header className='user-info'>
+                <div className='profile-img'>
+                    <img  src='https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='avatars'  />
+                </div>
+                <section className='introduction'>
                     <h2>{user ? user.name : 'Loading'}</h2>
                     <div className='user-activity'>
-                        <h4>20 posts</h4>
-                        <h4>20 followers</h4>
-                        <h4>20 following</h4>
+                        <h4><span>200</span> posts</h4>
+                        <h4><span>200</span> followers</h4>
+                        <h4><span>200</span> following</h4>
                     </div>
-                    <div>Live in California</div>
-                </div>
-            </div>
+                    <div className='bio'>Live in California</div>
+                </section>
+            </header>
             {myPosts.length
                 ?  <Gallery userPosts={myPosts} />
                 : <p>Pending</p>

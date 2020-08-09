@@ -5,11 +5,11 @@
     padding: 0 5rem;
 
     // RWD
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 735px) {
         padding: 0 3rem;
     }
 
-    @media screen and (max-width: 430px) {
+    @media screen and (max-width: 500px) {
         padding: 0 1.8rem;
     }
 
@@ -25,213 +25,153 @@
         border-bottom: 1px solid rgb(170, 170, 170);
 
         .profile-img {
-            width: 10rem;
-            height: 10rem;
-            border-radius: 100%;
-            margin-right: 1rem;
+            flex: 1 0 0%; // flex-grow | flex-shrink | flex-basis
+            -webkit-box-flex: 1;
+            margin-right: 2rem;
 
-            // RWD
-            @media screen and (max-width: 600px) {
-                width: 8rem;
-                height: 8rem;
+            width: calc(33.333% - 1rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+            @media screen and (max-width: 735px) {
+                margin-right: 1rem;
             }
 
-            @media screen and (max-width: 480px) {
-                width: 6rem;
-                height: 6rem;
-                margin-top: 1.5rem;
+            img {
+                align-items: center;
+                align-self: center;
+                flex: none;
+                justify-content: center;
+                width: 60%;
+                border-radius: 100%;
+
+                @media screen and (max-width: 845px) {
+                    width: 80%;
+                }
+
+                @media screen and (max-width: 560px) {
+                    width: 90%;
+                }
             }
         }
 
         .introduction {
+            width: calc(63% - 2rem);
+            flex-basis: 30px;
+            -webkit-box-flex: 2;
+            flex-grow: 2;
+            color: #262626;
+            flex-shrink: 1;
 
-            // RWD
-            @media screen and (max-width: 625px) {
-                h2 {
-                    font-size: 1.3rem;
+            h2 {
+                font-size: 3rem;
+                font-weight: 300;
+                margin: 1rem 0 0.5rem 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; // hide the overflow texts
+
+                @media screen and (max-width: 1025px) {
+                    font-size: 2.5rem;
                 }
 
-                h4 {
-                    font-size: 0.9rem;
+                @media screen and (max-width: 870px) {
+                    font-size: 2rem;
                 }
-            }
 
-            @media screen and (max-width: 435px) {
-                h2 {
+                @media screen and (max-width: 435px) {
                     font-size: 1.2rem;
-                }
-
-                h4 {
-                    font-size: 0.8rem;
-                }
-            }
-
-            @media screen and (max-width: 370px) {
-                h4 {
-                    font-size: 0.7rem;
                 }
             }
 
             .user-activity {
                 display: flex;
-                justify-content: space-between; // post & follower & following
-                width: 116%; // create space for space-between
+                // justify-content: space-between; // post & follower & following
+                // width: 116%; // create space for space-between
 
-                @media screen and (max-width: 625px) {
-                    width: 110%;
+                h4 {
+                    display: inline-block;
+                    font-size: 1.6rem;
+                    line-height: 1.5;
+                    margin: 1rem 4rem 1.8rem 0;
+                    font-weight: 300;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    span {
+                        font-weight: 600;
+
+                        @media screen and (max-width: 735px) {
+                            display: block;
+                        }
+                    }
+
+                    @media screen and (max-width: 970px) {
+                        margin-right: 3rem;
+                        font-size: 1.4rem;
+                    }
+
+                    @media screen and (max-width: 865px) {
+                        font-size: 1.2rem;
+                    }
+
+                    @media screen and (max-width: 800px) {
+                        margin-right: 2.5rem;
+                    }
+
+                    @media screen and (max-width: 760px) {
+                        margin-right: 2.1rem;
+                    }
+
+                    @media screen and (max-width: 735px) {
+                        // margin: 0.5rem 4rem 0.5rem 0;
+                        margin: 0.5rem 0;
+                        justify-content: space-between; // post & follower & following
+                        width: 116%; // create space for space-between
+                    }
                 }
-            }
-        }
-    }
 
-    // .gallery {
-    //     // 1~3 pic in a row (big size img version)
-    //     margin-top: 2rem;
-
-
-    //     // &.big-size-img {
-    //     //   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    //     // }
-    //     // &.small-size-img {
-    //     //   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    //     // }
-    //     // className={`${otherProps.value.length ? 'shrink' : ''} form-input-label `}
-
-    //     // display: flex;
-    //     // flex-wrap: wrap;
-    //     // justify-content: space-around;
-
-    //     .item {
-    //         // width: 30%; (if flex)
-    //         width: 100%;
-
-    //         .img-container {
-    //             display: grid;
-    //             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    //             grid-gap: 20px;
-
-    //             .item-img {
-    //                 width: 100%;
-    //                 height: 300px; // cut hight to match width
-
-    //                 // &.big-size-img {
-    //                 //   height: 300px;
-    //                 // }
-    //                 // &.small-size-img {
-    //                 //   height: 80px;
-    //                 // }
-
-    //                 object-fit: cover; // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
-    //                 object-position: center; // background-position: center;
-    //                 background-repeat: no-repeat;
-    //             }
-    //         }
-    //     }
-    // }
-    .gallery-box {
-        display: flex;
-        -webkit-box-flex: 1;
-        -webkit-flex-grow: 1;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        margin: 0 auto 30px;
-        max-width: 935px;
-        width: 100%;
-
-        @media (max-width: 735px) {
-            border-top: 1px solid #dbdbdb;
-            border-top: 1px solid rgba(var(--b38, 219, 219, 219), 1);
-            -webkit-box-flex: 1;
-            -webkit-flex-grow: 1;
-            -ms-flex-positive: 1;
-            flex-grow: 1;
-        }
-
-        @media (min-width: 736px) {
-            -webkit-box-sizing: content-box;
-            box-sizing: content-box;
-            padding: 60px 20px 0;
-            width: calc(100% - 40px);
-            padding: 30px 20px 0;
-        }
-
-        .gallery {
-            display: flex;
-            flex-grow: 1;
-            -webkit-box-flex: 1;
-            -webkit-flex-grow: 1;
-            -ms-flex-positive: 1;
-
-            .items {
-                display: flex;
-                flex-direction: column;
-                padding-bottom: 300px;
-                padding-top: 0px;
-
-                .row {
+                @media screen and (max-width: 735px) {
+                    // width: 110%;
+                    width: auto;
+                    flex-basis: 100%;
+                    order: 1;
+                    margin-top: 1.5rem;
+                    // 
                     display: flex;
-                    -webkit-box-orient: horizontal;
-                    -webkit-box-direction: normal;
-                    flex-direction: row;
-
-                    @media (min-width: 736px) {
-                        margin-bottom: 28px;
-                    }
-
-                    .img-comtainer {
-                        display: flex;
-                        -webkit-box-flex: 1;
-                        flex: 1 0 0%;
-                        // 
-                        display: block;
-                        width: 30%;
-                        position: relative;
-
-
-                        &:last-child {
-                            margin-right: 0;
-                        }
-
-                        @media (min-width: 736px) {
-                            margin-right: 28px;
-                        }
-
-                        @media (max-width: 735px) {
-                            margin-right: 3px;
-                        }
-
-                        .item-img {
-                            width: 100%;
-                            height: 18.3rem;
-                            object-fit: cover;
-
-                            @media (max-width: 360px) {
-                                height: 6.3rem;
-                            }
-
-                        }
-                    }
-
-
+                    text-align: center;
+                    padding: 0.5rem 0;
+                    border-top: 0.1rem solid #dadada;
+                    border-bottom: 0.1rem solid #dadada;
                 }
+            }
 
+            .bio {
+                font-size: 1.4rem;
+                font-weight: 300;
+                line-height: 1.5;
+                word-wrap: break-word;
+                display: block;
 
+                @media screen and (max-width: 735px) {
+                    width: auto;
+                    flex-basis: 100%;
+                    font-size: 1.2rem;
+                }
             }
         }
     }
 
 
+    // &.big-size-img {
+    //   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    // }
+    // &.small-size-img {
+    //   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    // }
+    // className={`${otherProps.value.length ? 'shrink' : ''} form-input-label `}
 }
-
-// small size img version
-// .gallery{
-//   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-
-//   .item {
-//     .img-container {
-//       .item-img {
-//         height: 80px;
-//       }
-//     }
-//   }
-// }

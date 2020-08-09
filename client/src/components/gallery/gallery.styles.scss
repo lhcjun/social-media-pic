@@ -1,6 +1,6 @@
 .profile-gallery {
     display: flex;
-    flex-grow: 1;
+    flex-grow: 1; // assigned remaining space in the flex container
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     margin: 0 auto 1.9rem;

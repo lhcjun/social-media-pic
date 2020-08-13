@@ -5,7 +5,7 @@ const Gallery = ({ userPosts }) => {
     const allRows = [];
 
     const createRows = userPosts => {
-        // 3 posts in 1 row (for layout)    [[{1}, {2}, {3}], [...], [{1}]]
+        // 3 posts in 1 row (for layout)    [[1, 2, 3], [...], [1]]
         for(var i=0; i<userPosts.length; i+=3){
             allRows.push(userPosts.slice(i, i+3));
         }
@@ -30,25 +30,21 @@ const Gallery = ({ userPosts }) => {
 
     return(
       <main className='profile-gallery'>
-          <article className='gallery'>
-            {
-              createRows(userPosts).map((eachRow, i) => 
-                <div className='row' key={i}>
-                  {  
-                    checkRowLength(eachRow).map(eachPost => 
-                      <div className='img-container' key={eachPost._id}>
-                        <img 
-                            src={eachPost.photo} 
-                            alt={eachPost.title}  
-                            className='item-img' 
-                        />
-                      </div>
-                    )
-                  }
-                </div> 
-              )
-            } 
-          </article>
+        <article className='gallery'>
+          { createRows(userPosts).map((eachRow, i) => 
+              <div className='row' key={i}>
+                { checkRowLength(eachRow).map(eachPost => 
+                    <div className='img-container' key={eachPost._id}>
+                      <img 
+                          src={eachPost.photo} 
+                          alt={eachPost.title}  
+                          className='item-img' 
+                      />
+                    </div>
+                )}
+              </div> 
+          )} 
+        </article>
       </main>
     )
 };

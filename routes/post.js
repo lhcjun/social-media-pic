@@ -44,7 +44,7 @@ router.get('/myposts', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
-// update post to like
+// like post
 router.put('/like', requireAuth, (req, res) => {
   Post
     .findByIdAndUpdate(req.body.postId, {
@@ -58,5 +58,21 @@ router.put('/like', requireAuth, (req, res) => {
       }
     })
 });
+
+// unlike post
+router.put('/unlike', requireAuth, (req, res) => {
+  Post
+    .findByIdAndUpdate(req.body.postId, {
+      $pull: { likes: req.user._id }
+    }, { new: true })
+    .exec((err,result) => {
+      if(err){
+        return res.status(422).json({ error: err });
+      }else{
+        return res.json(result);
+      }
+    })
+});
+
 
 module.exports = router;

@@ -49,11 +49,29 @@
         }
     }
 
-    .heart-icon {
-        color: red;
-        margin: 0.8rem;
-        cursor: pointer;
+    .like {
+        display: flex;
+
+        .heart-icon {
+            color: red;
+            margin: 0.8rem;
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                // grow
+                transform: scale(1.05);
+            }
+        }
+
+        h6 {
+            margin: 0.8rem 0 0.9rem;
+            font-weight: normal;
+            font-size: 1rem;
+        }
     }
+
+
 
     .post-content {
         margin: 0 0.8rem 1rem 1.3rem;

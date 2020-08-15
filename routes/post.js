@@ -10,7 +10,7 @@ router.get('/allposts', requireAuth, (req, res) => {
   Post
     .find() // all matching result
     .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
-    .then((allPosts) => res.json({ allPosts }))
+    .then(allPosts => res.json({ allPosts }))
     .catch(console.log);
 });
 
@@ -31,7 +31,7 @@ router.post('/createpost', requireAuth, (req, res) => {
   });
   newPost
     .save()
-    .then((result) => res.status(200).json({ post: result }))
+    .then(result => res.status(200).json({ post: result }))
     .catch(console.log);
 });
 
@@ -40,7 +40,7 @@ router.get('/myposts', requireAuth, (req, res) => {
   Post
     .find({ postedBy: req.user._id })
     .populate('postedBy', '_id name') // replace postedBy(only user id) with user model
-    .then((myPosts) => res.json({ myPosts }))
+    .then(myPosts => res.json({ myPosts }))
     .catch(console.log);
 });
 
@@ -50,11 +50,11 @@ router.put('/like', requireAuth, (req, res) => {
     .findByIdAndUpdate(req.body.postId, {
       $addToSet: { likes: req.user._id }
     }, { new: true })
-    .exec((err,result) => {
+    .exec((err, likedPost) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(result);
+        return res.json(likedPost);
       }
     })
 });
@@ -65,11 +65,11 @@ router.put('/unlike', requireAuth, (req, res) => {
     .findByIdAndUpdate(req.body.postId, {
       $pull: { likes: req.user._id }
     }, { new: true })
-    .exec((err,result) => {
+    .exec((err, unlikePost) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(result);
+        return res.json(unlikePost);
       }
     })
 });

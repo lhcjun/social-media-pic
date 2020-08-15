@@ -11,7 +11,10 @@ const HomePage = () => {
       headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')}
     })
       .then(res => res.json())
-      .then(posts => setPostData(posts.allPosts))   // array
+      .then(posts => {
+        setPostData(posts.allPosts)
+        console.log(posts)
+      })   // array
       .catch(console.log);
   }, []);
 

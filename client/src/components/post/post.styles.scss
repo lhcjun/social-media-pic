@@ -49,13 +49,34 @@
         }
     }
 
-    .like {
+    .icon {
         display: flex;
+        margin: 0.5rem 0 0.38rem 0.2rem;
+        cursor: pointer;
 
         .heart-icon {
             color: red;
-            margin: 0.8rem;
-            cursor: pointer;
+        }
+
+        .heart-border,
+        .comment-icon {
+            color: #8d8d8d;
+        }
+
+        .heart-icon,
+        .heart-border {
+            font-size: 2rem;
+            margin-right: 0.8rem;
+
+            &:hover,
+            &:focus {
+                transform: scale(1);
+                animation: like-button-animation .45s ease-in-out;
+            }
+        }
+
+        .comment-icon {
+            font-size: 2rem;
 
             &:hover,
             &:focus {
@@ -63,15 +84,13 @@
                 transform: scale(1.05);
             }
         }
-
-        h6 {
-            margin: 0.8rem 0 0.9rem;
-            font-weight: normal;
-            font-size: 1rem;
-        }
     }
 
-
+    .like-num {
+        margin: 0 0 1.1rem 0.38rem;
+        font-weight: normal;
+        font-size: 1rem;
+    }
 
     .post-content {
         margin: 0 0.8rem 1rem 1.3rem;
@@ -113,10 +132,30 @@
                 cursor: pointer;
                 font-size: 2.1rem;
 
-                &:hover {
+                &:hover,
+                &:focus {
                     color: rgb(0, 89, 255);
+                    // grow
+                    transform: scale(1.07);
                 }
             }
         }
+    }
+}
+
+
+@keyframes like-button-animation {
+
+    0%,
+    to {
+        transform: scale(1)
+    }
+
+    25% {
+        transform: scale(1.2)
+    }
+
+    50% {
+        transform: scale(.95)
     }
 }

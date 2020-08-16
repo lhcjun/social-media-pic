@@ -3,6 +3,7 @@ import UserContext from '../../contexts/user/user.context';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import SendIcon from '@material-ui/icons/Send';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './post.styles.scss';
@@ -79,13 +80,14 @@ const Post = ({ eachPost }) => {
       <div className='post-img-container center'>
         <img className='post-img' src={eachPost.photo} alt='post-img' />
       </div>
-      <div className='like'>
+      <div className='icon'>
         {likeClicked 
           ? <FavoriteIcon className='heart-icon' onClick={() => unlikePost(eachPost._id)} />
-          : <FavoriteBorderIcon className='heart-icon' onClick={() => likePost(eachPost._id)}/>
+          : <FavoriteBorderIcon className='heart-border' onClick={() => likePost(eachPost._id)}/>
         }
-        <h6>{likeNum} likes</h6>
+        <ChatBubbleOutlineIcon className='comment-icon' />
       </div>
+      <h6 className='like-num'>{likeNum} likes</h6>
       <div className='post-content'>
         <h5>{eachPost.title}</h5>
         <p>{eachPost.content}</p>

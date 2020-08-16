@@ -48,7 +48,7 @@ router.get('/myposts', requireAuth, (req, res) => {
 router.put('/like', requireAuth, (req, res) => {
   Post
     .findByIdAndUpdate(req.body.postId, {
-      $addToSet: { likes: req.user._id }
+      $addToSet: { likes: req.user._id }    // only add unique item to array
     }, { new: true })
     .exec((err, likedPost) => {
       if(err){
@@ -63,7 +63,7 @@ router.put('/like', requireAuth, (req, res) => {
 router.put('/unlike', requireAuth, (req, res) => {
   Post
     .findByIdAndUpdate(req.body.postId, {
-      $pull: { likes: req.user._id }
+      $pull: { likes: req.user._id }        // remove item from array
     }, { new: true })
     .exec((err, unlikePost) => {
       if(err){
@@ -74,5 +74,26 @@ router.put('/unlike', requireAuth, (req, res) => {
     })
 });
 
+// comment on post
+router.put('/comment', requireAuth, (req, res) => {
+  const comment = {
+    text: req.body.text,
+    postedBy: req.user._id
+  };
+
+  Post
+    .findByIdAndUpdate(req.body.postId,{
+        $push: { comments: comment }            // add item to array
+    },{ new: true })
+    .populate('comments.postedBy', '_id name')  // replace postedBy(only user id) with ref user id, name
+    .populate('postedBy', '_id name')           // post
+    .exec((err, commentedPost) => {
+      if(err){
+        return res.status(422).json({ error: err });
+      }else{
+        return res.json(commentedPost);
+      }
+    })
+});
 
 module.exports = router;

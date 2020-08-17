@@ -15,6 +15,8 @@ const Post = ({ eachPost }) => {
 
   const [ likeClicked, setLikeClicked ] = useState(false);
   const [ likeNum, setLikeNum ] = useState(0);
+  const [ latestComment, setLatestComment ] = useState(null);
+  const [ commentNum, setCommentNum ] = useState(0);
 
   useEffect(() => {
     // check if the user has already liked the post
@@ -24,8 +26,14 @@ const Post = ({ eachPost }) => {
 
     // get like number
     setLikeNum(eachPost.likes.length);
-
   }, [eachPost.likes, user._id]);
+
+  useEffect(() => {
+    // get comment number
+    setCommentNum(eachPost.comments.length);
+    // get latest comment
+    setLatestComment(eachPost.comments[eachPost.comments.length - 1]);
+  }, [eachPost.comments]);
 
 
   // user like the post 
@@ -36,7 +44,7 @@ const Post = ({ eachPost }) => {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
       },
-      body: JSON.stringify({ postId: postId }),
+      body: JSON.stringify({ postId: postId })
     })
       .then(res => res.json())
       .then(likedPost => {
@@ -54,7 +62,7 @@ const Post = ({ eachPost }) => {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
       },
-      body: JSON.stringify({ postId }),
+      body: JSON.stringify({ postId })
     })
       .then(res => res.json())
       .then(unlikePost => {
@@ -62,6 +70,34 @@ const Post = ({ eachPost }) => {
           setLikeNum(unlikePost.likes.length);
       })
       .catch(console.log);
+  };
+
+  // user make a comment on the post
+  const makeComment = e => {
+    e.preventDefault();   // prevent from formally refreshing the page when submitting the form
+    const text = e.target[0].value;
+    const postId = eachPost._id;
+
+    // no empty comment
+    if(text.length){
+      fetch('/comment', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({ postId, text })
+      })
+        .then(res => res.json())
+        .then(commentedPost => {
+          let len = commentedPost.comments.length;
+          setCommentNum(len);
+          setLatestComment(commentedPost.comments[len - 1]);
+        })
+        .catch(console.log);
+    }
+    // clear input box after submit
+    e.target[0].value = '';
   };
 
   return (
@@ -85,16 +121,23 @@ const Post = ({ eachPost }) => {
           ? <FavoriteIcon className='heart-icon' onClick={() => unlikePost(eachPost._id)} />
           : <FavoriteBorderIcon className='heart-border' onClick={() => likePost(eachPost._id)}/>
         }
+        <span>{likeNum}</span>
         <ChatBubbleOutlineIcon className='comment-icon' />
+        <span>{commentNum}</span>
       </div>
-      <h6 className='like-num'>{likeNum} likes</h6>
       <div className='post-content'>
         <h5>{eachPost.title}</h5>
         <p>{eachPost.content}</p>
-        <div className='comment-container'>
+        <form className='comment-container' onSubmit={e => makeComment(e) }>
           <input type='text' placeholder='Add a comment' className='comment' />
-          <SendIcon className='send' />
-        </div>
+          <button><SendIcon className='send' /></button>
+        </form>
+        {latestComment ? (
+          <div className='latest-comment'>
+            <span className='comment-name'>{latestComment.postedBy.name}</span>
+            <span className='comment-text'>{latestComment.text}</span>
+          </div>
+        ) : null}
       </div>
     </div>
   );

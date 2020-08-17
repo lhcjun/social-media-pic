@@ -10,6 +10,8 @@ router.get('/allposts', requireAuth, (req, res) => {
   Post
     .find() // all matching result
     .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
+    .populate('comments.postedBy', '_id name')
+    .sort('-createdAt')
     .then(allPosts => res.json({ allPosts }))
     .catch(console.log);
 });
@@ -40,6 +42,7 @@ router.get('/myposts', requireAuth, (req, res) => {
   Post
     .find({ postedBy: req.user._id })
     .populate('postedBy', '_id name') // replace postedBy(only user id) with user model
+    .sort('-createdAt')
     .then(myPosts => res.json({ myPosts }))
     .catch(console.log);
 });

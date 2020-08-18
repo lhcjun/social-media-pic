@@ -12,9 +12,8 @@ const HomePage = () => {
     })
       .then(res => res.json())
       .then(posts => {
-        setPostData(posts.allPosts)
-        console.log(posts)
-      })   // array
+        setPostData(posts.allPosts);        // array
+      })   
       .catch(console.log);
   }, []);
 

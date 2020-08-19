@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
+import DeletePost from '../delete-post/delete-post.component';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import SendIcon from '@material-ui/icons/Send';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './post.styles.scss';
 
 
@@ -84,7 +84,7 @@ const Post = ({ eachPost }) => {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
+          Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
         },
         body: JSON.stringify({ postId, text })
       })
@@ -100,6 +100,7 @@ const Post = ({ eachPost }) => {
     e.target[0].value = '';
   };
 
+
   return (
     <div className='post-frame'>
       <div className='top-row'>
@@ -111,7 +112,7 @@ const Post = ({ eachPost }) => {
           />
           <div className='username'>{eachPost.postedBy.name}</div>
         </div>
-        <MoreVertIcon className='more-icon' />
+        <DeletePost eachPost={eachPost} />
       </div>
       <div className='post-img-container center'>
         <img className='post-img' src={eachPost.photo} alt='post-img' />

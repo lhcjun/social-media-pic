@@ -1,0 +1,70 @@
+@mixin dropdownOption {
+    border: none;
+    padding: 0.6rem;
+    margin: 0.35rem 0;
+    background-color: #fff;
+    outline: none; // outline when clicked
+    display: flex;
+    justify-content: space-around;
+}
+
+@mixin optionFonts {
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    margin-right: 1.4rem;
+    font-family: 'Julius Sans One';
+    text-transform: uppercase;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.delete-post {
+    margin-left: auto;
+    position: relative; // for absolute
+
+    .more-icon {
+        margin-top: 0.7rem;
+        cursor: pointer;
+    }
+
+    .more-dropdown {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem;
+        width: 12rem;
+        background-color: #fff;
+        // position
+        position: absolute;
+        top: 1.5rem;
+        right: 0rem;
+        z-index: 900;
+        // card frame - light
+        border-radius: 0.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
+
+        .delete-btn {
+            @include dropdownOption();
+            cursor: pointer;
+
+            span {
+                @include optionFonts();
+            }
+
+            &:hover {
+                background-color: rgba(204, 31, 0, 0.65);
+                color: #fff;
+            }
+
+        }
+
+        .btn-unclickable {
+            @include dropdownOption();
+            color: rgb(153, 153, 153);
+
+            span {
+                @include optionFonts();
+            }
+        }
+    }
+}

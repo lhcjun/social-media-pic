@@ -38,7 +38,7 @@ const DeletePost = ({ eachPost }) => {
         />
         {hideMoreDropdown ? null : (
           <div className='more-dropdown'>
-            {eachPost.postedBy._id.toString() === user._id.toString() ? ( // obj
+            {eachPost.postedBy._id.toString() === user._id.toString() ? (  // obj to string
               // only the person who publishes the post is allowed to delete the post
               <button
                 onClick={() => deletePost(eachPost._id)}

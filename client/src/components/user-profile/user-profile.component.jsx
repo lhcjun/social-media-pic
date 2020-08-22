@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
-import './profile.styles.scss';
+import './user-profile.styles.scss';
 
-const Profile = () => {
-  const [ myPosts, setMyPosts ] = useState([]);
+const UserProfile = () => {
+  const { userId } = useParams();                   // get url params
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
     fetch('/myposts', {
@@ -16,17 +18,11 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className='profile'>
+    <div className="user-profile">
       <UserInfo />
       {myPosts.length ? <Gallery userPosts={myPosts} /> : <p>Pending</p>}
     </div>
   );
 };
 
-export default Profile;
-
-// myPosts.map(eachPost =>
-//     <img src={eachPost.photo} alt={eachPost.title}
-//         className='item-img' key={eachPost._id}
-//     />
-// )
+export default UserProfile;

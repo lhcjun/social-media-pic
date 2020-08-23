@@ -1,11 +1,11 @@
 import React from 'react';
-import Profile from '../../components/profile/profile.component';
+import MyProfile from '../../components/my-profile/my-profile.component';
 import './profile-page.styles.scss';
 
 const ProfilePage = () => (
-    <div className='profile-page'>
-        <Profile />
-    </div>
+  <div className="profile-page">
+    <MyProfile />
+  </div>
 );
 
-export default ProfilePage;  
+export default ProfilePage;

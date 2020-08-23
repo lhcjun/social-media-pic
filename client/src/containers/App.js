@@ -32,23 +32,23 @@ const App = () => {
     <Router>
       <Navigation />
       <Switch>
-        <Route exact={true} path="/">
-          {user ? <HomePage /> : <Redirect to="/signin" />}
+        <Route exact={true} path='/'>
+          {user ? <HomePage /> : <Redirect to='/signin' />}
         </Route>
-        <Route exact path="/profile">
-          {user ? <ProfilePage /> : <Redirect to="/signin" />}
+        <Route exact path='/profile'>
+          {user ? <ProfilePage /> : <Redirect to='/signin' />}
         </Route>
-        <Route exact path="/signin">
-          {user ? <Redirect to="/" /> : <SignInPage />}
+        <Route exact path='/signin'>
+          {user ? <Redirect to='/' /> : <SignInPage />}
         </Route>
-        <Route exact path="/signup">
-          {user ? <Redirect to="/" /> : <SignUpPage />}
+        <Route exact path='/signup'>
+          {user ? <Redirect to='/' /> : <SignUpPage />}
         </Route>
-        <Route exact path="/createpost">
-          {user ? <CreatePostPage /> : <Redirect to="/signin" />}
+        <Route exact path='/createpost'>
+          {user ? <CreatePostPage /> : <Redirect to='/signin' />}
         </Route>
-        <Route path="/profile/:userId">
-          {user ? <UserProfilePage /> : <Redirect to="/signin" />}
+        <Route path='/profile/:userId'>
+          {user ? <UserProfilePage /> : <Redirect to='/signin' />}
         </Route>
       </Switch>
     </Router>

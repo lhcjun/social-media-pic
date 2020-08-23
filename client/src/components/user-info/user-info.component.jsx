@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import UserContext from "../../contexts/user/user.context";
-import "./user-info.styles.scss";
+import React from 'react';
+import './user-info.styles.scss';
 
-const UserInfo = () => {
-  const { state, dispatch } = useContext(UserContext); // nearest Context.Provider
-  const { user } = state;
+const UserInfo = ({ user }) => {
+  // get email account (extract string before @ from email)
+  let emailLength = user.email.indexOf('@');
+  const account = user.email.substring(0, emailLength);         // index start & end
 
   return (
     <header className="user-info">
@@ -15,7 +15,8 @@ const UserInfo = () => {
         />
       </div>
       <div className="user-setting">
-        <h2>{user ? user.name : "Loading"}</h2>
+        <h2>{user ? user.name : 'Loading'}</h2>
+        <div className="account">(@{account})</div>
         <button className="edit-btn">Edit Profile</button>
       </div>
       <div className="user-activity">

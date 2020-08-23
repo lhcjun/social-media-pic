@@ -78,10 +78,36 @@
 
               @media screen and (max-width: 950px) {
                   font-size: 2rem;
+                  padding-right: 1.3rem;
+              }
+
+              @media screen and (max-width: 735px) {
+                  padding-right: 0.5rem;
               }
 
               @media screen and (max-width: 435px) {
                   font-size: 1.5rem;
+                  padding-right: 0;
+              }
+          }
+
+          .account {
+              font-size: 1.4rem;
+              font-weight: 300;
+              margin-top: 1rem;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis; // hide the overflow texts
+              display: inline-block;
+
+              @media screen and (max-width: 950px) {
+                  font-size: 1.3rem;
+                  margin-top: 0.6rem;
+              }
+
+              @media screen and (max-width: 435px) {
+                  font-size: 1.1rem;
+                  margin-top: 0.3rem;
               }
           }
 

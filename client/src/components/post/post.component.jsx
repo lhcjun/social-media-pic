@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import DeletePost from '../delete-post/delete-post.component';
 
@@ -110,7 +111,11 @@ const Post = ({ eachPost }) => {
             src='https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
             alt='user'
           />
-          <div className='username'>{eachPost.postedBy.name}</div>
+          <Link className='username'
+            to={eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile'}
+          >
+            {eachPost.postedBy.name}
+          </Link>
         </div>
         <DeletePost eachPost={eachPost} />
       </div>

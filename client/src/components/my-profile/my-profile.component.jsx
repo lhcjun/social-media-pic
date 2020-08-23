@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import UserContext from '../../contexts/user/user.context';
 import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
-import './profile.styles.scss';
+import './my-profile.styles.scss';
 
-const Profile = () => {
-  const [ myPosts, setMyPosts ] = useState([]);
+const MyProfile = () => {
+  const { state, dispatch } = useContext(UserContext); // nearest Context.Provider
+  const { user } = state;
+
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
     fetch('/myposts', {
@@ -16,14 +20,14 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className='profile'>
-      <UserInfo />
+    <div className='my-profile'>
+      <UserInfo user={user} />
       {myPosts.length ? <Gallery userPosts={myPosts} /> : <p>Pending</p>}
     </div>
   );
 };
 
-export default Profile;
+export default MyProfile;
 
 // myPosts.map(eachPost =>
 //     <img src={eachPost.photo} alt={eachPost.title}

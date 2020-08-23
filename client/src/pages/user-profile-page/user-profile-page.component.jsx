@@ -1,9 +1,9 @@
 import React from 'react';
 import UserProfile from '../../components/user-profile/user-profile.component';
-import './profile-page.styles.scss';
+import './user-profile-page.styles.scss';
 
 const UserProfilePage = () => (
-    <div className="user-profile-page">
+    <div className='user-profile-page'>
         <UserProfile />
     </div>
 );

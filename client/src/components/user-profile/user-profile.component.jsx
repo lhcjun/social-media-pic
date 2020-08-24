@@ -5,30 +5,27 @@ import Gallery from '../gallery/gallery.component';
 import './user-profile.styles.scss';
 
 const UserProfile = () => {
-  const { userId } = useParams(); // get url params
-  const [userProfile, setUserProfile] = useState([]);
+  const { userId } = useParams();         // get url params
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     fetch(`/user/${userId}`, {
       headers: { Authorization: 'Bearer ' + sessionStorage.getItem('jwt') },
     })
       .then((res) => res.json())
-      .then((userAndPosts) => {
-        console.log(userAndPosts);
-        setUserProfile(userAndPosts);
-      })
+      .then((userAndPosts) => setUserProfile(userAndPosts))
       .catch(console.log);
   }, [userId]);
 
   return (
     <React.Fragment>
-      {/* {userProfile
+      {userProfile
         ? <div className='user-profile'>
             <UserInfo user={userProfile.user} />
             {userProfile.posts.length ? <Gallery userPosts={userProfile.posts} /> : <p>Pending</p>}
           </div>
         : <h2>Loading...</h2>
-      } */}
+      }
     </React.Fragment>
   );
 };

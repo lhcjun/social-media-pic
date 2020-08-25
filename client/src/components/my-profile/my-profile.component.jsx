@@ -20,8 +20,8 @@ const MyProfile = () => {
   }, []);
 
   return (
-    <div className='my-profile'>
-      <UserInfo user={user} />
+    <div className="my-profile">
+      <UserInfo user={user} posts={myPosts} />
       {myPosts.length ? <Gallery userPosts={myPosts} /> : <p>Pending</p>}
     </div>
   );

@@ -21,7 +21,7 @@ const UserProfile = () => {
     <React.Fragment>
       {userProfile
         ? <div className='user-profile'>
-            <UserInfo user={userProfile.user} />
+            <UserInfo user={userProfile.user} posts={userProfile.posts} />
             {userProfile.posts.length ? <Gallery userPosts={userProfile.posts} /> : <p>Pending</p>}
           </div>
         : <h2>Loading...</h2>

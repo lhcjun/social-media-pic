@@ -1,10 +1,10 @@
 import React from 'react';
 import './user-info.styles.scss';
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({ user, posts }) => {
   // get email account (extract string before @ from email)
   let emailLength = user.email.indexOf('@');
-  const account = user.email.substring(0, emailLength);         // index start & end
+  const account = user.email.substring(0, emailLength); // index start & end
 
   return (
     <header className="user-info">
@@ -21,13 +21,13 @@ const UserInfo = ({ user }) => {
       </div>
       <div className="user-activity">
         <h4>
-          <span>200</span> posts
+          <span>{posts.length}</span> posts
         </h4>
         <h4>
-          <span>200</span> followers
+          <span>{user.followers.length}</span> followers
         </h4>
         <h4>
-          <span>200</span> following
+          <span>{user.following.length}</span> following
         </h4>
       </div>
       <div className="bio">

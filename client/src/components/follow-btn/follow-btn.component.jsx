@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
+import { updateUserFollow } from '../../reducers/user/user.reducer';
 import './follow-btn.styles.scss';
 
-const FollowBtn = () => {
+const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
   // sign in user
-  const { state } = useContext(UserContext); // nearest Context.Provide      r
+  const { state, dispatch } = useContext(UserContext); // nearest Context.Provide      r
   const { user } = state;
   // profile page user
   const { userId } = useParams(); // get url params
+
+  const [ showFollow, setShowFollow ] = useState(true)
 
   const followUser = () => {
     fetch('/follow', {
@@ -22,17 +25,52 @@ const FollowBtn = () => {
       .then((res) => res.json())
       .then((followerUser) => {
         console.log(followerUser);
-        // 要更新 user 才能更新 follower & following 數量
-        /* 要更新的 user  
-            1. sessionStorage 的 sign in user (主動追蹤 / 取消追蹤)
-            2. state 裡的 user (user state)
-            3. other user profile 的 user (被追蹤 / 取消追蹤)
-        */
+        /* update user obj (sign in user & followed user) － with follower & following */
+        // 1. update sessionStorage user obj (sign in user)
+        sessionStorage.setItem('user', JSON.stringify(followerUser));
+        // 2. update reducer user state (my profile page)
+        updateUserFollow(followerUser);
+        // 3. update userProfile state － followed user's follower [] (other user profile page)
+        setUserFollower(followerUser);
+        // btn
+        setShowFollow(false);
       })
       .catch(console.log);
   };
 
-  return <button className="follow-btn">Follow</button>;
+  const unfollowUser = () => {
+    fetch('/unfollow', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({ unfollowedId: userId }), // user to be unfollowed = profile page user
+    })
+      .then((res) => res.json())
+      .then((unfollowerUser) => {
+        console.log(unfollowerUser);
+        /* update user obj (sign in user & followed user) － with follower & following */
+        // 1. update sessionStorage user obj (sign in user)
+        sessionStorage.setItem('user', JSON.stringify(unfollowerUser));
+        // 2. update reducer user state (my profile page)
+        updateUserFollow(unfollowerUser);
+        // 3. update userProfile state － followed user's follower [] (other user profile page)
+        removeUserFollower(unfollowerUser);
+        // btn
+        setShowFollow(true);
+      })
+      .catch(console.log);
+  };
+
+  return (
+    <React.Fragment>
+      {showFollow
+        ? <button className="follow-btn" onClick={() => followUser()}>Follow</button>
+        : <button className="follow-btn" onClick={() => unfollowUser()}>Unfollow</button>
+      }
+    </React.Fragment>
+  );
 };
 
 export default FollowBtn;

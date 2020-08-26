@@ -1,7 +1,8 @@
 import React from 'react';
+import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-info.styles.scss';
 
-const UserInfo = ({ user, posts }) => {
+const UserInfo = ({ user, posts, setUserFollower, removeUserFollower }) => {
   // get email account (extract string before @ from email)
   let emailLength = user.email.indexOf('@');
   const account = user.email.substring(0, emailLength); // index start & end
@@ -18,17 +19,27 @@ const UserInfo = ({ user, posts }) => {
         <h2>{user ? user.name : 'Loading'}</h2>
         <div className="account">(@{account})</div>
         <button className="edit-btn">Edit Profile</button>
+        <FollowBtn
+          setUserFollower={setUserFollower}
+          removeUserFollower={removeUserFollower}
+        />
       </div>
       <div className="user-activity">
-        <h4>
-          <span>{posts.length}</span> posts
-        </h4>
-        <h4>
-          <span>{user.followers.length}</span> followers
-        </h4>
-        <h4>
-          <span>{user.following.length}</span> following
-        </h4>
+        {posts ? (
+          <h4>
+            <span>{posts.length}</span> posts
+          </h4>
+        ) : null}
+        {user ? (
+          <React.Fragment>
+            <h4>
+              <span>{user.followers.length}</span> followers
+            </h4>
+            <h4>
+              <span>{user.following.length}</span> following
+            </h4>
+          </React.Fragment>
+        ) : null}
       </div>
       <div className="bio">
         Using the order property will create a disconnect between the visual

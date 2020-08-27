@@ -46,7 +46,7 @@ const UserProfile = () => {
           ...prevState,             // user & posts
           user: {
             ...prevState.user,
-            followers: prevState.user.followers.filter(eachId => eachId != unfollowerUser._id )
+            followers: prevState.user.followers.filter(eachId => eachId !== unfollowerUser._id )
           }
         }
       }

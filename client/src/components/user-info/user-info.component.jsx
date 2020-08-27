@@ -25,21 +25,15 @@ const UserInfo = ({ user, posts, setUserFollower, removeUserFollower }) => {
         />
       </div>
       <div className="user-activity">
-        {posts ? (
-          <h4>
-            <span>{posts.length}</span> posts
-          </h4>
-        ) : null}
-        {user ? (
-          <React.Fragment>
-            <h4>
-              <span>{user.followers.length}</span> followers
-            </h4>
-            <h4>
-              <span>{user.following.length}</span> following
-            </h4>
-          </React.Fragment>
-        ) : null}
+        <h4>
+          <span>{posts ? posts.length : 0}</span> posts
+        </h4>
+        <h4>
+          <span>{user ? user.followers.length : 0}</span> followers
+        </h4>
+        <h4>
+          <span>{user ? user.following.length : 0}</span> following
+        </h4>
       </div>
       <div className="bio">
         Using the order property will create a disconnect between the visual

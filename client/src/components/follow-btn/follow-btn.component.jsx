@@ -11,7 +11,8 @@ const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
   // profile page user
   const { userId } = useParams(); // get url params
 
-  const [ showFollow, setShowFollow ] = useState(true)
+  // check if the sign in user has already followed when componentDidMount
+  const [ showFollow, setShowFollow ] = useState(user ? !user.following.includes(userId) : true);
 
   const followUser = () => {
     fetch('/follow', {
@@ -29,7 +30,7 @@ const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
         // 1. update sessionStorage user obj (sign in user)
         sessionStorage.setItem('user', JSON.stringify(followerUser));
         // 2. update reducer user state (my profile page)
-        updateUserFollow(followerUser);
+        dispatch(updateUserFollow(followerUser));
         // 3. update userProfile state － followed user's follower [] (other user profile page)
         setUserFollower(followerUser);
         // btn
@@ -54,7 +55,7 @@ const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
         // 1. update sessionStorage user obj (sign in user)
         sessionStorage.setItem('user', JSON.stringify(unfollowerUser));
         // 2. update reducer user state (my profile page)
-        updateUserFollow(unfollowerUser);
+        dispatch(updateUserFollow(unfollowerUser));
         // 3. update userProfile state － followed user's follower [] (other user profile page)
         removeUserFollower(unfollowerUser);
         // btn

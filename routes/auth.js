@@ -67,8 +67,8 @@ router.post('/signin', (req, res) => {
                 if(doMatch){
                     // successfully signed in
                     const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET); // _id = from MongoDB
-                    const { _id, name, email } = savedUser;
-                    return res.json({ token, user: { _id, name, email } });
+                    const { _id, name, email, followers, following } = savedUser;
+                    return res.json({ token, user: { _id, name, email, followers, following } });
                 }
                 return res.status(422).json({ error: 'Incorrect email or password' });
             })

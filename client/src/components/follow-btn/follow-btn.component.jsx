@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import { updateUserFollow } from '../../reducers/user/user.reducer';
-import './follow-btn.styles.scss';
 
 const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
   // sign in user
@@ -68,7 +67,7 @@ const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
     <React.Fragment>
       {showFollow
         ? <button className="follow-btn" onClick={() => followUser()}>Follow</button>
-        : <button className="follow-btn" onClick={() => unfollowUser()}>Unfollow</button>
+        : <button className="unfollow-btn" onClick={() => unfollowUser()}>Unfollow</button>
       }
     </React.Fragment>
   );

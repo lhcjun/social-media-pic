@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../contexts/user/user.context';
 import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-info.styles.scss';
 
-const UserInfo = ({ user, posts, setUserFollower, removeUserFollower }) => {
+const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
+  // sign in user
+  const { state } = useContext(UserContext); // nearest Context.Provide      r
+  const { user } = state;
+
   // get email account (extract string before @ from email)
-  let emailLength = user.email.indexOf('@');
-  const account = user.email.substring(0, emailLength); // index start & end
+  let emailLength = infoUser.email.indexOf('@');
+  const account = infoUser.email.substring(0, emailLength); // index start & end
 
   return (
     <header className="user-info">
@@ -16,23 +21,25 @@ const UserInfo = ({ user, posts, setUserFollower, removeUserFollower }) => {
         />
       </div>
       <div className="user-setting">
-        <h2>{user ? user.name : 'Loading'}</h2>
+        <h2>{infoUser ? infoUser.name : 'Loading'}</h2>
         <div className="account">(@{account})</div>
-        <button className="edit-btn">Edit Profile</button>
-        <FollowBtn
-          setUserFollower={setUserFollower}
-          removeUserFollower={removeUserFollower}
-        />
+        {user._id === infoUser._id
+          ? <button className="edit-btn">Edit Profile</button>
+          : <FollowBtn
+              setUserFollower={setUserFollower}
+              removeUserFollower={removeUserFollower}
+            />
+        }
       </div>
       <div className="user-activity">
         <h4>
           <span>{posts ? posts.length : 0}</span> posts
         </h4>
         <h4>
-          <span>{user ? user.followers.length : 0}</span> followers
+          <span>{infoUser ? infoUser.followers.length : 0}</span> followers
         </h4>
         <h4>
-          <span>{user ? user.following.length : 0}</span> following
+          <span>{infoUser ? infoUser.following.length : 0}</span> following
         </h4>
       </div>
       <div className="bio">

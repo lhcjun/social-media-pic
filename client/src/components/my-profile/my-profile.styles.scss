@@ -16,4 +16,19 @@
     @media screen and (max-width: 335px) {
         padding: 0 1.2rem;
     }
+
+    .block-icon {
+        display: flex;
+        margin: 0.5rem 0 0 auto;
+        color: #cacaca;
+        cursor: pointer;
+
+        @media screen and (max-width: 500px) {
+            margin-top: 0.3rem;
+        }
+
+        &:hover {
+            color: #a8a8a8;
+        }
+    }
 }

@@ -4,25 +4,16 @@ import Post from '../../components/post/post.component';
 import './homepage.styles.scss';
 
 const HomePage = () => {
-  const [postData, setPostData] = useState([]);
+  const [ allPosts, setAllPosts ] = useState([]);
 
-  // useEffect(() => {
-  //   fetch('/followingposts', {
-  //     headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')}
-  //   })
-  //     .then(res => res.json())
-  //     .then(posts => {
-  //       setPostData(posts.followingPosts);        // array
-  //     })
-  //     .catch(console.log);
-  // }, []);
+  // get my posts & my following user's posts
   useEffect(() => {
     fetch('/homeposts', {
       headers: { Authorization: 'Bearer ' + sessionStorage.getItem('jwt') },
     })
-      .then((res) => res.json())
-      .then((posts) => {
-        setPostData(posts.homePosts); // array
+      .then(res => res.json())
+      .then(posts => {
+        setAllPosts(posts.homePosts); // array
       })
       .catch(console.log);
   }, []);
@@ -30,20 +21,17 @@ const HomePage = () => {
   return (
     <div className="homepage center">
       <div className="all-posts">
-        {postData.length ? (
-          postData.map((eachPost) => (
-            <Post eachPost={eachPost} key={eachPost._id} />
-          ))
-        ) : (
-          <Link to="/createpost" className="empty-post">
-            Create your first post !
-          </Link>
-        )}
+        {allPosts.length 
+          ? allPosts.map(eachPost => (
+              <Post eachPost={eachPost} key={eachPost._id} />
+            ))
+          : <Link to="/createpost" className="empty-post">
+              Create your first post !
+            </Link>
+        }
       </div>
       <button className="add-post-btn center">
-        <Link to="/createpost" className="add-icon">
-          &#43;
-        </Link>
+        <Link to="/createpost" className="add-icon">&#43;</Link>
       </button>
     </div>
   );

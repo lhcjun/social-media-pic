@@ -2,6 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
 import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
+import PersonalPosts from '../personal-posts/personal-posts.component';
+import AppsIcon from '@material-ui/icons/Apps';
+import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import './my-profile.styles.scss';
 
 const MyProfile = () => {
@@ -9,6 +12,7 @@ const MyProfile = () => {
   const { user } = state;
 
   const [myPosts, setMyPosts] = useState([]);
+  const [blockDisplay, setBlockDisplay] = useState(true);
 
   useEffect(() => {
     fetch('/myposts', {
@@ -21,8 +25,15 @@ const MyProfile = () => {
 
   return (
     <div className="my-profile">
-      <UserInfo user={user} posts={myPosts} />
-      {myPosts.length ? <Gallery userPosts={myPosts} /> : <p>Pending</p>}
+      <UserInfo infoUser={user} posts={myPosts} />
+      {blockDisplay 
+        ? <ViewAgendaIcon className='block-icon' onClick={() => setBlockDisplay(false)} /> 
+        : <AppsIcon className='block-icon' onClick={() => setBlockDisplay(true)} />
+      }
+      {myPosts.length 
+        ? (blockDisplay ? <Gallery userPosts={myPosts} />  : <PersonalPosts userPosts={myPosts} />)
+        : <p>Pending</p>
+      }
     </div>
   );
 };

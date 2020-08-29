@@ -111,7 +111,9 @@
               }
           }
 
-          .edit-btn {
+          .edit-btn,
+          .follow-btn,
+          .unfollow-btn {
               font-size: 1rem;
               height: 2.2rem;
               line-height: 1.8; // min-height
@@ -121,7 +123,10 @@
               padding: 0 2rem;
               margin-left: 3.5rem;
               background: none;
+              outline: none;
               display: inline-block;
+              text-transform: capitalize;
+              cursor: pointer;
 
               @media screen and (max-width: 950px) {
                   margin-top: 0.3rem;
@@ -133,6 +138,24 @@
                   margin: 0 1rem 0 0;
                   height: auto; // use line-height
               }
+
+              &:hover {
+                  border-color: #9b9a9a;
+              }
+          }
+
+          .follow-btn:hover {
+              background-color: #42A5F5;
+              color: #fff;
+          }
+
+          .unfollow-btn:hover {
+              background-color: rgb(255, 118, 118); // 
+              color: #fff;
+          }
+
+          .edit-btn:hover {
+              background-color: rgb(255, 221, 176);
           }
       }
 

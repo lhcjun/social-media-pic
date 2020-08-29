@@ -11,13 +11,17 @@
         box-sizing: content-box; // actual size = value + border + padding
         -webkit-box-sizing: content-box;
         width: calc(100% - 40px);
-        padding: 1.9rem 1.25rem 0;
+        padding: 1.2rem 1.25rem 0;
     }
 
     @media (max-width: 735px) {
-        border-top: 1px solid #dbdbdb;
+        // border-top: 1px solid #dbdbdb;
         flex-grow: 1;
-        padding-top: 1.8rem;
+        padding-top: 0.6rem;
+    }
+
+    @media (max-width: 360px) {
+        padding-top: 0.3rem;
     }
 
     .gallery {
@@ -99,6 +103,11 @@
                         height: 5.6rem;
                     }
 
+                }
+
+                // to hide the broken image icon
+                [src=''] {
+                    visibility: hidden;
                 }
             }
 

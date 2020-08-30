@@ -1,12 +1,22 @@
 .personal-posts {
     margin-top: 2rem;
+    width: 100%;
 
     @media screen and (max-width: 735px) {
         margin-top: 1rem;
+        width: 90%;
+    }
+
+    @media screen and (max-width: 550px) {
+        width: 85%;
     }
 
     @media screen and (max-width: 360px) {
         margin-top: 0.7rem;
+    }
+
+    @media screen and (max-width: 290px) {
+        width: 80%;
     }
 
     .all-posts {

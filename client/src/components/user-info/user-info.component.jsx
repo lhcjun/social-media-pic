@@ -8,9 +8,9 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
   const { state } = useContext(UserContext); // nearest Context.Provide      r
   const { user } = state;
 
-  // get email account (extract string before @ from email)
-  let emailLength = infoUser.email.indexOf('@');
-  const account = infoUser.email.substring(0, emailLength); // index start & end
+  // extract string before @ from email
+  // let emailLength = infoUser.email.indexOf('@');
+  // const account = infoUser.email.substring(0, emailLength); // index start & end
 
   return (
     <header className="user-info">
@@ -22,7 +22,7 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
       </div>
       <div className="user-setting">
         <h2>{infoUser ? infoUser.name : 'Loading'}</h2>
-        <div className="account">(@{account})</div>
+        <div className="account">{infoUser ? `(@${infoUser.account})` : null}</div>
         {user._id === infoUser._id
           ? <button className="edit-btn">Edit Profile</button>
           : <FollowBtn

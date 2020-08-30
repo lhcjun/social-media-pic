@@ -12,11 +12,15 @@ const SignInAndSignUp = ({ path }) => {
 
   const [ userCredentials, setCredentials ] = useState({
     name: '',
+    account: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
-  const { name, email, password, confirmPassword } = userCredentials;
+  const { name, account, email, password, confirmPassword } = userCredentials;
+
+  const [ avatarImg, setAvatarImg ] = useState('');
+  const [ avatarUrl, setAvatarUrl ] = useState(null);
 
   const handleChange = event =>{
     const { name, value } = event.target;
@@ -34,7 +38,7 @@ const SignInAndSignUp = ({ path }) => {
     fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password })
+      body: JSON.stringify({ name, account, email, password })
     })
     .then(res => res.json())
     .then(data => {
@@ -90,6 +94,15 @@ const onSubmitSignIn = () => {
                 <input className='input-box' type='text' name='name' id='name'
                   value={name}    /* event.target.value */
                   onChange={event => handleChange(event)}
+                />
+              </div>
+            ) : null}
+            {/* Input field - account */}
+            {path === '/signup' ? (
+              <div className='input-field-top'>
+                <label className='input-label' htmlFor='account'>Username</label>
+                <input className='input-box' type='text' name='account' id='account'
+                  value={account} onChange={handleChange}
                 />
               </div>
             ) : null}

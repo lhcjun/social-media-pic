@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../../components/post/post.component';
+import EmptyPost from '../../components/empty-post/empty-post.component';
 import './homepage.styles.scss';
 
 const HomePage = () => {
@@ -25,9 +26,10 @@ const HomePage = () => {
           ? allPosts.map(eachPost => (
               <Post eachPost={eachPost} key={eachPost._id} />
             ))
-          : <Link to="/createpost" className="empty-post">
-              Create your first post !
-            </Link>
+          : <div>
+              <EmptyPost postOwner='You' />
+              <div className="empty-post">Go follow a user to get started !</div>
+            </div>
         }
       </div>
       <button className="add-post-btn center">

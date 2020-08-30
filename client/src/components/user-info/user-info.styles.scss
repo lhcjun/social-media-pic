@@ -127,6 +127,7 @@
               display: inline-block;
               text-transform: capitalize;
               cursor: pointer;
+              white-space: nowrap;
 
               @media screen and (max-width: 950px) {
                   margin-top: 0.3rem;

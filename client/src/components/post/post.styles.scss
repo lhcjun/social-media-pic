@@ -10,6 +10,14 @@
     box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
     padding: 1.7rem 1.3rem;
 
+    @media screen and (max-width: 370px) {
+        padding: 1.3rem 0.8rem;
+    }
+
+    @media screen and (max-width: 330px) {
+        padding: 1rem 0.8rem;
+    }
+
     .top-row {
         display: flex;
 
@@ -20,9 +28,13 @@
             cursor: pointer;
 
             .username {
-                font-size: 1.13rem;
-                font-weight: bold;
+                font-size: 1.2rem;
+                font-weight: 500;
                 margin-top: 0.5rem;
+
+                @media screen and (max-width: 370px) {
+                    font-size: 1.1rem;
+                }
             }
 
             .user-img {
@@ -30,6 +42,12 @@
                 height: 3.1rem;
                 border-radius: 100%;
                 margin-right: 1rem;
+
+                @media screen and (max-width: 370px) {
+                    width: 2.6rem;
+                    height: 2.6rem;
+                    margin-right: 0.7rem;
+                }
             }
         }
     }
@@ -67,6 +85,10 @@
                 transform: scale(1);
                 animation: like-button-animation .45s ease-in-out;
             }
+
+            @media screen and (max-width: 370px) {
+                font-size: 1.8rem;
+            }
         }
 
         .comment-icon {
@@ -79,6 +101,10 @@
                 // grow
                 transform: scale(1.05);
             }
+
+            @media screen and (max-width: 370px) {
+                font-size: 1.8rem;
+            }
         }
 
         span {
@@ -90,6 +116,10 @@
     .post-content {
         margin: 0.8rem 0.8rem 1rem 1.3rem;
         word-wrap: break-word;
+
+        @media screen and (max-width: 450px) {
+            margin: 0.8rem 0.3rem 1rem 0.5rem;
+        }
 
         h5 {
             margin-top: 0;
@@ -122,6 +152,10 @@
                     background-color: rgb(78, 80, 79);
                     color: #fff;
                 }
+
+                @media screen and (max-width: 450px) {
+                    padding: 0.3rem 0.7rem;
+                }
             }
 
             button {
@@ -139,6 +173,11 @@
                         color: rgb(0, 89, 255);
                         // grow
                         transform: scale(1.07);
+                    }
+
+                    @media screen and (max-width: 450px) {
+                        margin-left: 0;
+                        font-size: 1.8rem;
                     }
                 }
             }

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
 import PersonalPosts from '../personal-posts/personal-posts.component';
+import EmptyPost from '../empty-post/empty-post.component';
 import AppsIcon from '@material-ui/icons/Apps';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import './user-profile.styles.scss';
@@ -74,7 +75,7 @@ const UserProfile = () => {
           }
           {userProfile.posts.length 
             ? (blockDisplay ? <Gallery userPosts={userProfile.posts} /> : <PersonalPosts userPosts={userProfile.posts} />) 
-            : <p>Pending</p>
+            : <EmptyPost postOwner={userProfile.user.name} />
           }
         </div>
       ) : (

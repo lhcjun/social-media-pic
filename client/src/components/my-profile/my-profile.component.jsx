@@ -3,12 +3,13 @@ import UserContext from '../../contexts/user/user.context';
 import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
 import PersonalPosts from '../personal-posts/personal-posts.component';
+import EmptyPost from '../empty-post/empty-post.component';
 import AppsIcon from '@material-ui/icons/Apps';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import './my-profile.styles.scss';
 
 const MyProfile = () => {
-  const { state, dispatch } = useContext(UserContext); // nearest Context.Provider
+  const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
 
   const [myPosts, setMyPosts] = useState([]);
@@ -32,7 +33,7 @@ const MyProfile = () => {
       }
       {myPosts.length 
         ? (blockDisplay ? <Gallery userPosts={myPosts} />  : <PersonalPosts userPosts={myPosts} />)
-        : <p>Pending</p>
+        : <EmptyPost postOwner='You' />
       }
     </div>
   );

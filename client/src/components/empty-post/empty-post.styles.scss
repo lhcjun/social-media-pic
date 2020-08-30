@@ -1,0 +1,41 @@
+.empty {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    color: #d3d3d3;
+    text-transform: capitalize;
+    font-family: 'Lexend Peta';
+
+    .empty-emoji {
+        font-size: 3rem;
+        margin-bottom: 1.3rem;
+
+        @media screen and (max-width: 650px) {
+            font-size: 2.5rem;
+        }
+
+        @media screen and (max-width: 470px) {
+            font-size: 2rem;
+        }
+
+        @media screen and (max-width: 320px) {
+            font-size: 1.8rem;
+        }
+    }
+
+    .empty-msg {
+        font-size: 1.5rem;
+
+        @media screen and (max-width: 650px) {
+            font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 470px) {
+            font-size: 1rem;
+        }
+
+        @media screen and (max-width: 400px) {
+            font-size: 0.8rem;
+        }
+    }
+}

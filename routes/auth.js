@@ -11,9 +11,9 @@ const User = mongoose.model('User');
 
 // sign up
 router.post('/signup', (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, account, email, password } = req.body;
   // Incorrect form submission
-  if (!email || !password || !name) {
+  if (!email || !password || !name || !account) {
     return res.status(422).json({ error: 'Please fill in your details' });
   }
   // check email - regex email format validation
@@ -21,29 +21,46 @@ router.post('/signup', (req, res) => {
   if(!emailRegex.test(email)){
     return res.status(422).json({ error: 'Invalid Email Format' });
   }
+  // check account - length & regex 
+  if(account.length < 6){
+    return res.status(422).json({ error: 'Username must be at least 6 characters' });
+  }
+  const accountRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+  if(!accountRegex.test(account)){
+    return res.status(422).json({ error: 'Invalid Username Format' });
+  }
   // check password - length
   if(password.length < 6){
     return res.status(422).json({ error: 'Password must be at least 6 characters' });
   }
-  // create new user
+  // check exist account & email
   User
-    .findOne({ email: email })
-    .then(savedUser => {
-      if (savedUser) {
-        return res.status(422).json({ error: 'Email already exists' });
+    .findOne({ account: account })
+    .then(sameAccountUser => {
+      if (sameAccountUser) {
+        return res.status(422).json({ error: 'Username already exists' });
       }
-      // hash passwords
-      bcrypt.hash(password, 10)
-        .then(hashedPassword => {
-            // create new user if email doesn't exist
-            const newUser = new User({ name, email, password: hashedPassword });
-            newUser
-              .save()
-              .then(user =>
-                res.status(200).json({ message: 'User successfully saved' })
-              )
-              .catch(console.log);
-        });
+      // create new user
+      User
+        .findOne({ email: email })
+        .then(savedUser => {
+          if (savedUser) {
+            return res.status(422).json({ error: 'Email already exists' });
+          }
+          // hash passwords
+          bcrypt.hash(password, 10)
+            .then(hashedPassword => {
+                // create new user if email doesn't exist
+                const newUser = new User({ name, account, email, password: hashedPassword });
+                newUser
+                  .save()
+                  .then(user =>
+                    res.status(200).json({ message: 'User successfully saved' })
+                  )
+                  .catch(console.log);
+            });
+        })
+        .catch(console.log);
     })
     .catch(console.log);
 });
@@ -67,8 +84,8 @@ router.post('/signin', (req, res) => {
                 if(doMatch){
                     // successfully signed in
                     const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET); // _id = from MongoDB
-                    const { _id, name, email, followers, following } = savedUser;
-                    return res.json({ token, user: { _id, name, email, followers, following } });
+                    const { _id, name, account, email, followers, following } = savedUser;
+                    return res.json({ token, user: { _id, name, account, email, followers, following } });
                 }
                 return res.status(422).json({ error: 'Incorrect email or password' });
             })

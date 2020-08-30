@@ -62,7 +62,12 @@ router.get('/followingposts', requireAuth, (req, res) => {
 // get my posts & my following user's posts
 router.get('/homeposts', requireAuth, (req, res) => {
   Post
-    .find({$or: [ {postedBy: req.user._id}, {postedBy: {$in: req.user.following}} ] })
+    .find({
+      $or: [                                        // logical OR operation
+        { postedBy: req.user._id }, 
+        { postedBy: {$in: req.user.following} } 
+      ]
+    })
     .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
     .populate('comments.postedBy', '_id name')
     .sort('-createdAt')

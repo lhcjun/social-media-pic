@@ -22,16 +22,16 @@ router.post('/signup', (req, res) => {
     return res.status(422).json({ error: 'Invalid Email Format' });
   }
   // check account - length & regex 
-  if(account.length < 6){
-    return res.status(422).json({ error: 'Username must be at least 6 characters' });
+  if(account.length < 6 || account.length > 16){
+    return res.status(422).json({ error: 'Username must be 6 ~ 16 characters' });
   }
   const accountRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
   if(!accountRegex.test(account)){
-    return res.status(422).json({ error: 'Invalid Username Format' });
+    return res.status(422).json({ error: 'Invalid Username Format (try letters or _ .)' });
   }
   // check password - length
-  if(password.length < 6){
-    return res.status(422).json({ error: 'Password must be at least 6 characters' });
+  if(password.length < 6 || password.length > 20){
+    return res.status(422).json({ error: 'Password must be 6 ~ 20 characters' });
   }
   // check exist account & email
   User
@@ -54,9 +54,13 @@ router.post('/signup', (req, res) => {
                 const newUser = new User({ name, account, email, password: hashedPassword });
                 newUser
                   .save()
-                  .then(user =>
-                    res.status(200).json({ message: 'User successfully saved' })
-                  )
+                  .then(user => {
+                    // successfully signed up
+                    const token = jwt.sign({ _id: user._id }, JWT_SECRET);      // _id = from MongoDB
+                    const { _id, name, account, email, followers, following } = user;
+                    return res.json({ token, user: { _id, name, account, email, followers, following } });
+                    // res.status(200).json({ message: 'User successfully saved' })
+                  })
                   .catch(console.log);
             });
         })

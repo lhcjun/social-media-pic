@@ -67,7 +67,7 @@
           }
 
           h2 {
-              font-size: 2.6rem;
+              font-size: 2.4rem;
               font-weight: 300;
               margin: 0;
               padding-right: 2rem;
@@ -85,14 +85,14 @@
                   padding-right: 0.5rem;
               }
 
-              @media screen and (max-width: 435px) {
+              @media screen and (max-width: 550px) {
                   font-size: 1.5rem;
                   padding-right: 0;
               }
           }
 
           .account {
-              font-size: 1.4rem;
+              font-size: 1.2rem;
               font-weight: 300;
               margin-top: 1rem;
               white-space: nowrap;
@@ -101,13 +101,15 @@
               display: inline-block;
 
               @media screen and (max-width: 950px) {
-                  font-size: 1.3rem;
-                  margin-top: 0.6rem;
+                  margin-top: 0.5rem;
+              }
+
+              @media screen and (max-width: 550px) {
+                  margin-top: 0.3rem;
               }
 
               @media screen and (max-width: 435px) {
-                  font-size: 1.1rem;
-                  margin-top: 0.3rem;
+                  font-size: 1rem;
               }
           }
 

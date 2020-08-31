@@ -46,8 +46,13 @@ const SignInAndSignUp = ({ path }) => {
           showSignUpErrorMsg(data.error);
         }else{
           // sign up success
-          showSignUpErrorMsg('');
-          history.push('/signin');
+          // set JWT token & user obj into session storage
+          sessionStorage.setItem('jwt', data.token);
+          sessionStorage.setItem('user', JSON.stringify(data.user));  // can only store string
+          // set user state
+          dispatch(setCurrentUser(data.user));
+          // showSignInErrorMsg('');
+          history.push('/');
         }
       })
     .catch(console.log);
@@ -71,7 +76,7 @@ const onSubmitSignIn = () => {
           sessionStorage.setItem('user', JSON.stringify(data.user));  // can only store string
           // set user state
           dispatch(setCurrentUser(data.user));
-          showSignInErrorMsg('');
+          // showSignInErrorMsg('');
           history.push('/');
         }
       })

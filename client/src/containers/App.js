@@ -9,6 +9,7 @@ import SignUpPage from '../pages/sign-up-page/sign-up-page.component';
 import CreatePostPage from '../pages/create-post-page/create-post-page.component';
 import UserProfilePage from '../pages/user-profile-page/user-profile-page.component';
 import PostPage from '../pages/post-page/post-page.component';
+import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
 
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
@@ -51,8 +52,11 @@ const App = () => {
         <Route path='/profile/:userId'>
           {user ? <UserProfilePage /> : <Redirect to='/signin' />}
         </Route>
-        <Route path='/post'>
+        <Route path='/post/:postId'>
           {user ? <PostPage /> : <Redirect to='/signin' />}
+        </Route>
+        <Route exact path='/empty'>
+          <EmptyPostPage />
         </Route>
       </Switch>
     </Router>

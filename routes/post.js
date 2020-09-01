@@ -75,6 +75,17 @@ router.get('/homeposts', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
+// get each post
+router.get('/eachpost/:postId', requireAuth, (req, res) => {
+  Post
+    .findOne({ _id: req.params.postId })
+    .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
+    .populate('comments.postedBy', '_id name')
+    .sort('-createdAt')
+    .then(eachPost => res.json({ eachPost }))
+    .catch(console.log);
+});
+
 // like post
 router.put('/like', requireAuth, (req, res) => {
   Post

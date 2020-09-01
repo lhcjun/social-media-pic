@@ -64,7 +64,6 @@
     .icon {
         display: flex;
         margin: 0.7rem 0 0.38rem 0.2rem;
-        cursor: pointer;
 
         .heart-icon {
             color: red;
@@ -79,6 +78,7 @@
         .heart-border {
             font-size: 2rem;
             margin-right: 0.38rem;
+            cursor: pointer;
 
             &:hover,
             &:focus {
@@ -95,6 +95,7 @@
             font-size: 2rem;
             margin-right: 0.38rem;
             margin-top: 0.1rem;
+            cursor: pointer;
 
             &:hover,
             &:focus {

@@ -1,10 +1,10 @@
 import React from 'react';
-import Post from '../../components/post/post.component';
+import ViewPost from '../../components/view-post/view-post.component';
 import './post-page.styles.scss';
 
 const PostPage = () => (
   <div className="post-page center">
-    <Post />
+    <ViewPost />
   </div>
 );
 

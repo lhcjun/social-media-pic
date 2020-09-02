@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GalleryItemInfo from '../gallery-item-info/gallery-item-info.component';
 import './gallery.styles.scss';
 
 const Gallery = ({ userPosts }) => {    
@@ -37,11 +38,14 @@ const Gallery = ({ userPosts }) => {
                 { checkRowLength(eachRow).map(eachPost => 
                     <div className='img-container' key={eachPost._id}>
                       <Link to={eachPost._id.length ? `/post/${eachPost._id}` : `/empty`}>
-                        <img 
-                            src={eachPost.photo} 
-                            alt={eachPost.title}  
-                            className='item-img' 
-                        />
+                        <React.Fragment>
+                            <img 
+                                src={eachPost.photo} 
+                                alt={eachPost.title}  
+                                className='item-img' 
+                            />
+                            <GalleryItemInfo eachPost={eachPost} />
+                        </React.Fragment>
                       </Link>
                     </div>
                 )}

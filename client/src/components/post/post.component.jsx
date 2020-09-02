@@ -13,13 +13,9 @@ const Post = ({ eachPost }) => {
   const { user } = state;
 
   // get latest comment
-  const [latestComment, setLatestComment] = useState(
-    eachPost ? eachPost.comments[eachPost.comments.length - 1] : null
-  );
+  const [latestComment, setLatestComment] = useState(eachPost ? eachPost.comments[eachPost.comments.length - 1] : null);
   // get comment number
-  const [commentNum, setCommentNum] = useState(
-    eachPost ? eachPost.comments.length : 0
-  );
+  const [commentNum, setCommentNum] = useState(eachPost ? eachPost.comments.length : 0);
 
   // user make a comment on the post
   const setComment = (commentedPost) => {
@@ -39,11 +35,7 @@ const Post = ({ eachPost }) => {
           />
           <Link
             className="username"
-            to={
-              eachPost.postedBy._id !== user._id
-                ? `/profile/${eachPost.postedBy._id}`
-                : '/profile'
-            }
+            to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
           >
             {eachPost.postedBy.name}
           </Link>

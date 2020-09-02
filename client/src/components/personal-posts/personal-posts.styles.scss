@@ -8,11 +8,16 @@
     }
 
     @media screen and (max-width: 550px) {
+        width: 88%;
+    }
+
+    @media screen and (max-width: 435px) {
         width: 85%;
     }
 
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 370px) {
         margin-top: 0.7rem;
+        width: 88%;
     }
 
     @media screen and (max-width: 290px) {

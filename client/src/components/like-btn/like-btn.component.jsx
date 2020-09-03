@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import './like-btn.styles.scss';
 
 const LikeBtn = ({ eachPost }) => {
   const { state } = useContext(UserContext); // nearest Context.Provide      r
@@ -49,13 +50,13 @@ const LikeBtn = ({ eachPost }) => {
   };
 
   return(
-      <React.Fragment>
+      <div className='like-btn'>
         {likeClicked 
           ? <FavoriteIcon className='heart-icon' onClick={() => unlikePost(eachPost._id)} />
           : <FavoriteBorderIcon className='heart-border' onClick={() => likePost(eachPost._id)}/>
         }
         <span>{likeNum}</span>
-      </React.Fragment>
+      </div>
   )
 };
 

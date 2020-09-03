@@ -1,0 +1,57 @@
+.comment-container {
+    .comment-input {
+        display: flex;
+        margin-top: 1.5rem;
+
+        // input {
+        //     padding: 0.7rem;
+        //     width: 100%;
+        //     border: 1px solid;
+        //     background-color: transparent;
+        //     border-radius: 0.3rem;
+        //     font-size: 1.1rem;
+        //     // input reset - remove platform default styling to an element
+        //     -webkit-appearance: none;
+        //     -moz-appearance: none;
+
+        //     &:hover {
+        //         background-color: rgb(78, 80, 79);
+        //         color: #fff;
+        //     }
+
+        //     @media screen and (max-width: 450px) {
+        //         padding: 0.3rem 0.7rem;
+        //     }
+        // }
+
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+
+            .send {
+                margin-left: 0.3rem;
+                margin-top: 0.3rem;
+                cursor: pointer;
+                font-size: 2.1rem;
+
+                &:hover,
+                &:focus {
+                    color: rgb(0, 89, 255);
+                    // grow
+                    transform: scale(1.07);
+                }
+
+                @media screen and (max-width: 450px) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    .max-len {
+        color: #b1b1b1;
+        margin-top: 0.1rem;
+        font-size: 1rem;
+    }
+}

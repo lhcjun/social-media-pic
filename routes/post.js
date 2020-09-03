@@ -22,6 +22,14 @@ router.post('/createpost', requireAuth, (req, res) => {
   if (!title || !content || !imgURL) {
     return res.status(422).json({ error: 'Please add some details to the post' }); // Incorrect form submission
   }
+  // check title - length
+  if(title.length > 100){
+    return res.status(422).json({ error: 'Title must be less than 100 characters' });
+  }
+  // check content - length
+  if(content.length > 1000){
+    return res.status(422).json({ error: 'Content must be less than 1000 characters' });
+  }
   // remove password (when created new post)
   req.user.password = undefined;
   // create new post
@@ -122,7 +130,10 @@ router.put('/comment', requireAuth, (req, res) => {
     text: req.body.text,
     postedBy: req.user._id
   };
-
+  // check comment text - length
+  if(comment.text.length > 300){
+    return res.status(422).json({ error: 'Comment must be less than 300 characters' });
+  }
   Post
     .findByIdAndUpdate(req.body.postId,{
         $push: { comments: comment }            // add item to array

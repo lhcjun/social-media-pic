@@ -40,7 +40,6 @@ const ViewPost = () => {
     const setComment = (commentedPost) => {
       setComments(commentedPost.comments);
       setCommentNum(commentedPost.comments.length);
-      console.log(commentedPost);
     };
 
   return eachPost ? (

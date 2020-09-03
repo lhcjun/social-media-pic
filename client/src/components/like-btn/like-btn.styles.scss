@@ -1,0 +1,49 @@
+.like-btn {
+    display: flex;
+
+    .heart-icon,
+    .heart-border {
+        font-size: 2rem;
+        margin-right: 0.38rem;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            transform: scale(1);
+            animation: like-button-animation .45s ease-in-out;
+        }
+
+        @media screen and (max-width: 370px) {
+            font-size: 1.8rem;
+        }
+    }
+
+    .heart-icon {
+        color: red;
+    }
+
+    .heart-border {
+        color: #8d8d8d;
+    }
+
+    span {
+        margin: 0.2rem 0.8rem 0 0;
+        font-size: 1rem;
+    }
+}
+
+@keyframes like-button-animation {
+
+    0%,
+    to {
+        transform: scale(1)
+    }
+
+    25% {
+        transform: scale(1.2)
+    }
+
+    50% {
+        transform: scale(.95)
+    }
+}

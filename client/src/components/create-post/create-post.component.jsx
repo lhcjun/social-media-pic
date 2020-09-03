@@ -118,16 +118,18 @@ const CreatePost = () => {
                 id='post-title' label='Title' variant='outlined' margin='normal' 
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-                inputProps={{style: {fontSize: '1.2rem'}}}         // font size of input text
-                InputLabelProps={{style: {fontSize: '1.2rem'}}}    // font size of input label
+                inputProps={{style: {fontSize: '1.2rem'}, maxLength: 100}}  // font size of input text
+                InputLabelProps={{style: {fontSize: '1.2rem'}}}             // font size of input label
             />
+            <span>{title.length > 80 ? `${title.length} / 100` : null}</span>
             <TextField  
                 id='post-content' label='Content' multiline variant='outlined' margin='normal'
                 value={content}
                 onChange={e => setContent(e.target.value)}
-                inputProps={{style: {fontSize: '1.2rem'}}}         // input text
-                InputLabelProps={{style: {fontSize: '1.2rem'}}}    // input label
+                inputProps={{style: {fontSize: '1.2rem'}, maxLength: 1000}}  // input text
+                InputLabelProps={{style: {fontSize: '1.2rem'}}}              // input label
             />
+            <span>{content.length > 900 ? `${content.length} / 1000` : null}</span>
         </div>
         {/* Error msg */}
         <p id='create-post-error' className='center'></p>

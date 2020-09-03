@@ -33,6 +33,10 @@ router.post('/signup', (req, res) => {
   if(password.length < 6 || password.length > 20){
     return res.status(422).json({ error: 'Password must be 6 ~ 20 characters' });
   }
+  // check name - length
+  if(name.length > 30){
+    return res.status(422).json({ error: 'Name must be less than 30 characters' });
+  }
   // check exist account & email
   User
     .findOne({ account: account })

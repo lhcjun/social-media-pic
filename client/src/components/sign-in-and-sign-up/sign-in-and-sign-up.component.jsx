@@ -19,9 +19,6 @@ const SignInAndSignUp = ({ path }) => {
   });
   const { name, account, email, password, confirmPassword } = userCredentials;
 
-  const [ avatarImg, setAvatarImg ] = useState('');
-  const [ avatarUrl, setAvatarUrl ] = useState(null);
-
   const handleChange = event =>{
     const { name, value } = event.target;
     setCredentials({ ...userCredentials, [name]: value });

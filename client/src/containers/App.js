@@ -10,6 +10,7 @@ import CreatePostPage from '../pages/create-post-page/create-post-page.component
 import UserProfilePage from '../pages/user-profile-page/user-profile-page.component';
 import PostPage from '../pages/post-page/post-page.component';
 import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
+import EditPage from '../pages/edit-page/edit-page.component';
 
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
@@ -57,6 +58,9 @@ const App = () => {
         </Route>
         <Route exact path='/empty'>
           <EmptyPostPage />
+        </Route>
+        <Route exact path='/edit'>
+          {user ? <EditPage /> : <Redirect to='/signin' />}
         </Route>
       </Switch>
     </Router>

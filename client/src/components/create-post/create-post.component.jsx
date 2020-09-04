@@ -124,7 +124,7 @@ const CreatePost = () => {
             <span>{title.length > 80 ? `${title.length} / 100` : null}</span>
             <TextField  
                 id='post-content' label='Content' multiline variant='outlined' margin='normal'
-                value={content}
+                value={content} rowsMax={12}
                 onChange={e => setContent(e.target.value)}
                 inputProps={{style: {fontSize: '1.2rem'}, maxLength: 1000}}  // input text
                 InputLabelProps={{style: {fontSize: '1.2rem'}}}              // input label

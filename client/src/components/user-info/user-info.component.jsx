@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-info.styles.scss';
@@ -9,8 +10,7 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
   const { user } = state;
 
   // extract string before @ from email
-  // let emailLength = infoUser.email.indexOf('@');
-  // const account = infoUser.email.substring(0, emailLength); // index start & end
+  // const account = infoUser.email.substring(0, infoUser.email.indexOf('@')); // index start & end
 
   return (
     <header className="user-info">
@@ -21,10 +21,11 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
         />
       </div>
       <div className="user-setting">
-        <h2>{infoUser ? infoUser.name : 'Loading'}</h2>
-        <div className="account">{infoUser ? `(@${infoUser.account})` : null}</div>
+        <h2>{infoUser ? `${infoUser.account}` : 'Loading'}</h2>
         {user._id === infoUser._id
-          ? <button className="edit-btn">Edit Profile</button>
+          ? <button className="edit-btn">
+              <Link to='/edit'>Edit Profile</Link>
+            </button>
           : <FollowBtn
               setUserFollower={setUserFollower}
               removeUserFollower={removeUserFollower}
@@ -43,6 +44,7 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
         </h4>
       </div>
       <div className="bio">
+        <div className="name">{infoUser ? infoUser.name : null}</div>
         Using the order property will create a disconnect between the visual
         presentation of content and DOM order
       </div>

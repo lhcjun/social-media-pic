@@ -9,6 +9,14 @@
     box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
     padding: 2rem;
 
+    @media screen and (max-width: 600px) {
+        max-width: 90%;
+    }
+
+    @media screen and (max-width: 465px) {
+        padding: 1.5rem;
+    }
+
     .title-row {
         display: flex;
 
@@ -20,61 +28,97 @@
         h2 {
             margin-top: 0;
             margin-bottom: 2.2rem;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            @media screen and (max-width: 465px) {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
         }
     }
 
-    .img-input {
+    .add-img-btn {
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
+        //     margin-bottom: 1rem;
+        //     display: flex;
+        //     flex-direction: column;
 
-        .file-input {
-            display: flex;
+        //     .file-input {
+        //         display: flex;
 
-            .input-btn {
-                display: flex;
-                padding: 1rem 1rem 2rem 1rem;
-                cursor: pointer;
+        //         @media screen and (max-width: 410px) {
+        //             flex-direction: column;
+        //         }
 
-                #upload_img {
-                    display: none;
-                }
+        //         .input-btn {
+        //             display: flex;
+        //             padding: 1rem 1rem 2rem 1rem;
+        //             cursor: pointer;
 
-                .img-btn {
-                    font-size: 3rem;
-                }
+        //             #upload_img {
+        //                 display: none;
+        //             }
 
-                span {
-                    font-size: 1.5rem;
-                    margin: 0.5rem 0 0 0.5rem;
-                }
+        //             .img-btn {
+        //                 font-size: 3rem;
 
-                &:hover {
-                    // grow
-                    transform: scale(1.05);
-                }
-            }
+        //                 @media screen and (max-width: 500px) {
+        //                     font-size: 2.5rem;
+        //                 }
+        //             }
 
-            .file-path {
-                border: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-                margin-bottom: 2rem;
-                width: 48%;
-                font-size: 1.2rem;
-                padding: 0.8rem 0 0 2rem;
-                outline: none;
-            }
-        }
+        //             span {
+        //                 font-size: 1.3rem;
+        //                 margin: 0.7rem 0 0 0.5rem;
 
-        .thumbnail {
-            width: 100%;
-            max-height: 29.4rem;
-            object-fit: contain; // object-fit (img, video tag)  vs  background-size (only bg-img)
-            object-position: center;
-        }
+        //                 @media screen and (max-width: 500px) {
+        //                     font-size: 1.2rem;
+        //                     margin: 0.45rem 0 0 0.3rem;
+        //                 }
+        //             }
+
+        //             &:hover {
+        //                 // grow
+        //                 transform: scale(1.05);
+        //             }
+
+        //             @media screen and (max-width: 410px) {
+        //                 padding: 1rem 1rem 0.5rem 1rem;
+        //             }
+        //         }
+
+        //         .file-path {
+        //             border: none;
+        //             border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        //             margin-bottom: 2rem;
+        //             width: 48%;
+        //             font-size: 1.2rem;
+        //             padding: 0.8rem 0 0 2rem;
+        //             outline: none;
+        //             color: #6d6d6d;
+
+        //             @media screen and (max-width: 600px) {
+        //                 width: 42%;
+        //                 font-size: 1.1rem;
+        //             }
+
+        //             @media screen and (max-width: 410px) {
+        //                 width: 70%;
+        //                 margin: 0 1rem 1.8rem 1.7rem;
+        //                 padding-top: 0;
+        //             }
+        //         }
+        //     }
+
+        //     .thumbnail {
+        //         width: 100%;
+        //         max-height: 29.4rem;
+        //         object-fit: contain; // object-fit (img, video tag)  vs  background-size (only bg-img)
+        //         object-position: center;
+        //     }
+
     }
 
     .post-input {

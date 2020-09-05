@@ -2,39 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import AddImgBtn from '../add-img-btn/add-img-btn.component';
 import { API_CALL } from '../../assets/api-call';
 import './create-post.styles.scss';
 
-const getImgPath = event => {
-    // get input img data
-    const fileData = event.target.files[0];
-    // get img file name
-    const fileName = fileData.name;
-    showFileName(fileName);
-    // get thumbnail url
-    const thumbnailURL = URL.createObjectURL(fileData);
-    showThumbnail(thumbnailURL);
-}
-
-const showFileName = fileName => {
-    // set file name value to input text (.file-path)
-    const pathContainer = document.querySelector('.file-path');
-    pathContainer.value = fileName;
-}
-
-const showThumbnail = thumbnailURL => {
-    // set thumbnail url into img src (.thumbnail)
-    const thumbnailContainer = document.querySelector('.thumbnail');
-    thumbnailContainer.src = thumbnailURL;
-}
 
 const showErrorMsg = error => {
     const createPostError = document.querySelector('#create-post-error');
     createPostError.style.display='flex';
     createPostError.textContent = error;
 };
-
 
 const CreatePost = () => {
     const history = useHistory();
@@ -69,6 +46,8 @@ const CreatePost = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [imgURL]);                                                       // (for dependencies warning)
 
+    const setPostImgFile = file => setPostImg(file);  // input img data
+
     const onImgSubmit = () => {
         // upload file with FormData & fetch
         const formData = new FormData();
@@ -97,22 +76,7 @@ const CreatePost = () => {
             <CreateIcon className='pen-icon' />
             <h2>New Post</h2>
         </div>
-        <div className='img-input'>
-            <div className='file-input'>
-                <label className='input-btn'>
-                    <input id='upload_img' type='file' accept='image/*' 
-                        onChange={event => {
-                            getImgPath(event);
-                            setPostImg(event.target.files[0]);  // input img data
-                        }} 
-                    />
-                    <AddPhotoAlternateIcon className='img-btn' />
-                    <span>Add Img</span>
-                </label>
-                <input type='text' name='file-path' className='file-path' readOnly />
-            </div>
-            <img src='' alt='' className='thumbnail' />
-        </div>
+        <AddImgBtn setImgFile={setPostImgFile} />
         <div className='post-input'>
             <TextField  
                 id='post-title' label='Title' variant='outlined' margin='normal' 

@@ -5,10 +5,11 @@ const { ObjectId } = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     account: { type: String, required: true },
-    email:{ type: String, required: true, unique: true },
-    password:{ type: String, required: true },
-    followers:[{ type: ObjectId, ref: 'User' }],
-    following:[{ type: ObjectId, ref: 'User' }]
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    profileImg: { type: String, default: 'https://res.cloudinary.com/jl/image/upload/v1599406141/default_user_atfqaa.png' },
+    followers: [{ type: ObjectId, ref: 'User' }],
+    following: [{ type: ObjectId, ref: 'User' }]
 },{ timestamps: true });
 
 // compile model from schema (a document instance > for creating a new user)

@@ -41,84 +41,48 @@
     .add-img-btn {
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 0.5rem;
-        //     margin-bottom: 1rem;
-        //     display: flex;
-        //     flex-direction: column;
+        flex-direction: column;
+        margin-bottom: 1rem;
 
-        //     .file-input {
-        //         display: flex;
+        .file-input {
 
-        //         @media screen and (max-width: 410px) {
-        //             flex-direction: column;
-        //         }
+            @media screen and (max-width: 410px) {
+                flex-direction: column;
+            }
 
-        //         .input-btn {
-        //             display: flex;
-        //             padding: 1rem 1rem 2rem 1rem;
-        //             cursor: pointer;
+            .input-btn {
+                padding: 1rem 1rem 2rem 1rem;
 
-        //             #upload_img {
-        //                 display: none;
-        //             }
+                .img-btn {
+                    font-size: 3rem;
 
-        //             .img-btn {
-        //                 font-size: 3rem;
+                    @media screen and (max-width: 500px) {
+                        font-size: 2.5rem;
+                    }
+                }
 
-        //                 @media screen and (max-width: 500px) {
-        //                     font-size: 2.5rem;
-        //                 }
-        //             }
+                span {
+                    font-size: 1.3rem;
+                    margin: 0.7rem 0 0 0.5rem;
 
-        //             span {
-        //                 font-size: 1.3rem;
-        //                 margin: 0.7rem 0 0 0.5rem;
+                    @media screen and (max-width: 500px) {
+                        font-size: 1.2rem;
+                        margin: 0.45rem 0 0 0.3rem;
+                    }
+                }
 
-        //                 @media screen and (max-width: 500px) {
-        //                     font-size: 1.2rem;
-        //                     margin: 0.45rem 0 0 0.3rem;
-        //                 }
-        //             }
+                @media screen and (max-width: 410px) {
+                    padding: 1rem 1rem 0.5rem 1rem;
+                }
 
-        //             &:hover {
-        //                 // grow
-        //                 transform: scale(1.05);
-        //             }
+            }
+        }
 
-        //             @media screen and (max-width: 410px) {
-        //                 padding: 1rem 1rem 0.5rem 1rem;
-        //             }
-        //         }
-
-        //         .file-path {
-        //             border: none;
-        //             border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-        //             margin-bottom: 2rem;
-        //             width: 48%;
-        //             font-size: 1.2rem;
-        //             padding: 0.8rem 0 0 2rem;
-        //             outline: none;
-        //             color: #6d6d6d;
-
-        //             @media screen and (max-width: 600px) {
-        //                 width: 42%;
-        //                 font-size: 1.1rem;
-        //             }
-
-        //             @media screen and (max-width: 410px) {
-        //                 width: 70%;
-        //                 margin: 0 1rem 1.8rem 1.7rem;
-        //                 padding-top: 0;
-        //             }
-        //         }
-        //     }
-
-        //     .thumbnail {
-        //         width: 100%;
-        //         max-height: 29.4rem;
-        //         object-fit: contain; // object-fit (img, video tag)  vs  background-size (only bg-img)
-        //         object-position: center;
-        //     }
-
+        .thumbnail {
+            width: 100%;
+            max-height: 29.4rem;
+            object-fit: contain; // object-fit (img, video tag)  vs  background-size (only bg-img)
+        }
     }
 
     .post-input {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useRouteMatch } from 'react-router';
 import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
@@ -15,6 +16,9 @@ const showErrorMsg = error => {
 
 const CreatePost = () => {
     const history = useHistory();
+    let match = useRouteMatch();
+    const path = match.path;
+
     const [ title, setTitle ] = useState(''); 
     const [ content, setContent ] = useState(''); 
     const [ postImg, setPostImg ] = useState('');
@@ -76,7 +80,7 @@ const CreatePost = () => {
             <CreateIcon className='pen-icon' />
             <h2>New Post</h2>
         </div>
-        <AddImgBtn setImgFile={setPostImgFile} />
+        <AddImgBtn path={path} setImgFile={setPostImgFile} btnTitle='Add Img' />
         <div className='post-input'>
             <TextField  
                 id='post-title' label='Title' variant='outlined' margin='normal' 

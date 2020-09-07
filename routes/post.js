@@ -9,8 +9,8 @@ const Post = mongoose.model('Post');
 router.get('/allposts', requireAuth, (req, res) => {
   Post
     .find() // all matching result
-    .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
-    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account &　profileImg
+    .populate('comments.postedBy', '_id account profileImg')
     .sort('-createdAt')
     .then(allPosts => res.json({ allPosts }))
     .catch(console.log);
@@ -49,8 +49,8 @@ router.post('/createpost', requireAuth, (req, res) => {
 router.get('/myposts', requireAuth, (req, res) => {
   Post
     .find({ postedBy: req.user._id })
-    .populate('postedBy', '_id name') // replace postedBy(only user id) with user model
-    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with user model
+    .populate('comments.postedBy', '_id account profileImg')
     .sort('-createdAt')
     .then(myPosts => res.json({ myPosts }))
     .catch(console.log);
@@ -60,8 +60,8 @@ router.get('/myposts', requireAuth, (req, res) => {
 router.get('/followingposts', requireAuth, (req, res) => {
   Post
     .find({ postedBy: {$in: req.user.following} })  // $in: if postedBy = any userId in following []
-    .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
-    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
+    .populate('comments.postedBy', '_id account profileImg')
     .sort('-createdAt')
     .then(followingPosts => res.json({ followingPosts }))
     .catch(console.log);
@@ -76,8 +76,8 @@ router.get('/homeposts', requireAuth, (req, res) => {
         { postedBy: {$in: req.user.following} } 
       ]
     })
-    .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
-    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
+    .populate('comments.postedBy', '_id account profileImg')
     .sort('-createdAt')
     .then(homePosts => res.json({ homePosts }))
     .catch(console.log);
@@ -87,8 +87,8 @@ router.get('/homeposts', requireAuth, (req, res) => {
 router.get('/eachpost/:postId', requireAuth, (req, res) => {
   Post
     .findOne({ _id: req.params.postId })
-    .populate('postedBy', '_id name') // replace postedBy(only user id) with ref user id, name
-    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
+    .populate('comments.postedBy', '_id account profileImg')
     .sort('-createdAt')
     .then(eachPost => res.json({ eachPost }))
     .catch(console.log);
@@ -138,8 +138,8 @@ router.put('/comment', requireAuth, (req, res) => {
     .findByIdAndUpdate(req.body.postId,{
         $push: { comments: comment }            // add item to array
     },{ new: true })
-    .populate('comments.postedBy', '_id name')  // replace postedBy(only user id) with ref user id, name
-    .populate('postedBy', '_id name')           // post
+    .populate('comments.postedBy', '_id account profileImg')  // replace postedBy(only user id) with ref user id, account, profileImg
+    .populate('postedBy', '_id account profileImg')           // post
     .exec((err, commentedPost) => {
       if(err){
         return res.status(422).json({ error: err });

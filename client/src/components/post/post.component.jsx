@@ -30,14 +30,14 @@ const Post = ({ eachPost }) => {
         <div className="post-user">
           <img
             className="user-img"
-            src="https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src={eachPost.postedBy ? eachPost.postedBy.profileImg : null}
             alt="user"
           />
           <Link
             className="username"
             to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
           >
-            {eachPost.postedBy.name}
+            {eachPost.postedBy.account}
           </Link>
         </div>
         <DeletePost eachPost={eachPost} />
@@ -58,7 +58,7 @@ const Post = ({ eachPost }) => {
         <CommentInput setComment={setComment} eachPost={eachPost} />
         {latestComment ? (
           <div className="latest-comment">
-            <span className="comment-name">{latestComment.postedBy.name}</span>
+            <span className="comment-name">{latestComment.postedBy.account}</span>
             <span className="comment-text">{latestComment.text}</span>
           </div>
         ) : null}

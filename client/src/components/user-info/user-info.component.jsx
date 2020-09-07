@@ -16,7 +16,7 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
     <header className="user-info">
       <div className="profile-img">
         <img
-          src="https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          src={infoUser ? infoUser.profileImg : null}
           alt="avatars"
         />
       </div>
@@ -43,10 +43,9 @@ const UserInfo = ({ infoUser, posts, setUserFollower, removeUserFollower }) => {
           <span>{infoUser ? infoUser.following.length : 0}</span> following
         </h4>
       </div>
-      <div className="bio">
+      <div className="bio-area">
         <div className="name">{infoUser ? infoUser.name : null}</div>
-        Using the order property will create a disconnect between the visual
-        presentation of content and DOM order
+        <div className="bio">{infoUser ? infoUser.bio : null}</div>
       </div>
     </header>
   );

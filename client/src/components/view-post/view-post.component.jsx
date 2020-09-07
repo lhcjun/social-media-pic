@@ -51,7 +51,7 @@ const ViewPost = () => {
         <div className="post-user">
           <img
             className="user-img"
-            src="https://images.unsplash.com/photo-1570731102433-34470efb6acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src={eachPost.postedBy ? eachPost.postedBy.profileImg : null}
             alt="user"
           />
           {eachPost.postedBy ? 
@@ -59,7 +59,7 @@ const ViewPost = () => {
               className="username"
               to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
             >
-              {eachPost.postedBy.name}
+              {eachPost.postedBy.account}
             </Link>
             : 'Loading'}
         </div>
@@ -73,7 +73,7 @@ const ViewPost = () => {
         {comments ?
           comments.map(eachComment => 
             <div className="each-comment" key={eachComment._id}>
-              <span className="comment-name">{eachComment.postedBy.name}</span>
+              <span className="comment-name">{eachComment.postedBy.account}</span>
               <span className="comment-text">{eachComment.text}</span>
             </div>
           ) : null}

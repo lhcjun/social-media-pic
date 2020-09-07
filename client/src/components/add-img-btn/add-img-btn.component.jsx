@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../contexts/user/user.context';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import './add-img-btn.styles.scss';
 
@@ -16,6 +17,9 @@ const showThumbnail = thumbnailURL => {
 
 
 const AddImgBtn = ({ setImgFile, path, btnTitle }) => {
+    const { state } = useContext(UserContext); // nearest Context.Provide      r
+    const { user } = state;
+
     const getImgPath = event => {
         // get input img data
         const fileData = event.target.files[0];
@@ -48,7 +52,11 @@ const AddImgBtn = ({ setImgFile, path, btnTitle }) => {
                 <input type='text' name='file-path' className='file-path' readOnly />
             )}
           </div>
-          <img src='' alt='' className='thumbnail' />
+          <img 
+            src={path === '/edit' ? (user ? user.profileImg : null) : ''} 
+            alt='' 
+            className='thumbnail' 
+          />
         </div>
     )
 };

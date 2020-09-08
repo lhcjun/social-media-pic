@@ -8,7 +8,7 @@ import './sign-in-and-sign-up.styles.scss';
 
 const SignInAndSignUp = ({ path }) => {
   const history = useHistory();
-  const { state, dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
+  const { dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
 
   const [ userCredentials, setCredentials ] = useState({
     name: '',

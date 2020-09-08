@@ -23,6 +23,23 @@ export const reducer = (state, action) => {
           followers: action.payload.followers,
         },
       };
+    case 'UPDATE_USER_AVATAR':
+      return {
+        ...state,
+        user: {
+          ...action.payload,
+          profileImg: action.payload.profileImg,
+        },
+      };
+    case 'UPDATE_USER_PROFILE':
+      return {
+        ...state,
+        user: {
+          ...action.payload,
+          bio: action.payload.bio,
+          name: action.payload.name,
+        },
+      };
     default:
       return state;
   }
@@ -41,4 +58,14 @@ export const clearUserState = () => ({
 export const updateUserFollow = (followerUser) => ({
   type: 'UPDATE_USER_FOLLOW',
   payload: followerUser,
+});
+
+export const updateUserAvatar = (updatedUser) => ({
+  type: 'UPDATE_USER_AVATAR',
+  payload: updatedUser,
+});
+
+export const updateUserProfile = (updatedUser) => ({
+  type: 'UPDATE_USER_PROFILE',
+  payload: updatedUser,
 });

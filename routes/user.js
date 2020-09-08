@@ -39,14 +39,12 @@ router.put('/follow', requireAuth, (req, res)=>{
         return res.status(422).json({ error: err })
       }
       // find the follower by userId(requireAuth) > add followed user(unique) into following array
-      console.log('followedUser', followedUser);
       User
         .findByIdAndUpdate(req.user._id, {
           $addToSet: { following: req.body.followedId }        
         }, { new: true })
         .select('-password')
         .then(followerUser => {
-          console.log('followerUser', followerUser);
           res.json(followerUser);
         })
         .catch(err => res.status(422).json({ error: err }));
@@ -65,19 +63,64 @@ router.put('/unfollow', requireAuth, (req, res)=>{
         return res.status(422).json({ error: err })
       }
       // find the unfollower by userId(requireAuth) > remove followed user(unique) from following array
-      console.log('unfollowedUser', unfollowedUser);
       User
         .findByIdAndUpdate(req.user._id, {
           $pull: { following: req.body.unfollowedId }        
         }, { new: true })
         .select('-password')
         .then(unfollowerUser => {
-          console.log('unfollowerUser', unfollowerUser);
           res.json(unfollowerUser);
         })
         .catch(err => res.status(422).json({ error: err }));
     })
 });
+
+// update profile img
+router.put('/update-avatar', requireAuth, (req, res) => {
+  User
+    .findByIdAndUpdate(req.user._id, {
+      $set: { profileImg: req.body.profileImg }     //  replaces with the specified value
+    }, { new: true })
+    .exec((err, updatedUser) => { 
+      if(err){
+          return res.status(422).json({ error: 'avatar posting error' })
+      }
+      res.json(updatedUser);
+    })
+});
+
+// update user profile (bio, name)
+router.put('/update-profile', requireAuth, (req, res) => {
+  const { name, bio } = req.body.formInput;
+
+  User
+    .findByIdAndUpdate(req.user._id, {
+      $set: {                                       //  replaces with the specified value
+        bio: bio,
+        name: name
+      }
+    }, { new: true })
+    .exec((err, updatedUser) => { 
+      if(err){
+          return res.status(422).json({ error: 'profile updating error: ', err })
+      }
+      res.json(updatedUser);
+    })
+});
+
+// update name
+// router.put('/update-name', requireAuth, (req, res) => {
+//   User
+//     .findByIdAndUpdate(req.user._id, {
+//       $set: { name: req.body.name }             // set value to key
+//     }, { new: true })
+//     .exec((err, updatedUser) => { 
+//       if(err){
+//           return res.status(422).json({ error: 'name updating error' })
+//       }
+//       res.json(updatedUser);
+//     })
+// });
 
 
 module.exports = router;

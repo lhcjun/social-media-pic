@@ -6,25 +6,36 @@
         width: 95%;
     }
 
-    .avatar-area {
+    // h4 {
+    //     margin: 0 1rem 2rem;
+    //     font-weight: 500;
+    //     font-size: 1.3rem;
+    // }
 
-        h4 {
-            margin: 1.2rem 1rem 0.5rem;
+    .avatar-area {
+        display: flex;
+        justify-content: space-between;
+
+        .account {
+            margin: 2.5rem 2rem 1.5rem;
             font-weight: 500;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
+
         .add-img-btn {
-            justify-content: space-between;
-            margin-bottom: 1rem;
+            flex-direction: column;
+            margin-right: 1rem;
+            color: rgb(77, 77, 77);
 
             .file-input {
+                order: 1;
 
                 .input-btn {
-                    padding: 1.5rem 1rem 2rem;
+                    padding: 0.5rem 0;
 
                     .img-btn {
-                        font-size: 2rem;
+                        font-size: 1.8rem;
 
                         @media screen and (max-width: 500px) {
                             font-size: 1.5rem;
@@ -32,8 +43,8 @@
                     }
 
                     span {
-                        font-size: 1.1rem;
-                        margin: 0.38rem 0 0 0.5rem;
+                        font-size: 1rem;
+                        margin: 0.3rem 0 0 0.5rem;
 
                         @media screen and (max-width: 500px) {
                             font-size: 1rem;
@@ -48,8 +59,21 @@
                 height: 6rem;
                 border-radius: 100%;
                 object-fit: cover; // object-fit (img, video tag)  vs  background-size (only bg-img)
-                margin-right: 1rem;
+                margin: 0 auto;
             }
         }
+    }
+
+    .name-area,
+    .bio-area {
+        margin: 0 1rem;
+
+        span {
+            color: #b1b1b1;
+        }
+    }
+
+    .save-btn {
+        margin: 2rem 0;
     }
 }

@@ -95,10 +95,7 @@ router.put('/update-profile', requireAuth, (req, res) => {
 
   User
     .findByIdAndUpdate(req.user._id, {
-      $set: {                                       //  replaces with the specified value
-        bio: bio,
-        name: name
-      }
+      $set: { bio: bio, name }                                //  replaces with the specified value
     }, { new: true })
     .exec((err, updatedUser) => { 
       if(err){
@@ -107,20 +104,6 @@ router.put('/update-profile', requireAuth, (req, res) => {
       res.json(updatedUser);
     })
 });
-
-// update name
-// router.put('/update-name', requireAuth, (req, res) => {
-//   User
-//     .findByIdAndUpdate(req.user._id, {
-//       $set: { name: req.body.name }             // set value to key
-//     }, { new: true })
-//     .exec((err, updatedUser) => { 
-//       if(err){
-//           return res.status(422).json({ error: 'name updating error' })
-//       }
-//       res.json(updatedUser);
-//     })
-// });
 
 
 module.exports = router;

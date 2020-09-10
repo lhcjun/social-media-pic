@@ -25,7 +25,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (avatarUrl) {
-      // update avatar after uploading img to cloudinary and getting back img url
+      // update avatar only after uploading img to cloudinary and getting back img url
       fetch('/update-avatar', {
         method: 'put',
         headers: {
@@ -51,14 +51,14 @@ const EditProfile = () => {
 
   const onImgSubmit = () => {
     if (avatarImg) {
-      // upload img file with FormData & fetch
+      // upload img file (to cloudinary) with FormData & fetch
       const formData = new FormData();
       // append data into formData obj (convert into a data format that can be sent to the backend)
       formData.append('file', avatarImg);
       formData.append('upload_preset', 'social-media-pic'); // cloudinary
-      formData.append('cloud_name', 'jl'); // cloudinary
+      formData.append('cloud_name', 'jl');                  // cloudinary
 
-      // upload img > get uploaded img url
+      // upload img > return uploaded img url
       fetch(API_CALL.IMG_UPLOAD, {
         method: 'post',
         body: formData,

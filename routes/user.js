@@ -95,7 +95,7 @@ router.put('/update-profile', requireAuth, (req, res) => {
 
   User
     .findByIdAndUpdate(req.user._id, {
-      $set: { bio: bio, name }                                //  replaces with the specified value
+      $set: { bio, name }                            //  replaces with the specified value (bio: bio)
     }, { new: true })
     .exec((err, updatedUser) => { 
       if(err){

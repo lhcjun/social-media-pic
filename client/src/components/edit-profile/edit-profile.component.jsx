@@ -2,7 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
-import { updateUserAvatar, updateUserProfile } from '../../reducers/user/user.reducer';
+import {
+  updateUserAvatar,
+  updateUserProfile,
+} from '../../reducers/user/user.reducer';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
 import TextField from '@material-ui/core/TextField';
 import { API_CALL } from '../../assets/api-call';
@@ -47,7 +50,7 @@ const EditProfile = () => {
         .catch(console.log);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [avatarUrl]);                                                       // (for dependencies warning)
+  }, [avatarUrl]); // (for dependencies warning)
 
   const onImgSubmit = () => {
     if (avatarImg) {
@@ -56,7 +59,7 @@ const EditProfile = () => {
       // append data into formData obj (convert into a data format that can be sent to the backend)
       formData.append('file', avatarImg);
       formData.append('upload_preset', 'social-media-pic'); // cloudinary
-      formData.append('cloud_name', 'jl');                  // cloudinary
+      formData.append('cloud_name', 'jl'); // cloudinary
 
       // upload img > return uploaded img url
       fetch(API_CALL.IMG_UPLOAD, {
@@ -73,7 +76,7 @@ const EditProfile = () => {
     // upload profile img to cloudinary and update avatar
     onImgSubmit();
     // update bio, name
-    if(name !== user.name || bio !== user.bio){
+    if (name !== user.name || bio !== user.bio) {
       fetch('/update-profile', {
         method: 'put',
         headers: {
@@ -90,7 +93,7 @@ const EditProfile = () => {
           sessionStorage.setItem('user', JSON.stringify(updatedUser));
           // 2. update reducer user state (my profile page)
           dispatch(updateUserProfile(updatedUser));
-          if (!avatarImg){
+          if (!avatarImg) {
             history.push('/profile');
           }
         })
@@ -138,12 +141,20 @@ const EditProfile = () => {
         <span>{bio.length > 85 ? `${bio.length} / 100` : null}</span>
       </div>
       {/* Submit */}
-      <button
-        className="save-btn"
-        onClick={() => onProfileUpdate({ name, bio })}
-      >
-        Save
-      </button>
+      <div className="submit-btn">
+        <button
+          className="save-btn"
+          onClick={() => onProfileUpdate({ name, bio })}
+        >
+          Save
+        </button>
+        <button
+          className="cancel-btn"
+          onClick={() => history.push('/profile')}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };

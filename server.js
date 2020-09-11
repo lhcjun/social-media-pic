@@ -35,6 +35,17 @@ app.use(require('./routes/post'));
 app.use(require('./routes/user'));
 
 
+// deploy to production
+if(process.env.NODE_ENV === 'production'){
+    const path = require('path');
+    // serve the static file(html, css, js) which is inside client/build to express server 
+    app.use(express.static('client/build'));
+    // client makes any req(hit all routes) > serve html in client/build
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
 });

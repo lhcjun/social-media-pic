@@ -1,4 +1,5 @@
-module.exports = {
-    MONGO_URI: "mongodb+srv://js_mg1:7OBBtdisx5qH2mC1@cluster0-qzdw9.mongodb.net/<dbname>?retryWrites=true&w=majority",
-    JWT_SECRET: "huiyhfhkhwehe2yugug78t34p76p3fcsa"
-}     
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./production');
+} else {
+  module.exports = require('./dev');
+}

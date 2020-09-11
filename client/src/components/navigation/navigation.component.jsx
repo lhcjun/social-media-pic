@@ -5,13 +5,13 @@ import AvatarMenu from '../avatar-menu/avatar-menu.component';
 import './navigation.styles.scss';
 
 const Navigation = () => {
-  const { state, dispatch } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
+  const { state } = useContext(UserContext);  // get the value passed by the nearest Context.Provider
   const { user } = state;                               // to get current state in reducer
 
 
   return(
     <nav className='navigation'>
-      <Link to={user ? '/' : '/signin'} className='logo logo-font'>Instagram</Link>
+      <Link to={user ? '/' : '/signin'} className='logo logo-font'>Silhouette</Link>
       <div className='options'>
         { user 
           ? <AvatarMenu />

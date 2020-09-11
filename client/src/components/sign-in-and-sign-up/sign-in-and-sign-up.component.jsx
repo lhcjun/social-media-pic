@@ -88,7 +88,7 @@ const onSubmitSignIn = () => {
             id={path === '/signup' ? 'sign_up' : 'sign_in'}
             className='sign-field'
           >
-            <legend className='title center logo-font'>Instagram</legend>
+            <legend className='title center logo-font'>Silhouette</legend>
             {/* Input field - name */}
             {path === '/signup' ? (
               <div className='input-field-top'>

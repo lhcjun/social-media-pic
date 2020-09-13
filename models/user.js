@@ -13,7 +13,9 @@ const userSchema = new mongoose.Schema({
     },
     bio: { type: String },
     followers: [{ type: ObjectId, ref: 'User' }],
-    following: [{ type: ObjectId, ref: 'User' }]
+    following: [{ type: ObjectId, ref: 'User' }],
+    resetToken: String,
+    expireToken: Date
 },{ timestamps: true });
 
 // compile model from schema (a document instance > for creating a new user)

@@ -121,19 +121,49 @@ router.post('/signin', (req, res) => {
 
 // reset password
 router.post('/reset-password', (req, res) => {
-  crypto.randomBytes(32, (err, buffer) => {
+  // check email - regex email format validation
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(!emailRegex.test(req.body.email)){
+    return res.status(422).json({ error: 'Invalid Email Format' });
+  }
+
+  // create reset password token
+  crypto.randomBytes(32, (err, buffer) => { // 32 bytes binary buffer
     if(err){
       console.log(err)
     }
     const token = buffer.toString('hex');
+    // find the user and send reset password email
     User
       .findOne({ email: req.body.email })
       .then(user => {
         if(!user){
           return res.status(422).json({ error: 'User does not exist with this email' })
         }
+        // set token & expire time to this user model
         user.resetToken = token;
         user.expireToken = Date.now() + 3600000;  // 1 hour
+        user
+          .save()
+          .then(result => {
+            // send email
+            transporter.sendMail({
+              to: user.email,
+              from: EMAIL_FROM,
+              subject: 'Reset Password',
+              html: `
+                <p>
+                  Hello ${user.name},<br>
+                  Check out the link below to reset your password.<br>
+                  The link will expire after one hour. Once the link is expired, please click the reset password button again.
+                </p>
+                <h5>
+                  <a href='${EMAIL}/reset/${token}'>Click Here To Reset Password !</a>
+                </h5>
+              `
+            })
+            res.json({ message: 'Please check your email to reset password' })
+          })
       })
   })
 })

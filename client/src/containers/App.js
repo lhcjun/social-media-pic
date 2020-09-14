@@ -11,6 +11,7 @@ import UserProfilePage from '../pages/user-profile-page/user-profile-page.compon
 import PostPage from '../pages/post-page/post-page.component';
 import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
 import EditPage from '../pages/edit-page/edit-page.component';
+import ResetPasswordPage from '../pages/reset-password-page/reset-password-page.component';
 
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
@@ -27,7 +28,9 @@ const App = () => {
     if (currentUser) {
       dispatch(setCurrentUser(currentUser)); // wrapped in dispatch
     } else {
-      history.push('/signin');
+      if(!history.location.pathname.startsWith('/reset-password')){
+        history.push('/signin');
+      }
     }
   }, [dispatch, history]); // componentDidMount
 
@@ -61,6 +64,9 @@ const App = () => {
         </Route>
         <Route exact path='/edit'>
           {user ? <EditPage /> : <Redirect to='/signin' />}
+        </Route>
+        <Route exact path='/reset-password'>
+          <ResetPasswordPage />
         </Route>
       </Switch>
     </Router>

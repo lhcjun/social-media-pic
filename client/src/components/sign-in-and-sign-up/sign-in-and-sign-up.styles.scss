@@ -22,6 +22,27 @@
     }
 }
 
+@mixin link {
+    display: block;
+    cursor: pointer;
+    font-family: 'Merienda One';
+    // link
+    text-decoration: none;
+    transition: color .15s ease-in;
+    // dim
+    opacity: 1;
+    transition: opacity .15s ease-in;
+
+    &:hover {
+        // dim
+        opacity: 0.7;
+        transition: opacity .15s ease-in;
+        // link
+        // color: rgb(78, 80, 79);
+        transition: color .15s ease-in;
+    }
+}
+
 
 .card-frame {
     border-radius: 0.5rem;
@@ -126,25 +147,20 @@
 
                 .link {
                     font-size: 0.875rem;
-                    display: block;
-                    cursor: pointer;
-                    font-family: 'Merienda One';
                     color: rgb(78, 80, 79);
-                    // link
-                    text-decoration: none;
-                    transition: color .15s ease-in;
-                    // dim
-                    opacity: 1;
-                    transition: opacity .15s ease-in;
+                    @include link();
+                }
+            }
 
-                    &:hover {
-                        // dim
-                        opacity: 0.7;
-                        transition: opacity .15s ease-in;
-                        // link
-                        // color: rgb(78, 80, 79);
-                        transition: color .15s ease-in;
-                    }
+            .reset-password {
+                line-height: 1.5;
+                margin: 2rem 0 0 0;
+
+                .link {
+                    font-size: 0.7rem;
+                    color: rgb(143, 143, 143);
+                    margin: 0 auto 0;
+                    @include link();
                 }
             }
         }

@@ -147,6 +147,11 @@ const onSubmitSignIn = () => {
               : <Link to='/signup' className='link'>Sign Up !</Link>
             }
           </div>
+          <div className='reset-password'>
+            {path === '/signin' &&
+              <Link to='/reset-password' className='link'>Forgot Password ?</Link>
+            }
+          </div>
         </div>
       </main>
     </article>

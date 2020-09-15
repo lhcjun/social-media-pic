@@ -21,6 +21,14 @@
 
         .toast-img {
             height: 2.5rem;
+
+            @media screen and (max-width: 345px) {
+                height: 2rem;
+            }
+
+            @media screen and (max-width: 310px) {
+                height: 1.7rem;
+            }
         }
 
         .toast-message {
@@ -29,6 +37,14 @@
             font-weight: 600;
             color: #fff;
             margin-left: 1rem;
+
+            @media screen and (max-width: 345px) {
+                font-size: 0.9rem;
+            }
+
+            @media screen and (max-width: 310px) {
+                font-size: 0.8rem;
+            }
         }
 
         .toast-close {
@@ -43,6 +59,11 @@
                 color: rgba(0, 0, 0, 0.6);
                 // grow
                 transform: scale(1.1);
+            }
+
+            @media screen and (max-width: 310px) {
+                font-size: 1rem;
+                margin-left: 1rem;
             }
         }
     }

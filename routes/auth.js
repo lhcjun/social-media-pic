@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
-const { JWT_SECRET, SEND_GRID_API, EMAIL, EMAIL_FROM } = require('../config/public_key');
+const { JWT_SECRET, SEND_GRID_API, EMAIL_LINK, EMAIL_FROM } = require('../config/public_key');
 
 const router = express.Router();
 const User = mongoose.model('User');
@@ -119,7 +119,7 @@ router.post('/signin', (req, res) => {
       .catch(console.log);
 });
 
-// reset password
+// reset password - create token and send link to email
 router.post('/reset-password', (req, res) => {
   // check email - regex email format validation
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -132,7 +132,7 @@ router.post('/reset-password', (req, res) => {
     if(err){
       console.log(err)
     }
-    const token = buffer.toString('hex');
+    const token = buffer.toString('hex'); // or ('base64')
     // find the user and send reset password email
     User
       .findOne({ email: req.body.email })
@@ -140,7 +140,7 @@ router.post('/reset-password', (req, res) => {
         if(!user){
           return res.status(422).json({ error: 'User does not exist with this email' })
         }
-        // set token & expire time to this user model
+        // set token & expire time to database user obj
         user.resetToken = token;
         user.expireToken = Date.now() + 3600000;  // 1 hour
         user
@@ -158,14 +158,47 @@ router.post('/reset-password', (req, res) => {
                   The link will expire after one hour. Once the link is expired, please click the reset password button again.
                 </p>
                 <h5>
-                  <a href='${EMAIL}/reset/${token}'>Click Here To Reset Password !</a>
+                  <a href='${EMAIL_LINK}/reset-password/${token}'>Click Here To Reset Password !</a>
                 </h5>
               `
             })
             res.json({ message: 'Please check your email to reset password' })
           })
       })
+      .catch(console.log);
   })
-})
+});
+
+// set new password
+router.post('/new-password', (req, res) => {
+  const newPassword = req.body.password;
+  const resetPasswordToken = req.body.token;
+  // check password - length
+  if(newPassword.length < 6 || newPassword.length > 20){
+    return res.status(422).json({ error: 'Password must be 6 ~ 20 characters' });
+  }
+  // find the user with token(token expire date > now) and update password
+  User
+    .findOne({ resetToken: resetPasswordToken, expireToken:{ $gt: Date.now() } })   // $gt  >
+    .then(user => {
+      if(!user){
+        return res.status(422).json({ error: 'Please try again, the session is expired' })
+      }
+      // hash and set new password
+      bcrypt.hash(newPassword, 12)
+        .then(hashedPassword => {
+          user.password = hashedPassword;
+          // clear resetToken & expireToken of database user obj
+          user.resetToken = undefined;
+          user.expireToken = undefined;
+          user
+            .save()
+            .then(savedUser => {
+              res.json({ message: 'Successfully updated new password' })
+            })
+        })
+    })
+    .catch(console.log);
+});
 
 module.exports = router;

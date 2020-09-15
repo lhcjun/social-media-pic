@@ -38,9 +38,9 @@ app.use(require('./routes/user'));
 // deploy to production
 if(process.env.NODE_ENV === 'production'){
     const path = require('path');
-    // serve the static file(html, css, js) which is inside client/build to express server 
+    // serve the static files(html, css, js) that inside client/build folder to express server 
     app.use(express.static('client/build'));
-    // client makes any req(hit all routes) > serve html in client/build
+    // client side makes any req(hit all routes) > serve client with html in client/build folder 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });

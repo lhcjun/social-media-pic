@@ -50,6 +50,9 @@ Logo is designed by Vexels.com<p>
    module.exports = {
      MONGO_URI: 'YOUR_MongoDB_URI_KEY',
      JWT_SECRET: 'YOUR_JWT_SECRET',
+     SEND_GRID_API: 'YOUR_SEND_GRID_API',
+     EMAIL_LINK: 'http://localhost:3000',
+     EMAIL_FROM: 'YOUR_EMAIL'
    };
    ```
 5. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the _components/create-post.component.jsx_<br>

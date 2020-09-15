@@ -12,6 +12,7 @@ import PostPage from '../pages/post-page/post-page.component';
 import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
 import EditPage from '../pages/edit-page/edit-page.component';
 import ResetPasswordPage from '../pages/reset-password-page/reset-password-page.component';
+import NewPasswordPage from '../pages/new-password-page/new-password-page.component';
 
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
@@ -41,9 +42,6 @@ const App = () => {
         <Route exact={true} path='/'>
           {user ? <HomePage /> : <Redirect to='/signin' />}
         </Route>
-        <Route exact path='/profile'>
-          {user ? <ProfilePage /> : <Redirect to='/signin' />}
-        </Route>
         <Route exact path='/signin'>
           {user ? <Redirect to='/' /> : <SignInPage />}
         </Route>
@@ -52,6 +50,9 @@ const App = () => {
         </Route>
         <Route exact path='/createpost'>
           {user ? <CreatePostPage /> : <Redirect to='/signin' />}
+        </Route>
+        <Route exact path='/profile'>
+          {user ? <ProfilePage /> : <Redirect to='/signin' />}
         </Route>
         <Route path='/profile/:userId'>
           {user ? <UserProfilePage /> : <Redirect to='/signin' />}
@@ -67,6 +68,9 @@ const App = () => {
         </Route>
         <Route exact path='/reset-password'>
           <ResetPasswordPage />
+        </Route>
+        <Route path='/reset-password/:token'>
+          <NewPasswordPage />
         </Route>
       </Switch>
     </Router>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Toast from '../toasts/toasts.component.jsx';
 import './reset-password.styles.scss';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [redMsg, setRedMsg] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const resetPasswordMsg = document.querySelector('#reset-password-msg');
@@ -37,7 +39,7 @@ const ResetPassword = () => {
           // successfully send email to reset password
           setRedMsg(false);
           showMsg(data.message);
-          // history.push('/signin');
+          setShowToast(true);
         }
       })
       .catch(console.log);
@@ -66,6 +68,8 @@ const ResetPassword = () => {
       </div>
       {/* Error / Success msg */}
       <p id="reset-password-msg" className="center"></p>
+      {/* Toast */}
+      {showToast ? <Toast type='success' message='Email Successfully Sent' /> : null} 
     </div>
   );
 };

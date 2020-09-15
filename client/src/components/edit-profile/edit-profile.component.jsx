@@ -2,10 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
-import {
-  updateUserAvatar,
-  updateUserProfile,
-} from '../../reducers/user/user.reducer';
+import { updateUserAvatar, updateUserProfile } from '../../reducers/user/user.reducer';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
 import TextField from '@material-ui/core/TextField';
 import { API_CALL } from '../../assets/api-call';
@@ -103,7 +100,7 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile">
-      {/* <h4>Update your profile info</h4> */}
+      <h3 className='title'>Edit Profile</h3>
       <div className="avatar-area">
         <div className="account">{user.account ? user.account : 'Loading'}</div>
         <AddImgBtn
@@ -114,12 +111,8 @@ const EditProfile = () => {
       </div>
       <div className="name-area">
         <TextField
-          id="edit-name"
-          label="Name"
-          variant="outlined"
-          margin="normal"
-          value={name}
-          fullWidth
+          id="edit-name" label="Name" variant="outlined" margin="normal"
+          value={name} fullWidth
           onChange={(e) => setName(e.target.value)}
           inputProps={{ maxLength: 30 }}
         />
@@ -127,14 +120,8 @@ const EditProfile = () => {
       </div>
       <div className="bio-area">
         <TextField
-          id="edit-bio"
-          label="Bio"
-          variant="outlined"
-          margin="normal"
-          value={bio}
-          multiline
-          rows={3}
-          fullWidth
+          id="edit-bio" label="Bio" variant="outlined" margin="normal"
+          value={bio} multiline rows={3} fullWidth
           onChange={(e) => setBio(e.target.value)}
           inputProps={{ maxLength: 100 }}
         />
@@ -142,18 +129,18 @@ const EditProfile = () => {
       </div>
       {/* Submit */}
       <div className="submit-btn">
-        <button
-          className="save-btn"
+        <button className="save-btn"
           onClick={() => onProfileUpdate({ name, bio })}
-        >
-          Save
-        </button>
-        <button
-          className="cancel-btn"
+        >Save</button>
+        <button className="cancel-btn"
           onClick={() => history.push('/profile')}
-        >
-          Cancel
-        </button>
+        >Cancel</button>
+      </div>
+      {/* Reset Password */}
+      <div className="reset-password-area">
+        <h3>Reset Password</h3>
+        <p>Click the button below and enter your email, we'll send you the link to reset your password.</p>
+        <button onClick={() => history.push('/reset-password')}>Go Reset Password</button>
       </div>
     </div>
   );

@@ -26,47 +26,4 @@
             }
         }
     }
-
-    .add-post-btn {
-        align-items: center;
-        cursor: pointer;
-        outline: none; // outline when clicked
-        background-color: #610f4b93;
-        // shape
-        border-radius: 100%;
-        border: 1px solid #410d3363;
-        height: 3.2rem;
-        width: 3.2rem;
-        // position
-        position: fixed;
-        bottom: 10%;
-        right: 5%;
-        z-index: 1000;
-
-        .add-icon {
-            color: #ffebf9d7;
-            font-size: 2.3rem;
-        }
-
-        &:hover {
-            background-color: #610f4b;
-            border-color: #da67bb;
-            // grow
-            transform: scale(1.05);
-
-            .add-icon {
-                color: #fff;
-            }
-        }
-
-        @media screen and (max-width: 1025px) {
-            bottom: 9%;
-            right: 9%;
-        }
-
-        @media screen and (max-width: 500px) {
-            bottom: 5%;
-            right: 5%;
-        }
-    }
 }

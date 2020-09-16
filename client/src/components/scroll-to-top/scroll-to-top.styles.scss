@@ -1,0 +1,61 @@
+.scroll-to-top {
+    align-items: center;
+    cursor: pointer;
+    outline: none; // outline when clicked
+    background-color: #46404493;
+    // shape
+    border-radius: 100%;
+    border: 1px solid #2e2e2e63;
+    height: 3rem;
+    width: 3rem;
+    // position
+    position: fixed;
+    bottom: 6%;
+    right: 5%;
+    z-index: 1000;
+    // animation
+    animation: fadeIn 0.3s;
+    transition: opacity 0.4s;
+    opacity: 0.5;
+
+    &:hover {
+        background-color: #232B32;
+        border-color: #2e2e2e;
+        // grow
+        transform: scale(1.05);
+
+        .add-icon {
+            color: #fff;
+        }
+    }
+
+
+    @media screen and (max-width: 500px) {
+        bottom: 3.8%;
+        right: 5%;
+    }
+
+    .arrow-icon {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffebf9d7;
+        font-size: 2.8rem;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}

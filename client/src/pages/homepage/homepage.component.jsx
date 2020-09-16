@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Post from '../../components/post/post.component';
 import EmptyPost from '../../components/empty-post/empty-post.component';
+import ScrollToTop from '../../components/scroll-to-top/scroll-to-top.component';
 import './homepage.styles.scss';
 
 const HomePage = () => {
@@ -32,9 +32,7 @@ const HomePage = () => {
             </div>
         }
       </div>
-      <button className="add-post-btn center">
-        <Link to="/createpost" className="add-icon">&#43;</Link>
-      </button>
+      <ScrollToTop />
     </div>
   );
 };

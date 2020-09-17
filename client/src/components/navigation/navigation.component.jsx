@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import AvatarMenu from '../avatar-menu/avatar-menu.component';
+import SearchUser from '../search-user/search-user.component';
 import './navigation.styles.scss';
 
 const Navigation = () => {
@@ -12,6 +13,7 @@ const Navigation = () => {
   return(
     <nav className='navigation'>
       <Link to={user ? '/' : '/signin'} className='logo logo-font'>Silhouette</Link>
+      {user && <SearchUser />}
       <div className='options'>
         { user 
           ? <AvatarMenu />

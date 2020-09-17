@@ -36,7 +36,6 @@ const EditProfile = () => {
       })
         .then((res) => res.json())
         .then((updatedUser) => {
-          console.log('/update-avatar updatedUser', updatedUser);
           /* update user obj (sign in user) － with profileImg */
           // 1. update sessionStorage user obj (sign in user)
           sessionStorage.setItem('user', JSON.stringify(updatedUser));
@@ -84,7 +83,6 @@ const EditProfile = () => {
       })
         .then((res) => res.json())
         .then((updatedUser) => {
-          console.log('/update-profile updatedUser', updatedUser);
           /* update user obj (sign in user) － with profileImg */
           // 1. update sessionStorage user obj (sign in user)
           sessionStorage.setItem('user', JSON.stringify(updatedUser));

@@ -1,25 +1,45 @@
+@mixin fix-bar {
+    width: 20rem;
+    background: #f1f1f1;
+    border: 4px solid #f1f1f1;
+
+    @media screen and (max-width: 620px) {
+        width: 96%;
+    }
+}
+
+@mixin fix-input {
+    display: flex;
+    width: 93%;
+    border-radius: 1.2rem 0 0 1.2rem;
+}
+
 .search-user {
+    z-index: 1100;
 
     .search-bar {
         position: absolute;
         top: 2rem;
-        left: 45%;
+        left: 50%;
         transform: translate(-50%, -50%);
-        background: #a8a8a8;
-        height: 2.5rem;
+        background: none;
         border-radius: 2rem;
         padding: 0.3rem;
 
         transition: all 1s;
-        width: 50px;
-        height: 50px;
+        width: 3.1rem;
+        height: 3.1rem;
         box-sizing: border-box;
-        border: 4px solid #a8a8a8;
+        border: 1px solid transparent;
 
         &:hover,
         &:focus {
-            // background: white;
-            width: 20rem;
+            @include fix-bar();
+        }
+
+        @media screen and (max-width: 620px) {
+            width: 3.4rem;
+            height: 3.4rem;
         }
 
         input {
@@ -30,58 +50,91 @@
             border: 0;
             display: none;
             font-size: 1em;
-            border-radius: 20px;
-            padding: 0 20px;
+            padding: 0 1.25rem;
             background: none;
             transition: 0.4s;
             line-height: 40px;
             width: 0px;
-            color: white;
+            color: rgb(66, 66, 66);
             font-size: 1.1rem;
 
             &::placeholder {
-                color: rgb(206, 204, 204);
+                color: rgb(145, 143, 143);
+            }
+
+            @media screen and (max-width: 620px) {
+                height: 2.4rem;
             }
         }
 
         &:hover input,
         &:focus input {
-            display: flex;
-            width: 90%;
-            border-radius: 20px 0 0 20px;
-        }
-
-
-        .search-icon {
-            box-sizing: border-box;
-            padding: 10px;
-            width: 42.5px;
-            height: 42.5px;
-            position: absolute;
-            top: 0;
-            right: 0;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 1.2em;
-            transition: all 1s;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #a8a8a8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.4s;
-            cursor: pointer;
-            margin-top: 0.1rem;
+            @include fix-input();
         }
 
         &:hover .search-icon,
         &:focus .search-icon {
-            background: #3fc1c9;
+            background: #868686;
             color: white;
         }
 
+        .search-icon {
+            box-sizing: border-box;
+            padding: 0.5rem;
+            width: 2.7rem;
+            height: 2.7rem;
+            border-radius: 50%;
+            cursor: pointer;
+            // position
+            position: absolute;
+            top: 0;
+            right: 0;
+            // icon
+            text-align: center;
+            font-size: 1.2rem;
+            transition: 0.4s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(117, 117, 117);
+            // color: white;
+            // background: #e7e6e6;
+
+            &:hover {
+                background: #3fc1c9;
+                // grow
+                transform: scale(1.05);
+                font-size: 1.5rem
+            }
+
+            @media screen and (max-width: 620px) {
+                width: 2.8rem;
+                height: 2.8rem;
+                margin: 0 0.2rem 0 0;
+            }
+        }
+    }
+
+    .fix-bar {
+        @include fix-bar();
+
+        input {
+            @include fix-input();
+        }
+    }
+
+    .search-result {
+        position: absolute;
+        top: 4.2rem;
+        left: 35%;
+        border: 1px solid #000;
+        width: 20rem;
+        height: 10rem;
+        background: white;
+
+        @media screen and (max-width: 620px) {
+            width: 96%;
+            left: 2%;
+        }
     }
 }

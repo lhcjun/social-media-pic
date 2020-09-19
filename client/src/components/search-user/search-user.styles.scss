@@ -104,7 +104,7 @@
                 background: #3fc1c9;
                 // grow
                 transform: scale(1.05);
-                font-size: 1.5rem
+                font-size: 1.5rem;
             }
 
             @media screen and (max-width: 620px) {
@@ -125,12 +125,15 @@
 
     .search-result {
         position: absolute;
-        top: 4.2rem;
+        top: 4rem;
         left: 35%;
-        border: 1px solid #000;
-        width: 20rem;
+        border: 1px solid rgb(71, 71, 71);
+        border-radius: 0.5rem;
+        width: 30rem;
         height: 10rem;
-        background: white;
+        // background: #f1f1f1;
+        background: #fff;
+        // padding: 1rem;
 
         @media screen and (max-width: 620px) {
             width: 96%;

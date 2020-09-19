@@ -106,4 +106,7 @@ router.put('/update-profile', requireAuth, (req, res) => {
 });
 
 
+// search users
+router.post('/search-users', (req, res) => {});
+
 module.exports = router;

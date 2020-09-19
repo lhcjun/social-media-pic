@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import UserList from '../user-list/user-list.component';
 import SearchIcon from '@material-ui/icons/Search';
 import './search-user.styles.scss';
 
@@ -15,7 +16,9 @@ const SearchUser = () => {
         />
         <SearchIcon className="search-icon" />
       </div>
-      <div className="search-result">Result</div>
+      <div className="search-result">
+        <UserList />
+      </div>
     </div>
   );
 };

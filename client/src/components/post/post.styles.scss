@@ -30,12 +30,12 @@
             display: flex;
             margin-bottom: 1.1rem;
             margin-left: 0.6rem;
-            cursor: pointer;
-
+            
             .username {
                 font-size: 1.2rem;
                 font-weight: 500;
                 margin-top: 0.5rem;
+                cursor: pointer;
 
                 @media screen and (max-width: 370px) {
                     font-size: 1.1rem;

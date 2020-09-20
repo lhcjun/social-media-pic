@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import { updateUserFollow } from '../../reducers/user/user.reducer';
 
-const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
+const FollowBtn = ({ userProfile, setUserProfile }) => {
   // sign in user
   const { state, dispatch } = useContext(UserContext); // nearest Context.Provide      r
   const { user } = state;
@@ -12,6 +12,45 @@ const FollowBtn = ({ setUserFollower, removeUserFollower }) => {
 
   // check if the sign in user has already followed when componentDidMount
   const [ showFollow, setShowFollow ] = useState(user ? !user.following.includes(userId) : true);
+
+
+  // when follow btn is clicked > update userProfile state (the followed user's follower [])
+  const setUserFollower = followerUser => {
+    setUserProfile(prevState => {
+      const alreadyFollowed = prevState.user.followers.includes(followerUser._id);
+
+      if (!alreadyFollowed) {
+        // add sign in user to follower array
+        return {
+          ...prevState, // user & posts
+          user: {
+            ...prevState.user,
+            followers: [...prevState.user.followers, followerUser._id],
+          },
+        };
+      }
+      return prevState;
+    });
+  };
+
+  // when unfollow btn is clicked > update userProfile state (the followed user's follower [])
+  const removeUserFollower = unfollowerUser => {
+    setUserProfile(prevState => {
+      const alreadyFollowed = prevState.user.followers.includes(unfollowerUser._id);
+      if (alreadyFollowed) {
+        // remove sign in user from follower array
+        return {
+          ...prevState, // user & posts
+          user: {
+            ...prevState.user,
+            followers: prevState.user.followers.filter(eachId => eachId !== unfollowerUser._id),
+          },
+        };
+      }
+      return prevState;
+    });
+  };
+
 
   const followUser = () => {
     fetch('/follow', {

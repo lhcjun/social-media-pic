@@ -107,6 +107,19 @@ router.put('/update-profile', requireAuth, (req, res) => {
 
 
 // search users
-router.post('/search-users', (req, res) => {});
+router.post('/search-users', (req, res) => {
+  // the pattern used for query (^ start with)
+  let userPattern = new RegExp('^' + req.body.query);
+  User    
+    .find({
+      $or: [                                                // logical OR operation
+        { name: { $regex: userPattern, $options: 'i' } },   // $regex = use regex pattern to match strings (in db)
+        { account: { $regex: userPattern, $options: 'i' } } // $options i = insensitivity to match both upper and lower cases
+      ]
+    })
+    .select('_id name account profileImg')
+    .then(users => res.json({users}))
+    .catch(console.log);
+});
 
 module.exports = router;

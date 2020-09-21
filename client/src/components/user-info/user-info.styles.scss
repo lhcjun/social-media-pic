@@ -31,8 +31,11 @@
           img {
               display: block;
               margin: 0 auto;
-              width: 60%;
+              width: 13.5rem;
+              height: 13.5rem;
               border-radius: 100%;
+              object-fit: cover; // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
+              object-position: center; // background-position: center;
 
               @media screen and (max-width: 990px) {
                   width: 10rem;

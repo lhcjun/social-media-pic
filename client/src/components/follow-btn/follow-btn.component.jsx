@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import { updateUserFollow } from '../../reducers/user/user.reducer';
 
-const FollowBtn = ({ userProfile, setUserProfile }) => {
+const FollowBtn = ({ setUserProfile }) => {
   // sign in user
-  const { state, dispatch } = useContext(UserContext); // nearest Context.Provide      r
+  const { state, dispatch } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
   // profile page user
   const { userId } = useParams(); // get url params

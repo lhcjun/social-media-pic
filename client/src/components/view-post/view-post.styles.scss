@@ -28,6 +28,10 @@
         max-height: max-content;
     }
 
+    @media screen and (max-width: 450px) {
+        width: 100%;
+    }
+
     .post-img-container {
         width: auto;
         max-height: 46rem;
@@ -90,10 +94,12 @@
                 height: 3.1rem;
                 border-radius: 100%;
                 margin-right: 1rem;
+                object-fit: cover; // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
+                object-position: center; // background-position: center;
 
                 @media screen and (max-width: 370px) {
-                    width: 2.6rem;
-                    height: 2.6rem;
+                    width: 2.5rem;
+                    height: 2.5rem;
                     margin-right: 0.7rem;
                 }
             }

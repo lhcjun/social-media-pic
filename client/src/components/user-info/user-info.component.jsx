@@ -4,7 +4,7 @@ import UserContext from '../../contexts/user/user.context';
 import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-info.styles.scss';
 
-const UserInfo = ({ infoUser, posts, userProfile, setUserProfile }) => {
+const UserInfo = ({ infoUser, posts, setUserProfile }) => {
   // sign in user
   const { state } = useContext(UserContext); // nearest Context.Provide      r
   const { user } = state;
@@ -26,10 +26,7 @@ const UserInfo = ({ infoUser, posts, userProfile, setUserProfile }) => {
           ? <button className="edit-btn">
               <Link to='/edit'>Edit Profile</Link>
             </button>
-          : <FollowBtn
-              userProfile={userProfile}
-              setUserProfile={setUserProfile}
-            />
+          : <FollowBtn setUserProfile={setUserProfile} />
         }
       </div>
       <div className="user-activity">

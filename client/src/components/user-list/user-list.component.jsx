@@ -1,24 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
 import { Link } from 'react-router-dom';
-import FollowBtn from '../follow-btn/follow-btn.component';
+// import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-list.styles.scss';
 
 const UserList = ({ listUsers, title, closeUserList }) => {
-  // const [ eachUserId, setEachUserId ] = ('');
-  const [ userProfile, setUserProfile ] = useState(null);
   // sign in user
   const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
-
-  // useEffect(() => {
-  //   fetch(`/user/${eachUserId}`, {
-  //     headers: { Authorization: 'Bearer ' + sessionStorage.getItem('jwt') },
-  //   })
-  //     .then(res => res.json())
-  //     .then(userAndPosts => setUserProfile(userAndPosts))
-  //     .catch(console.log);
-  // }, [eachUserId]);
 
   return (
     <div className="user-list center">
@@ -40,15 +29,14 @@ const UserList = ({ listUsers, title, closeUserList }) => {
                 </Link>
                 <h2>{eachUser.name}</h2>
               </div>
-              {user._id === eachUser._id ? null : (
+              {/* {user._id === eachUser._id ? null : (
                 <div className="follow-btn">
                   <FollowBtn 
-                    followedUser={eachUser} 
-                    // userProfile={userProfile} 
-                    setUserProfile={setUserProfile}
+                    followedUser={eachUser}
+                    // setUserProfile={setUserProfile}
                   />
                 </div>
-              )}
+              )} */}
             </article>
           );
         })

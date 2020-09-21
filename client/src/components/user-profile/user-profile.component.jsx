@@ -29,7 +29,6 @@ const UserProfile = () => {
           <UserInfo
             infoUser={userProfile.user}
             posts={userProfile.posts}
-            userProfile={userProfile}
             setUserProfile={setUserProfile}
           />
           {blockDisplay 

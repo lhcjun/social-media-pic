@@ -50,6 +50,8 @@
                 border-radius: 100%;
                 width: 2rem;
                 height: 2rem;
+                object-fit: cover; // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
+                object-position: center; // background-position: center;
 
                 @media screen and (min-width: 30em) {
                     width: 4rem;
@@ -88,33 +90,33 @@
             }
         }
 
-        .follow-btn {
-            display: block;
-            margin: auto 0rem auto auto;
-            text-align: right;
+        // .follow-btn {
+        //     display: block;
+        //     margin: auto 0rem auto auto;
+        //     text-align: right;
 
-            .follow-btn,
-            .unfollow-btn {
-                font-size: .875rem;
-                border: 1px solid rgba(0, 0, 0, .1);
-                background-color: #fff;
-                cursor: pointer;
-                padding: 0.25rem 0.5rem;
-                color: rgba(0, 0, 0, .6);
+        //     .follow-btn,
+        //     .unfollow-btn {
+        //         font-size: .875rem;
+        //         border: 1px solid rgba(0, 0, 0, .1);
+        //         background-color: #fff;
+        //         cursor: pointer;
+        //         padding: 0.25rem 0.5rem;
+        //         color: rgba(0, 0, 0, .6);
 
-                &:hover,
-                &:focus {
-                    // grow
-                    transform: scale(1.05);
-                    color: #000;
-                    border: 1px solid rgba(0, 0, 0, 0.3);
-                }
-            }
+        //         &:hover,
+        //         &:focus {
+        //             // grow
+        //             transform: scale(1.05);
+        //             color: #000;
+        //             border: 1px solid rgba(0, 0, 0, 0.3);
+        //         }
+        //     }
 
-            .follow-btn:hover {
-                background-color: #3fc1c9;
-            }
-        }
+        //     .follow-btn:hover {
+        //         background-color: #3fc1c9;
+        //     }
+        // }
     }
 
     .empty-user {

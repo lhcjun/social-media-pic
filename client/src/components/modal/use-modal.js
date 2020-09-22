@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 const useModal = () => {
-  let [ showModal, setShowModal ] = useState(false);
-  let [ modalContent, setModalContent ] = useState("Content");
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState('Content');
 
-  let handleModal = (content = false) => {
+  const handleModal = (content = false) => {
     setShowModal(!showModal);
     if (content) {
       setModalContent(content);

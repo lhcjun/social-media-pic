@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
+import { ModalContext } from '../../contexts/modal/modal.context';
 import FollowBtn from '../follow-btn/follow-btn.component';
+import UserList from '../user-list/user-list.component';
 import './user-info.styles.scss';
 
 const UserInfo = ({ infoUser, posts, setUserProfile }) => {
   // sign in user
-  const { state } = useContext(UserContext); // nearest Context.Provide      r
+  const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
+  const { showModal, handleModal, modalContent } = useContext(ModalContext);
 
   // extract string before @ from email
   // const account = infoUser.email.substring(0, infoUser.email.indexOf('@')); // index start & end

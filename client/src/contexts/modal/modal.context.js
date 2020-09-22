@@ -4,7 +4,7 @@ import useModal from '../../components/modal/use-modal';
 
 const ModalContext = createContext(null);
 
-let ModalProvider = ({ children }) => {
+const ModalProvider = ({ children }) => {
   let { showModal, handleModal, modalContent } = useModal();
   return (
     // similar to Redux <Provider store={store}>

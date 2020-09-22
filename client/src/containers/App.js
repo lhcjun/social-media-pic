@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
+import { ModalProvider } from '../contexts/modal/modal.context';
 
 import Navigation from '../components/navigation/navigation.component';
 import HomePage from '../pages/homepage/homepage.component';
@@ -36,44 +37,46 @@ const App = () => {
   }, [dispatch, history]); // componentDidMount
 
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact={true} path='/'>
-          {user ? <HomePage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route exact path='/signin'>
-          {user ? <Redirect to='/' /> : <SignInPage />}
-        </Route>
-        <Route exact path='/signup'>
-          {user ? <Redirect to='/' /> : <SignUpPage />}
-        </Route>
-        <Route exact path='/createpost'>
-          {user ? <CreatePostPage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route exact path='/profile'>
-          {user ? <ProfilePage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route path='/profile/:userId'>
-          {user ? <UserProfilePage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route path='/post/:postId'>
-          {user ? <PostPage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route exact path='/empty'>
-          <EmptyPostPage />
-        </Route>
-        <Route exact path='/edit'>
-          {user ? <EditPage /> : <Redirect to='/signin' />}
-        </Route>
-        <Route exact path='/reset-password'>
-          <ResetPasswordPage />
-        </Route>
-        <Route path='/reset-password/:token'>
-          <NewPasswordPage />
-        </Route>
-      </Switch>
-    </Router>
+    <ModalProvider>
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route exact={true} path='/'>
+            {user ? <HomePage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact path='/signin'>
+            {user ? <Redirect to='/' /> : <SignInPage />}
+          </Route>
+          <Route exact path='/signup'>
+            {user ? <Redirect to='/' /> : <SignUpPage />}
+          </Route>
+          <Route exact path='/createpost'>
+            {user ? <CreatePostPage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact path='/profile'>
+            {user ? <ProfilePage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route path='/profile/:userId'>
+            {user ? <UserProfilePage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route path='/post/:postId'>
+            {user ? <PostPage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact path='/empty'>
+            <EmptyPostPage />
+          </Route>
+          <Route exact path='/edit'>
+            {user ? <EditPage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact path='/reset-password'>
+            <ResetPasswordPage />
+          </Route>
+          <Route path='/reset-password/:token'>
+            <NewPasswordPage />
+          </Route>
+        </Switch>
+      </Router>
+    </ModalProvider>
   );
 };
 

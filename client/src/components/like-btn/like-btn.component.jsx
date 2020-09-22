@@ -1,17 +1,23 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
+import { ModalContext } from '../../contexts/modal/modal.context';
+import UserList from '../user-list/user-list.component';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import './like-btn.styles.scss';
 
 const LikeBtn = ({ eachPost }) => {
-  const { state } = useContext(UserContext); // nearest Context.Provide      r
+  const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
+  const { showModal, handleModal, modalContent } = useContext(ModalContext);
 
   // check if the user has already liked the post when componentDidMount  (likes array)
-  const [ likeClicked, setLikeClicked ] = useState(eachPost ? eachPost.likes.includes(user._id) : false);
+  const [likeClicked, setLikeClicked] = useState(
+    eachPost ? eachPost.likes.includes(user._id) : false
+  );
   // get like number
-  const [ likeNum, setLikeNum ] = useState(eachPost ? eachPost.likes.length : 0);
+  const [likeNum, setLikeNum] = useState(eachPost ? eachPost.likes.length : 0);
+  const [likeUsers, setLikeUsers] = useState(eachPost ? eachPost.likes : null);
 
   // user like the post
   const likePost = (postId) => {
@@ -23,8 +29,8 @@ const LikeBtn = ({ eachPost }) => {
       },
       body: JSON.stringify({ postId: postId }),
     })
-      .then(res => res.json())
-      .then(likedPost => {
+      .then((res) => res.json())
+      .then((likedPost) => {
         setLikeClicked(true);
         setLikeNum(likedPost.likes.length);
       })
@@ -41,23 +47,44 @@ const LikeBtn = ({ eachPost }) => {
       },
       body: JSON.stringify({ postId }),
     })
-      .then(res => res.json())
-      .then(unlikePost => {
+      .then((res) => res.json())
+      .then((unlikePost) => {
         setLikeClicked(false);
         setLikeNum(unlikePost.likes.length);
       })
       .catch(console.log);
   };
 
-  return(
-      <div className='like-btn'>
-        {likeClicked 
-          ? <FavoriteIcon className='heart-icon' onClick={() => unlikePost(eachPost._id)} />
-          : <FavoriteBorderIcon className='heart-border' onClick={() => likePost(eachPost._id)}/>
+  return (
+    <div className="like-btn">
+      {likeClicked ? (
+        <FavoriteIcon
+          className="heart-icon"
+          onClick={() => unlikePost(eachPost._id)}
+        />
+      ) : (
+        <FavoriteBorderIcon
+          className="heart-border"
+          onClick={() => likePost(eachPost._id)}
+        />
+      )}
+      <span
+        onClick={
+          likeNum === 0
+            ? null
+            : () =>
+                handleModal(
+                  <UserList
+                    listUsers={likeUsers ? likeUsers : null}
+                    closeUserList={handleModal}
+                  />
+                )
         }
-        <span>{likeNum}</span>
-      </div>
-  )
+      >
+        {likeNum}
+      </span>
+    </div>
+  );
 };
 
 export default LikeBtn;

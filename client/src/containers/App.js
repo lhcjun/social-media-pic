@@ -45,7 +45,7 @@ const App = () => {
             {user ? <HomePage /> : <Redirect to='/signin' />}
           </Route>
           <Route exact path='/signin'>
-            {user ? <Redirect to='/' /> : <SignInPage />}
+            {user ? <Redirect to='/' /> : <SignInPage />} {/* history.goBack() */}
           </Route>
           <Route exact path='/signup'>
             {user ? <Redirect to='/' /> : <SignUpPage />}

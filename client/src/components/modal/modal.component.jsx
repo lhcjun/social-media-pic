@@ -9,10 +9,10 @@ const Modal = () => {
     return ReactDOM.createPortal(
       <div className="modal-background">
         <div className="modal-card">
-          {/* <button className="close-btn" onClick={() => handleModal()}>
-                &times;
-            </button> */}
-          <p>{modalContent}</p>
+          <button className="close-btn" onClick={() => handleModal()}>
+            &times;
+          </button>
+          <React.Fragment>{modalContent}</React.Fragment>
         </div>
       </div>,
       document.querySelector('#modal-root')

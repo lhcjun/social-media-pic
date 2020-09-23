@@ -16,7 +16,9 @@ router.get('/user/:id', requireAuth, (req, res) => {
         // find all the posts posted by the user with user id
         Post
           .find({ postedBy: req.params.id })
-          .populate('postedBy', '_id name')       // replace postedBy(only user id) with ref user id, name
+          .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
+          .populate('comments.postedBy', '_id account profileImg')
+          .sort('-createdAt')
           .exec((err, posts) => {
             if(err){
                 return res.status(422).json({ error: err })
@@ -119,6 +121,15 @@ router.post('/search-users', (req, res) => {
     })
     .select('_id name account profileImg')
     .then(users => res.json({users}))
+    .catch(console.log);
+});
+
+// get all the users who has liked the post by likes [] userId
+router.post('/like-post-users', requireAuth, (req, res) => {
+  User
+    .find({ _id: {$in: req.body.likes} })  // $in: if _id = any userId in likes []
+    .select('_id name account profileImg')
+    .then(likeUsers => res.json({ likeUsers }))
     .catch(console.log);
 });
 

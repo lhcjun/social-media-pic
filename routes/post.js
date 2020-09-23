@@ -89,7 +89,6 @@ router.get('/eachpost/:postId', requireAuth, (req, res) => {
     .findOne({ _id: req.params.postId })
     .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
     .populate('comments.postedBy', '_id account profileImg')
-    .sort('-createdAt')
     .then(eachPost => res.json({ eachPost }))
     .catch(console.log);
 });

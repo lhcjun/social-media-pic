@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
 import { ModalContext } from '../../contexts/modal/modal.context';
-import UserList from '../user-list/user-list.component';
+import LikePostUsers from './like-post-users.component';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import './like-btn.styles.scss';
@@ -9,7 +9,7 @@ import './like-btn.styles.scss';
 const LikeBtn = ({ eachPost }) => {
   const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
-  const { showModal, handleModal, modalContent } = useContext(ModalContext);
+  const { handleModal } = useContext(ModalContext);
 
   // check if the user has already liked the post when componentDidMount  (likes array)
   const [likeClicked, setLikeClicked] = useState(
@@ -17,7 +17,8 @@ const LikeBtn = ({ eachPost }) => {
   );
   // get like number
   const [likeNum, setLikeNum] = useState(eachPost ? eachPost.likes.length : 0);
-  const [likeUsers, setLikeUsers] = useState(eachPost ? eachPost.likes : null);
+  // get likes [] (users id)
+  const [likeUserId, setLikeUserId] = useState(eachPost ? eachPost.likes : []);
 
   // user like the post
   const likePost = (postId) => {
@@ -33,6 +34,7 @@ const LikeBtn = ({ eachPost }) => {
       .then((likedPost) => {
         setLikeClicked(true);
         setLikeNum(likedPost.likes.length);
+        setLikeUserId(likedPost.likes);
       })
       .catch(console.log);
   };
@@ -51,6 +53,7 @@ const LikeBtn = ({ eachPost }) => {
       .then((unlikePost) => {
         setLikeClicked(false);
         setLikeNum(unlikePost.likes.length);
+        setLikeUserId(unlikePost.likes);
       })
       .catch(console.log);
   };
@@ -72,14 +75,9 @@ const LikeBtn = ({ eachPost }) => {
         onClick={
           likeNum === 0
             ? null
-            : () =>
-                handleModal(
-                  <UserList
-                    listUsers={likeUsers ? likeUsers : null}
-                    closeUserList={handleModal}
-                  />
-                )
+            : () => handleModal(<LikePostUsers likeUserId={likeUserId} />)
         }
+        style={{ cursor: likeNum === 0 ? 'default' : 'pointer' }}
       >
         {likeNum}
       </span>

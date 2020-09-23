@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import FollowBtn from '../follow-btn/follow-btn.component';
 import './user-list.styles.scss';
 
 const UserList = ({ listUsers, title, closeUserList }) => {
+  const history = useHistory();
   // sign in user
   const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
+
+  const checkProfile = (eachUser) => {
+    closeUserList();
+    history.push(eachUser._id !== user._id ? `/profile/${eachUser._id}` : `/profile`);
+  }
 
   return (
     <div className="user-list center">
@@ -24,9 +30,7 @@ const UserList = ({ listUsers, title, closeUserList }) => {
                 <img src={eachUser.profileImg} alt='user' />
               </div>
               <div className="user-name">
-                <Link to={eachUser._id !== user._id ? `/profile/${eachUser._id}` : `/profile`}>
-                  <h1 onClick={() => closeUserList()}>{`@` + eachUser.account}</h1>
-                </Link>
+                <h1 onClick={() => checkProfile(eachUser)}>{`@` + eachUser.account}</h1>
                 <h2>{eachUser.name}</h2>
               </div>
               {/* {user._id === eachUser._id ? null : (

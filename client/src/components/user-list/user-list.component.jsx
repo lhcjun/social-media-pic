@@ -10,6 +10,7 @@ const UserList = ({ listUsers, title, closeUserList }) => {
   const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
 
+
   const checkProfile = (eachUser) => {
     closeUserList();
     history.push(eachUser._id !== user._id ? `/profile/${eachUser._id}` : `/profile`);

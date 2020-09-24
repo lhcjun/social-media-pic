@@ -6,7 +6,7 @@ import '../modal/modal.styles.scss';
 const LikePostUsers = ({ likeUserId }) => {
   const { handleModal } = useContext(ModalContext); // nearest Context.Provider
 
-  const [likeUsers, setLikeUsers] = useState(null);
+  const [likeUsers, setLikeUsers] = useState([]);
 
   useEffect(() => {
     if (likeUserId) {
@@ -27,9 +27,13 @@ const LikePostUsers = ({ likeUserId }) => {
   return (
     <React.Fragment>
       {likeUsers ? (
-        <UserList listUsers={likeUsers} title='Likes' closeUserList={handleModal} />
+        <UserList
+          listUsers={likeUsers}
+          title="Likes"
+          closeUserList={handleModal}
+        />
       ) : (
-        <h2 className='modal-pending'>Trying to get the users</h2>
+        <h2 className="modal-pending">Trying to get the users</h2>
       )}
     </React.Fragment>
   );

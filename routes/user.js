@@ -133,4 +133,22 @@ router.post('/like-post-users', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
+// get follower users obj by follower [] userId
+router.post('/list-follower-users', requireAuth, (req, res) => {
+  User
+    .find({ _id: {$in: req.body.follower} })  // $in: if _id = any userId in follower []
+    .select('_id name account profileImg')
+    .then(followerUsers => res.json({ followerUsers }))
+    .catch(console.log);
+});
+
+// get following users obj by following [] userId
+router.post('/list-following-users', requireAuth, (req, res) => {
+  User
+    .find({ _id: {$in: req.body.following} })  // $in: if _id = any userId in following []
+    .select('_id name account profileImg')
+    .then(followingUsers => res.json({ followingUsers }))
+    .catch(console.log);
+});
+
 module.exports = router;

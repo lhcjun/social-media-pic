@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { convertTime } from '../../utils/convert-time';
 import UserContext from '../../contexts/user/user.context';
 import DeletePost from '../delete-post/delete-post.component';
 import LikeBtn from '../like-btn/like-btn.component';
 import CommentInput from '../comment-input/comment-input.component';
-
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import './post.styles.scss';
 
@@ -33,12 +33,15 @@ const Post = ({ eachPost }) => {
             src={eachPost.postedBy ? eachPost.postedBy.profileImg : null}
             alt="user"
           />
-          <Link
-            className="username"
-            to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
-          >
-            {eachPost.postedBy.account}
-          </Link>
+          <div className='name-area'>
+            <Link
+              className="username"
+              to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
+            >
+              {eachPost.postedBy.account}
+            </Link>
+            <div className='posted-at'>{convertTime(eachPost.createdAt)}</div>
+          </div>
         </div>
         <DeletePost eachPost={eachPost} />
       </div>

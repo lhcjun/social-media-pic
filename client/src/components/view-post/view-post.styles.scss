@@ -78,16 +78,30 @@
                 margin-bottom: 0.9rem;
             }
 
-            .username {
-                font-size: 1.2rem;
-                font-weight: 500;
-                margin-top: 0.5rem;
-                cursor: pointer;
+            .name-info {
+                .username {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    margin-top: 0.5rem;
+                    cursor: pointer;
 
-                @media screen and (max-width: 370px) {
-                    font-size: 1.1rem;
+                    @media screen and (max-width: 450px) {
+                        font-size: 1.1rem;
+                    }
                 }
+
+                .posted-at {
+                    color: rgba(0, 0, 0, 0.35);
+                    font-size: 0.8rem;
+                    margin: 0.1rem 0 0 0.2rem;
+
+                    @media screen and (max-width: 450px) {
+                        margin-left: 0.1rem;
+                    }
+                }
+
             }
+
 
             .user-img {
                 width: 3.1rem;
@@ -97,10 +111,15 @@
                 object-fit: cover; // object-fit (img, video tag)  vs  background-size: cover; (only bg-img)
                 object-position: center; // background-position: center;
 
-                @media screen and (max-width: 370px) {
+                @media screen and (min-width: 886px) and (max-width: 950px) {
+                    margin-right: 0.7rem;
+                }
+
+                @media screen and (max-width: 450px) {
                     width: 2.5rem;
                     height: 2.5rem;
                     margin-right: 0.7rem;
+                    margin-top: 0.2rem;
                 }
             }
         }

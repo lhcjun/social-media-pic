@@ -6,6 +6,7 @@ import { updateUserAvatar, updateUserProfile } from '../../reducers/user/user.re
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
 import TextField from '@material-ui/core/TextField';
 import { API_CALL } from '../../assets/api-call';
+import { convertDate } from '../../utils/convert-time';
 import './edit-profile.styles.scss';
 
 const EditProfile = () => {
@@ -100,7 +101,10 @@ const EditProfile = () => {
     <div className="edit-profile">
       <h3 className='title'>Edit Profile</h3>
       <div className="avatar-area">
-        <div className="account">{user.account ? user.account : 'Loading'}</div>
+        <div className='username-area'>
+          <div className="account">{user.account ? user.account : 'Loading'}</div>
+          <div className="join-date">{user.createdAt ? `Joined: ${convertDate(user.createdAt)}` : null}</div>
+        </div>
         <AddImgBtn
           path={path}
           setImgFile={setAvatarImgFile}

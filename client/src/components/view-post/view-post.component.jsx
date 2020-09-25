@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { convertTime } from '../../utils/convert-time';
 import UserContext from '../../contexts/user/user.context';
 import DeletePost from '../delete-post/delete-post.component';
 import LikeBtn from '../like-btn/like-btn.component';
@@ -54,14 +55,17 @@ const ViewPost = () => {
             src={eachPost.postedBy ? eachPost.postedBy.profileImg : null}
             alt="user"
           />
-          {eachPost.postedBy ? 
-            <Link
-              className="username"
-              to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
-            >
-              {eachPost.postedBy.account}
-            </Link>
-            : 'Loading'}
+          <div className='name-info'>
+            {eachPost.postedBy ? 
+              <Link
+                className="username"
+                to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile' }
+              >
+                {eachPost.postedBy.account}
+              </Link>
+              : 'Loading'}
+            <div className='posted-at'>{eachPost.createdAt ? convertTime(eachPost.createdAt) : null}</div>
+          </div>
         </div>
         <DeletePost eachPost={eachPost} />
       </div>

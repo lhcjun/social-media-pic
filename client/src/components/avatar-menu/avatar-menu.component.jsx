@@ -5,7 +5,7 @@ import { ClickAwayListener } from '@material-ui/core';
 import './avatar-menu.styles.scss';
 
 const AvatarMenu = () => {
-    const { state } = useContext(UserContext); // nearest Context.Provide      r
+    const { state } = useContext(UserContext); // nearest Context.Provider
     const { user } = state;
 
     const [ hideDropdown, setHideDropdown ] = useState(true);

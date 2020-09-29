@@ -131,21 +131,5 @@
             font-size: 1.1rem;
             white-space: pre-wrap; // textarea break line
         }
-
-        .latest-comment {
-            margin: 0.8rem 0.7rem;
-            font-size: 1rem;
-            width: 90%;
-            display: flex;
-
-            .comment-name {
-                font-weight: 500;
-            }
-
-            .comment-text {
-                margin-left: 1rem;
-                white-space: pre-wrap; // textarea break line
-            }
-        }
     }
 }

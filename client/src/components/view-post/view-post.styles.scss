@@ -239,19 +239,6 @@
             .comments {
                 margin: 0.5rem 1rem 0.5rem 0;
                 font-size: 1rem;
-
-                .each-comment {
-                    display: flex;
-                    margin-bottom: 0.3rem;
-
-                    .comment-name {
-                        font-weight: 500;
-                    }
-
-                    .comment-text {
-                        white-space: pre-wrap; // textarea break line
-                    }
-                }
             }
         }
 

@@ -5,6 +5,7 @@ import UserContext from '../../contexts/user/user.context';
 import DeletePost from '../delete-post/delete-post.component';
 import LikeBtn from '../like-btn/like-btn.component';
 import CommentInput from '../comment-input/comment-input.component';
+import EachComment from '../each-comment/each-comment.component';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import './post.styles.scss';
 
@@ -59,12 +60,11 @@ const Post = ({ eachPost }) => {
         <h5>{eachPost.title}</h5>
         <p>{eachPost.content}</p>
         <CommentInput setComment={setComment} eachPost={eachPost} />
-        {latestComment ? (
-          <div className="latest-comment">
-            <span className="comment-name">{latestComment.postedBy.account}</span>
-            <span className="comment-text">{latestComment.text}</span>
-          </div>
-        ) : null}
+        <Link to={eachPost._id.length ? `/post/${eachPost._id}` : `/empty`}>
+          {latestComment ? (
+            <EachComment eachComment={latestComment} />
+          ) : null}
+        </Link>
       </div>
     </div>
   );

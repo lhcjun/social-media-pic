@@ -6,6 +6,7 @@ import UserContext from '../../contexts/user/user.context';
 import DeletePost from '../delete-post/delete-post.component';
 import LikeBtn from '../like-btn/like-btn.component';
 import CommentInput from '../comment-input/comment-input.component';
+import EachComment from '../each-comment/each-comment.component';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import './view-post.styles.scss';
 
@@ -58,11 +59,17 @@ const ViewPost = () => {
               {eachPost.postedBy ? (
                 <Link
                   className="username"
-                  to={eachPost.postedBy._id !== user._id? `/profile/${eachPost.postedBy._id}` : '/profile'}
+                  to={
+                    eachPost.postedBy._id !== user._id
+                      ? `/profile/${eachPost.postedBy._id}`
+                      : '/profile'
+                  }
                 >
                   {eachPost.postedBy.account}
                 </Link>
-              ) : 'Loading'}
+              ) : (
+                'Loading'
+              )}
               <div className="posted-at">
                 {eachPost.createdAt ? convertTime(eachPost.createdAt) : null}
               </div>
@@ -78,12 +85,10 @@ const ViewPost = () => {
           <div className="comments">
             {comments
               ? comments.map((eachComment) => (
-                  <div className="each-comment" key={eachComment._id}>
-                    <span className="comment-name">
-                      {eachComment.postedBy.account}
-                    </span>
-                    <span className="comment-text">{eachComment.text}</span>
-                  </div>
+                  <EachComment
+                    eachComment={eachComment}
+                    key={eachComment._id}
+                  />
                 ))
               : null}
           </div>

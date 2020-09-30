@@ -4,6 +4,7 @@ const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 const Post = mongoose.model('Post');
+const User = mongoose.model('User');
 
 // get all posts
 router.get('/allposts', requireAuth, (req, res) => {
@@ -163,6 +164,36 @@ router.delete('/deletepost/:postId', requireAuth, (req, res) => {
             .remove()
             .then(deletedPost => res.json(deletedPost))
             .catch(console.log)
+      }
+    })
+});
+
+// save post
+router.put('/save-post', requireAuth, (req, res) => {
+  User
+    .findByIdAndUpdate(req.user._id, {
+      $addToSet: { saved: req.body.postId }    // only add unique item to array
+    }, { new: true })
+    .exec((err, savedPost) => {
+      if(err){
+        return res.status(422).json({ error: err });
+      }else{
+        return res.json(savedPost);
+      }
+    })
+});
+
+// unsave post
+router.put('/unsave-post', requireAuth, (req, res) => {
+  User
+    .findByIdAndUpdate(req.user._id, {
+      $pull: { saved: req.body.postId }    // only add unique item to array
+    }, { new: true })
+    .exec((err, unsavedPost) => {
+      if(err){
+        return res.status(422).json({ error: err });
+      }else{
+        return res.json(unsavedPost);
       }
     })
 });

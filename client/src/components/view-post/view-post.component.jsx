@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { convertTime } from '../../utils/convert-time';
 import UserContext from '../../contexts/user/user.context';
-import DeletePost from '../delete-post/delete-post.component';
+import PostDoMore from '../post-do-more/post-do-more.component';
 import LikeBtn from '../like-btn/like-btn.component';
 import CommentInput from '../comment-input/comment-input.component';
 import EachComment from '../each-comment/each-comment.component';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import './view-post.styles.scss';
 
 const ViewPost = () => {
@@ -18,6 +19,9 @@ const ViewPost = () => {
 
   const { state } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
+
+  const scrollDown = useRef();
+
 
   useEffect(() => {
     fetch(`/eachpost/${postId}`, {
@@ -40,6 +44,10 @@ const ViewPost = () => {
   const setComment = (commentedPost) => {
     setComments(commentedPost.comments);
     setCommentNum(commentedPost.comments.length);
+    // scroll to new comment
+    if (commentedPost.comments && scrollDown.current) {
+      scrollDown.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return eachPost ? (
@@ -59,23 +67,19 @@ const ViewPost = () => {
               {eachPost.postedBy ? (
                 <Link
                   className="username"
-                  to={
-                    eachPost.postedBy._id !== user._id
-                      ? `/profile/${eachPost.postedBy._id}`
-                      : '/profile'
-                  }
+                  to={ eachPost.postedBy._id !== user._id ? `/profile/${eachPost.postedBy._id}` : '/profile'}
                 >
                   {eachPost.postedBy.account}
                 </Link>
-              ) : (
-                'Loading'
-              )}
+                ) : 'Loading'
+              }
               <div className="posted-at">
+                <ScheduleIcon className='time-icon' />
                 {eachPost.createdAt ? convertTime(eachPost.createdAt) : null}
               </div>
             </div>
           </div>
-          <DeletePost eachPost={eachPost} />
+          <PostDoMore eachPost={eachPost} />
         </div>
         <div className="post-content">
           <h5>{eachPost.title}</h5>
@@ -85,12 +89,10 @@ const ViewPost = () => {
           <div className="comments">
             {comments
               ? comments.map((eachComment) => (
-                  <EachComment
-                    eachComment={eachComment}
-                    key={eachComment._id}
-                  />
+                  <EachComment eachComment={eachComment} key={eachComment._id} />
                 ))
               : null}
+            <div ref={scrollDown}></div>
           </div>
         </div>
         <div className="icon">

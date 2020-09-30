@@ -3,6 +3,7 @@
     padding: 0.6rem;
     margin: 0.35rem 0;
     background-color: #fff;
+    color: rgb(88, 88, 88);
     outline: none; // outline when clicked
     display: flex;
     justify-content: space-around;
@@ -18,7 +19,7 @@
     font-weight: 400;
 }
 
-.delete-post {
+.post-do-more {
     margin-left: auto;
     position: relative; // for absolute
 
@@ -43,19 +44,26 @@
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
 
-        .delete-btn {
+        .delete-btn,
+        .save-btn,
+        .unsave-btn {
             @include dropdownOption();
             cursor: pointer;
 
             span {
                 @include optionFonts();
             }
+        }
 
-            &:hover {
-                background-color: rgba(204, 31, 0, 0.65);
-                color: #fff;
-            }
+        .delete-btn:hover,
+        .unsave-btn:hover {
+            background-color: rgba(204, 31, 0, 0.65);
+            color: #fff;
+        }
 
+        .save-btn:hover {
+            background-color: rgb(103, 223, 187);
+            color: rgb(54, 54, 54);
         }
 
         .btn-unclickable {

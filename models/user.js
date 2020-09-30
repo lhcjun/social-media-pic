@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     bio: { type: String },
     followers: [{ type: ObjectId, ref: 'User' }],
     following: [{ type: ObjectId, ref: 'User' }],
+    saved: [{ type: ObjectId, ref: 'Post' }],
     resetToken: String,
     expireToken: Date
 },{ timestamps: true });

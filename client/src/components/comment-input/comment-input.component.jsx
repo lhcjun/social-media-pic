@@ -39,7 +39,7 @@ const CommentInput = ({ setComment, eachPost }) => {
           /> */}
           <TextField
             id={eachPost._id} label='Add a comment' margin='dense'
-            fullWidth multiline rowsMax={4} variant='outlined' 
+            fullWidth variant='outlined' // multiline rowsMax={4}
             onChange={e => setCommentLength(e.target.value.length)}
             inputProps={{ maxLength: 300 }}
           />

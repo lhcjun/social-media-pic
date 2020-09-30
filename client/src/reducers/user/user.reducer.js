@@ -40,6 +40,14 @@ export const reducer = (state, action) => {
           name: action.payload.name,
         },
       };
+    case 'UPDATE_USER_SAVE_POST':
+      return {
+        ...state,
+        user: {
+          ...action.payload,
+          saved: action.payload.saved,
+        },
+      };
     default:
       return state;
   }
@@ -68,4 +76,9 @@ export const updateUserAvatar = (updatedUser) => ({
 export const updateUserProfile = (updatedUser) => ({
   type: 'UPDATE_USER_PROFILE',
   payload: updatedUser,
+});
+
+export const updateUserSavePost = (savePostUser) => ({
+  type: 'UPDATE_USER_SAVE_POST',
+  payload: savePostUser,
 });

@@ -63,7 +63,6 @@ const FollowBtn = ({ setUserProfile }) => {
     })
       .then((res) => res.json())
       .then((followerUser) => {
-        console.log(followerUser);
         /* update user obj (sign in user & followed user) － with follower & following */
         // 1. update sessionStorage user obj (sign in user)
         sessionStorage.setItem('user', JSON.stringify(followerUser));
@@ -88,7 +87,6 @@ const FollowBtn = ({ setUserProfile }) => {
     })
       .then((res) => res.json())
       .then((unfollowerUser) => {
-        console.log(unfollowerUser);
         /* update user obj (sign in user & followed user) － with follower & following */
         // 1. update sessionStorage user obj (sign in user)
         sessionStorage.setItem('user', JSON.stringify(unfollowerUser));

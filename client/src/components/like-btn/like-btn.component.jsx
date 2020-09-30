@@ -12,9 +12,7 @@ const LikeBtn = ({ eachPost }) => {
   const { handleModal } = useContext(ModalContext);
 
   // check if the user has already liked the post when componentDidMount  (likes array)
-  const [likeClicked, setLikeClicked] = useState(
-    eachPost ? eachPost.likes.includes(user._id) : false
-  );
+  const [likeClicked, setLikeClicked] = useState(eachPost ? eachPost.likes.includes(user._id) : false);
   // get like number
   const [likeNum, setLikeNum] = useState(eachPost ? eachPost.likes.length : 0);
   // get likes [] (users id)

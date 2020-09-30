@@ -45,10 +45,16 @@
                 .posted-at {
                     color: rgba(0, 0, 0, 0.35);
                     font-size: 0.8rem;
-                    margin: 0.1rem 0 0 0.2rem;
+                    margin: 0.2rem 0 0 0.2rem;
+                    display: flex;
 
                     @media screen and (max-width: 450px) {
-                        margin-left: 0.1rem;
+                        margin: 0.1rem 0 0 0.1rem;
+                    }
+
+                    .time-icon {
+                        font-size: 0.8rem;
+                        margin: 0.2rem 0.2rem 0 0;
                     }
                 }
             }

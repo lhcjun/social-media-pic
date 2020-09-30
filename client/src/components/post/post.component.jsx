@@ -2,11 +2,12 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { convertTime } from '../../utils/convert-time';
 import UserContext from '../../contexts/user/user.context';
-import DeletePost from '../delete-post/delete-post.component';
+import PostDoMore from '../post-do-more/post-do-more.component';
 import LikeBtn from '../like-btn/like-btn.component';
 import CommentInput from '../comment-input/comment-input.component';
 import EachComment from '../each-comment/each-comment.component';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import './post.styles.scss';
 
 const Post = ({ eachPost }) => {
@@ -41,10 +42,13 @@ const Post = ({ eachPost }) => {
             >
               {eachPost.postedBy.account}
             </Link>
-            <div className='posted-at'>{convertTime(eachPost.createdAt)}</div>
+            <div className='posted-at'>
+              <ScheduleIcon className='time-icon' />
+              {convertTime(eachPost.createdAt)}
+            </div>
           </div>
         </div>
-        <DeletePost eachPost={eachPost} />
+        <PostDoMore eachPost={eachPost} />
       </div>
       <div className="post-img-container center">
         <img className="post-img" src={eachPost.photo} alt="post-img" />

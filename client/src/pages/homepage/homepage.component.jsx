@@ -27,7 +27,7 @@ const HomePage = () => {
               <Post eachPost={eachPost} key={eachPost._id} />
             ))
           : <div>
-              <EmptyPost postOwner='You' />
+              <EmptyPost postOwner="You don't" />
               <div className="empty-post">Go follow a user to get started !</div>
             </div>
         }

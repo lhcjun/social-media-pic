@@ -71,8 +71,8 @@ router.post('/signup', (req, res) => {
                   .then(user => {
                     // successfully signed up
                     const token = jwt.sign({ _id: user._id }, JWT_SECRET);      // _id = from MongoDB
-                    const { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved } = user;
-                    return res.json({ token, user: { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved } });
+                    const { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved, liked } = user;
+                    return res.json({ token, user: { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved, liked } });
                     // welcome email
                     // transporter.sendMail({
                     //     to: user.email,
@@ -109,8 +109,8 @@ router.post('/signin', (req, res) => {
                 if(doMatch){
                     // successfully signed in
                     const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET); // _id = from MongoDB
-                    const { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved } = savedUser;
-                    return res.json({ token, user: { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved } });
+                    const { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved, liked } = savedUser;
+                    return res.json({ token, user: { _id, name, account, email, followers, following, profileImg, bio, createdAt, saved, liked } });
                 }
                 return res.status(422).json({ error: 'Incorrect email or password' });
             })

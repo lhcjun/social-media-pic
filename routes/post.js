@@ -84,6 +84,26 @@ router.get('/homeposts', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
+// get all the posts that the user has saved
+router.get('/saved-posts', requireAuth, (req, res) => {
+  Post
+    .find({ _id: {$in: req.user.saved} })  // $in: if _id = any postId in saved []
+    .populate('postedBy', '_id account profileImg') // replace postedBy(only user id) with ref user id, account, profileImg
+    .populate('comments.postedBy', '_id account profileImg')
+    .then(savedPosts => res.json({ savedPosts }))
+    .catch(console.log);
+});
+
+// get all the posts that the user has liked
+router.get('/liked-posts', requireAuth, (req, res) => {
+  Post
+    .find({ _id: {$in: req.user.liked} })  // $in: if _id = any postId in liked []
+    .populate('postedBy', '_id account profileImg')
+    .populate('comments.postedBy', '_id account profileImg')
+    .then(likedPosts => res.json({ likedPosts }))
+    .catch(console.log);
+});
+
 // get each post
 router.get('/eachpost/:postId', requireAuth, (req, res) => {
   Post
@@ -104,7 +124,17 @@ router.put('/like', requireAuth, (req, res) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(likedPost);
+        User
+          .findByIdAndUpdate(req.user._id, {
+            $addToSet: { liked: req.body.postId } 
+          }, { new: true })
+          .exec((err, likedPostUser) => {
+            if(err){
+              return res.status(422).json({ error: err });
+            }else{
+              return res.json({ likedPost, likedPostUser });
+            }
+          });
       }
     })
 });
@@ -119,7 +149,17 @@ router.put('/unlike', requireAuth, (req, res) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(unlikePost);
+        User
+          .findByIdAndUpdate(req.user._id, {
+            $pull: { liked: req.body.postId }
+          }, { new: true })
+          .exec((err, unlikePostUser) => {
+            if(err){
+              return res.status(422).json({ error: err });
+            }else{
+              return res.json({ unlikePost, unlikePostUser });
+            }
+          });
       }
     })
 });
@@ -174,11 +214,11 @@ router.put('/save-post', requireAuth, (req, res) => {
     .findByIdAndUpdate(req.user._id, {
       $addToSet: { saved: req.body.postId }    // only add unique item to array
     }, { new: true })
-    .exec((err, savedPost) => {
+    .exec((err, savedPostUser) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(savedPost);
+        return res.json(savedPostUser);
       }
     })
 });
@@ -187,13 +227,13 @@ router.put('/save-post', requireAuth, (req, res) => {
 router.put('/unsave-post', requireAuth, (req, res) => {
   User
     .findByIdAndUpdate(req.user._id, {
-      $pull: { saved: req.body.postId }    // only add unique item to array
+      $pull: { saved: req.body.postId }    // remove item from array
     }, { new: true })
-    .exec((err, unsavedPost) => {
+    .exec((err, unsavedPostUser) => {
       if(err){
         return res.status(422).json({ error: err });
       }else{
-        return res.json(unsavedPost);
+        return res.json(unsavedPostUser);
       }
     })
 });

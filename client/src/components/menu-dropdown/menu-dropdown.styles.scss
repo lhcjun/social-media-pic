@@ -1,9 +1,16 @@
-@mixin optionFont {
+@mixin option-font {
     font-family: 'Julius Sans One';
     text-transform: uppercase;
     line-height: 1.5;
     font-weight: 400;
     font-size: 1rem;
+}
+
+@mixin option-icon {
+    color: #7e7e7e;
+    margin-right: 1rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
 }
 
 .menu-dropdown {
@@ -38,13 +45,23 @@
         }
 
         .dropdown-item {
+            display: flex;
             padding: 0.5rem 1.2rem;
-            @include optionFont();
+            @include option-font();
 
             &:hover {
                 background-color: rgba(61, 64, 66, 0.75);
                 color: #fff;
+
+                .option-icon {
+                    color: #fff;
+                }
             }
+
+            .option-icon {
+                @include option-icon();
+            }
+
         }
 
         hr {
@@ -63,11 +80,19 @@
             margin-bottom: 0.5rem;
             cursor: pointer;
             outline: none; // outline when clicked
-            @include optionFont();
+            @include option-font();
 
             &:hover {
                 background-color: rgba(204, 31, 0, 0.65);
                 color: #fff;
+
+                .sign-out-icon {
+                    color: #fff;
+                }
+            }
+
+            .sign-out-icon {
+                @include option-icon();
             }
         }
     }

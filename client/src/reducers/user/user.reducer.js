@@ -48,6 +48,14 @@ export const reducer = (state, action) => {
           saved: action.payload.saved,
         },
       };
+    case 'UPDATE_USER_LIKED_POST':
+      return {
+        ...state,
+        user: {
+          ...action.payload,
+          liked: action.payload.liked,
+        },
+      };
     default:
       return state;
   }
@@ -81,4 +89,9 @@ export const updateUserProfile = (updatedUser) => ({
 export const updateUserSavePost = (savePostUser) => ({
   type: 'UPDATE_USER_SAVE_POST',
   payload: savePostUser,
+});
+
+export const updateUserLikedPost = (unlikePostUser) => ({
+  type: 'UPDATE_USER_LIKED_POST',
+  payload: unlikePostUser,
 });

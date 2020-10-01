@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../contexts/user/user.context';
 import { ModalContext } from '../../contexts/modal/modal.context';
+import { updateUserLikedPost } from '../../reducers/user/user.reducer';
+
 import LikePostUsers from './like-post-users.component';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import './like-btn.styles.scss';
 
 const LikeBtn = ({ eachPost }) => {
-  const { state } = useContext(UserContext); // nearest Context.Provider
+  const { state, dispatch } = useContext(UserContext); // nearest Context.Provider
   const { user } = state;
   const { handleModal } = useContext(ModalContext);
 
@@ -18,6 +20,7 @@ const LikeBtn = ({ eachPost }) => {
   // get likes [] (users id)
   const [likeUserId, setLikeUserId] = useState(eachPost ? eachPost.likes : []);
 
+  
   // user like the post
   const likePost = (postId) => {
     fetch('/like', {
@@ -29,10 +32,16 @@ const LikeBtn = ({ eachPost }) => {
       body: JSON.stringify({ postId: postId }),
     })
       .then((res) => res.json())
-      .then((likedPost) => {
+      .then((result) => {
+        /* update post obj (sign in user) － with likes */
         setLikeClicked(true);
-        setLikeNum(likedPost.likes.length);
-        setLikeUserId(likedPost.likes);
+        setLikeNum(result.likedPost.likes.length);
+        setLikeUserId(result.likedPost.likes);
+        /* update user obj (sign in user) － with liked */
+        // 1. update sessionStorage user obj (sign in user)
+        sessionStorage.setItem('user', JSON.stringify(result.likedPostUser));
+        // 2. update reducer user state (my profile page)
+        dispatch(updateUserLikedPost(result.likedPostUser));
       })
       .catch(console.log);
   };
@@ -48,10 +57,16 @@ const LikeBtn = ({ eachPost }) => {
       body: JSON.stringify({ postId }),
     })
       .then((res) => res.json())
-      .then((unlikePost) => {
+      .then((result) => {
+        /* update post obj (sign in user) － with likes */
         setLikeClicked(false);
-        setLikeNum(unlikePost.likes.length);
-        setLikeUserId(unlikePost.likes);
+        setLikeNum(result.unlikePost.likes.length);
+        setLikeUserId(result.unlikePost.likes);
+        /* update user obj (sign in user) － with liked */
+        // 1. update sessionStorage user obj (sign in user)
+        sessionStorage.setItem('user', JSON.stringify(result.unlikePostUser));
+        // 2. update reducer user state (my profile page)
+        dispatch(updateUserLikedPost(result.unlikePostUser));
       })
       .catch(console.log);
   };

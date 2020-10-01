@@ -37,7 +37,7 @@ const UserProfile = () => {
           }
           {userProfile.posts.length 
             ? (blockDisplay ? <Gallery userPosts={userProfile.posts} /> : <PersonalPosts userPosts={userProfile.posts} />) 
-            : <EmptyPost postOwner={userProfile.user.name} />
+            : <EmptyPost postOwner={userProfile.user.name + ` doesn't`} />
           }
         </div>
       ) : (

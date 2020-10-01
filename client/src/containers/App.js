@@ -14,6 +14,8 @@ import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
 import EditPage from '../pages/edit-page/edit-page.component';
 import ResetPasswordPage from '../pages/reset-password-page/reset-password-page.component';
 import NewPasswordPage from '../pages/new-password-page/new-password-page.component';
+import LikedPostPage from '../pages/liked-post-page/liked-post-page.component';
+import SavedPostPage from '../pages/saved-post-page/saved-post-page.component';
 
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
@@ -73,6 +75,12 @@ const App = () => {
           </Route>
           <Route path='/reset-password/:token'>
             <NewPasswordPage />
+          </Route>
+          <Route exact={true} path='/liked-post'>
+            {user ? <LikedPostPage /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact={true} path='/saved-post'>
+            {user ? <SavedPostPage /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
       </Router>

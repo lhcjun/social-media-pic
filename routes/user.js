@@ -124,7 +124,7 @@ router.post('/search-users', (req, res) => {
     .catch(console.log);
 });
 
-// get all the users who has liked the post by likes [] userId
+// get users obj (full info) who has liked the post by likes [] (only userId)
 router.post('/like-post-users', requireAuth, (req, res) => {
   User
     .find({ _id: {$in: req.body.likes} })  // $in: if _id = any userId in likes []
@@ -133,7 +133,7 @@ router.post('/like-post-users', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
-// get follower users obj by follower [] userId
+// get follower users obj (full info) by follower [] (only userId)
 router.post('/list-follower-users', requireAuth, (req, res) => {
   User
     .find({ _id: {$in: req.body.follower} })  // $in: if _id = any userId in follower []
@@ -142,7 +142,7 @@ router.post('/list-follower-users', requireAuth, (req, res) => {
     .catch(console.log);
 });
 
-// get following users obj by following [] userId
+// get following users obj (full info) by following [] (only userId)
 router.post('/list-following-users', requireAuth, (req, res) => {
   User
     .find({ _id: {$in: req.body.following} })  // $in: if _id = any userId in following []

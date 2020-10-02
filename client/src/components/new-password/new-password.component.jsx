@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Spinner from '../spinner/spinner.component';
 import '../reset-password/reset-password.styles.scss';
 
 const NewPassword = () => {
@@ -9,6 +10,7 @@ const NewPassword = () => {
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const showMsg = (error) => {
     const newPasswordMsg = document.querySelector('#new-password-msg');
@@ -21,6 +23,8 @@ const NewPassword = () => {
       alert("Passwords don't match");
       return; // exit
     }
+    // set spinner on 'update password btn'
+    setShowSpinner(true);
 
     fetch('/new-password', {
       method: 'post',
@@ -31,6 +35,7 @@ const NewPassword = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setShowSpinner(false);
         if (data.error) {
           showMsg(data.error);
         } else {
@@ -76,7 +81,7 @@ const NewPassword = () => {
       </div>
       <div className="center">
         <button className="reset-button center" onClick={() => onSubmit()}>
-          Update Password
+          {!showSpinner ? 'Update Password' : <Spinner size={'small'} />}
         </button>
       </div>
       {/* Error msg */}

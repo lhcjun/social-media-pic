@@ -14,7 +14,9 @@ const Toast = ({ type, message, timer = 5000 }) => {
     // close toast with timer
     setTimeout(() => {
         const toastContainer = document.querySelector('.toast-container');
-        toastContainer.remove();
+        if(toastContainer){
+            toastContainer.remove();
+        }
     }, timer);
 
     return (

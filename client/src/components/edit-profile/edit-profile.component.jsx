@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/user/user.context';
 import { updateUserAvatar, updateUserProfile } from '../../reducers/user/user.reducer';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
+import Spinner from '../spinner/spinner.component';
 import TextField from '@material-ui/core/TextField';
 import { API_CALL } from '../../assets/api-call';
 import { convertDate } from '../../utils/convert-time';
@@ -21,6 +22,7 @@ const EditProfile = () => {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [name, setName] = useState(user.name ? user.name : '');
   const [bio, setBio] = useState(user.bio ? user.bio : '');
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const setAvatarImgFile = (file) => setAvatarImg(file); // input img data
 
@@ -37,6 +39,7 @@ const EditProfile = () => {
       })
         .then((res) => res.json())
         .then((updatedUser) => {
+          setShowSpinner(false);
           /* update user obj (sign in user) － with profileImg */
           // 1. update sessionStorage user obj (sign in user)
           sessionStorage.setItem('user', JSON.stringify(updatedUser));
@@ -51,6 +54,8 @@ const EditProfile = () => {
 
   const onImgSubmit = () => {
     if (avatarImg) {
+      // set spinner on save btn
+      setShowSpinner(true);
       // upload img file (to cloudinary) with FormData & fetch
       const formData = new FormData();
       // append data into formData obj (convert into a data format that can be sent to the backend)
@@ -74,6 +79,9 @@ const EditProfile = () => {
     onImgSubmit();
     // update bio, name
     if (name !== user.name || bio !== user.bio) {
+      // set spinner on save btn
+      setShowSpinner(true);
+      
       fetch('/update-profile', {
         method: 'put',
         headers: {
@@ -84,6 +92,7 @@ const EditProfile = () => {
       })
         .then((res) => res.json())
         .then((updatedUser) => {
+          setShowSpinner(false);
           /* update user obj (sign in user) － with profileImg */
           // 1. update sessionStorage user obj (sign in user)
           sessionStorage.setItem('user', JSON.stringify(updatedUser));
@@ -133,7 +142,9 @@ const EditProfile = () => {
       <div className="submit-btn">
         <button className="save-btn"
           onClick={() => onProfileUpdate({ name, bio })}
-        >Save</button>
+        >
+          {!showSpinner ? 'Save' : <Spinner size={'small'} />}  
+        </button>
         <button className="cancel-btn"
           onClick={() => history.push('/profile')}
         >Cancel</button>

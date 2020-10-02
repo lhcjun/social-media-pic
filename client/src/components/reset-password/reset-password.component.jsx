@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Toast from '../toasts/toasts.component.jsx';
+import Spinner from '../spinner/spinner.component';
 import './reset-password.styles.scss';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [redMsg, setRedMsg] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     const resetPasswordMsg = document.querySelector('#reset-password-msg');
@@ -23,6 +25,9 @@ const ResetPassword = () => {
   };
 
   const onSubmit = () => {
+    // set spinner on 'reset btn'
+    setShowSpinner(true);
+
     fetch('/reset-password', {
       method: 'post',
       headers: {
@@ -32,6 +37,7 @@ const ResetPassword = () => {
     })
       .then(res => res.json())
       .then(data => {
+        setShowSpinner(false);
         if (data.error) {
           setRedMsg(true);
           showMsg(data.error);
@@ -63,7 +69,7 @@ const ResetPassword = () => {
       </div>
       <div className="center">
         <button className="reset-button center" onClick={() => onSubmit()}>
-          Reset Password
+          {!showSpinner ? 'Reset Password' : <Spinner size={'small'} />}
         </button>
       </div>
       {/* Error / Success msg */}

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { showSignInErrorMsg } from './sign-in.utils';
-import { showSignUpErrorMsg } from './sign-up.utils';
 import UserContext from '../../contexts/user/user.context';
 import { setCurrentUser } from '../../reducers/user/user.reducer';
+import Spinner from '../spinner/spinner.component';
+import { showSignInErrorMsg } from './sign-in.utils';
+import { showSignUpErrorMsg } from './sign-up.utils';
 import './sign-in-and-sign-up.styles.scss';
 
 const SignInAndSignUp = ({ path }) => {
@@ -18,6 +19,7 @@ const SignInAndSignUp = ({ path }) => {
     confirmPassword: ''
   });
   const { name, account, email, password, confirmPassword } = userCredentials;
+  const [ showSpinner, setShowSpinner ] = useState(false);
 
   const handleChange = event =>{
     const { name, value } = event.target;
@@ -31,6 +33,8 @@ const SignInAndSignUp = ({ path }) => {
       alert("Passwords don't match");
       return; // exit
     }
+    // set spinner on sign up btn
+    setShowSpinner(true);
 
     fetch('/signup', {
       method: 'post',
@@ -39,6 +43,7 @@ const SignInAndSignUp = ({ path }) => {
     })
     .then(res => res.json())
     .then(data => {
+        setShowSpinner(false);
         if(data.error){ // from backend
           showSignUpErrorMsg(data.error);
         }else{
@@ -57,6 +62,8 @@ const SignInAndSignUp = ({ path }) => {
 
 const onSubmitSignIn = () => {
     // event.preventDefault();
+    // set spinner on sign in btn
+    setShowSpinner(true);
     fetch('/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -64,6 +71,7 @@ const onSubmitSignIn = () => {
     })
       .then(res => res.json())
       .then(data => {
+        setShowSpinner(false);
         if(data.error){ // from backend
           showSignInErrorMsg(data.error);
         }else{
@@ -137,8 +145,12 @@ const onSubmitSignIn = () => {
           {/* Submit */}
           <div className='center'>
             {path === '/signup' 
-              ? <button className='submit-button center' onClick={() => onSubmitSignUp()}>Sign Up</button>
-              : <button className='submit-button center' onClick={() => onSubmitSignIn()}>Sign In</button>
+              ? <button className='submit-button center' onClick={() => onSubmitSignUp()}>
+                  {!showSpinner ? 'Sign Up' : <Spinner size={'small'} />}
+                </button>
+              : <button className='submit-button center' onClick={() => onSubmitSignIn()}>
+                  {!showSpinner ? 'Sign In' : <Spinner size={'small'} />}
+                </button>
             }
           </div>
           <div className='link-container center'>

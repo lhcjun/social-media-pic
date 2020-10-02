@@ -4,6 +4,7 @@ import { useRouteMatch } from 'react-router';
 import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
+import Spinner from '../spinner/spinner.component';
 import { API_CALL } from '../../assets/api-call';
 import './create-post.styles.scss';
 
@@ -23,6 +24,8 @@ const CreatePost = () => {
     const [ content, setContent ] = useState(''); 
     const [ postImg, setPostImg ] = useState('');
     const [ imgURL, setImgURL ] = useState('');
+    const [ showSpinner, setShowSpinner ] = useState(false);
+
 
     useEffect(() => {
         // upload post only when imgURL is changed
@@ -37,6 +40,7 @@ const CreatePost = () => {
             })
               .then(res => res.json())
               .then(newPost => {
+                  setShowSpinner(false);
                   if(newPost.error){   // from backend
                     showErrorMsg(newPost.error);
                   }else{
@@ -53,6 +57,8 @@ const CreatePost = () => {
     const setPostImgFile = file => setPostImg(file);  // input img data
 
     const onImgSubmit = () => {
+        // set spinner on publish btn
+        setShowSpinner(true);
         // upload file with FormData & fetch
         const formData = new FormData();
         // append data into formData obj (convert into a data format that can be sent to the backend)
@@ -61,6 +67,7 @@ const CreatePost = () => {
         formData.append('cloud_name', 'jl');                    // cloudinary
         
         if(!postImg){
+            setShowSpinner(false);
             return showErrorMsg('Please add an image to your new post');
         }else{
             // upload img > get uploaded img url
@@ -102,7 +109,9 @@ const CreatePost = () => {
         {/* Error msg */}
         <p id='create-post-error' className='center'></p>
         <div className='post-btn center'>
-            <button className='publish' onClick={() => onImgSubmit()}>Publish</button>
+            <button className='publish' onClick={() => onImgSubmit()}>
+                {!showSpinner ? 'Publish' : <Spinner size={'small'} />}
+            </button>
         </div>
     </div>
   )

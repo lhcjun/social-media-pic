@@ -29,4 +29,4 @@ const EachComment = ({ eachComment }) => {
   );
 };
 
-export default EachComment;
+export default React.memo(EachComment);

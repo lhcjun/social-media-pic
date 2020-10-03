@@ -4,6 +4,7 @@ import UserInfo from '../user-info/user-info.component';
 import Gallery from '../gallery/gallery.component';
 import PersonalPosts from '../personal-posts/personal-posts.component';
 import EmptyPost from '../empty-post/empty-post.component';
+import Spinner from '../spinner/spinner.component';
 import AppsIcon from '@material-ui/icons/Apps';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import './user-profile.styles.scss';
@@ -41,7 +42,7 @@ const UserProfile = () => {
           }
         </div>
       ) : (
-        <h2>Loading...</h2>
+        <Spinner size='large' />
       )}
     </React.Fragment>
   );

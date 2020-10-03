@@ -17,4 +17,4 @@ const GalleryItemInfo = ({ eachPost }) =>
     </div>
   ) : null;
 
-export default GalleryItemInfo;
+export default React.memo(GalleryItemInfo);

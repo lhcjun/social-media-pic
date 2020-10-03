@@ -14,6 +14,8 @@ const UserList = ({ listUsers, title, closeUserList }) => {
   const checkProfile = (eachUser) => {
     closeUserList();
     history.push(eachUser._id !== user._id ? `/profile/${eachUser._id}` : `/profile`);
+    // for Modal not able to change route with router (for now)
+    history.go(0);
   }
 
   return (

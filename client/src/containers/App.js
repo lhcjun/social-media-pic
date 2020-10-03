@@ -1,25 +1,29 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import { ModalProvider } from '../contexts/modal/modal.context';
 
 import Navigation from '../components/navigation/navigation.component';
-import HomePage from '../pages/homepage/homepage.component';
-import ProfilePage from '../pages/profile-page/profile-page.component';
-import SignInPage from '../pages/sign-in-page/sign-in-page.component';
-import SignUpPage from '../pages/sign-up-page/sign-up-page.component';
-import CreatePostPage from '../pages/create-post-page/create-post-page.component';
-import UserProfilePage from '../pages/user-profile-page/user-profile-page.component';
-import PostPage from '../pages/post-page/post-page.component';
-import EmptyPostPage from '../pages/empty-post-page/empty-post-page.component';
-import EditPage from '../pages/edit-page/edit-page.component';
-import ResetPasswordPage from '../pages/reset-password-page/reset-password-page.component';
-import NewPasswordPage from '../pages/new-password-page/new-password-page.component';
-import LikedPostPage from '../pages/liked-post-page/liked-post-page.component';
-import SavedPostPage from '../pages/saved-post-page/saved-post-page.component';
-
+import Spinner from '../components/spinner/spinner.component';
+import ErrorBoundary from '../components/error-boundary/error-boundary.component';
 import { setCurrentUser } from '../reducers/user/user.reducer';
 import UserContext from '../contexts/user/user.context';
 import './App.css';
+
+// code splitting > lazy component
+const HomePage = lazy(() => import('../pages/homepage/homepage.component'));
+const SignInPage = lazy(() => import('../pages/sign-in-page/sign-in-page.component'));
+const SignUpPage = lazy(() => import('../pages/sign-up-page/sign-up-page.component'));
+const CreatePostPage = lazy(() => import('../pages/create-post-page/create-post-page.component'));
+const ProfilePage = lazy(() => import('../pages/profile-page/profile-page.component'));
+const UserProfilePage = lazy(() => import('../pages/user-profile-page/user-profile-page.component'));
+const PostPage = lazy(() => import('../pages/post-page/post-page.component'));
+const EmptyPostPage = lazy(() => import('../pages/empty-post-page/empty-post-page.component'));
+const EditPage = lazy(() => import('../pages/edit-page/edit-page.component'));
+const ResetPasswordPage = lazy(() => import('../pages/reset-password-page/reset-password-page.component'));
+const NewPasswordPage = lazy(() => import('../pages/new-password-page/new-password-page.component'));
+const LikedPostPage = lazy(() => import('../pages/liked-post-page/liked-post-page.component'));
+const SavedPostPage = lazy(() => import('../pages/saved-post-page/saved-post-page.component'));
+
 
 const App = () => {
   const history = useHistory();
@@ -42,47 +46,51 @@ const App = () => {
     <ModalProvider>
       <Router>
         <Navigation />
-        <Switch>
-          <Route exact={true} path='/'>
-            {user ? <HomePage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route exact path='/signin'>
-            {user ? <Redirect to='/' /> : <SignInPage />}
-          </Route>
-          <Route exact path='/signup'>
-            {user ? <Redirect to='/' /> : <SignUpPage />}
-          </Route>
-          <Route exact path='/createpost'>
-            {user ? <CreatePostPage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route exact path='/profile'>
-            {user ? <ProfilePage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route path='/profile/:userId'>
-            {user ? <UserProfilePage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route path='/post/:postId'>
-            {user ? <PostPage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route exact path='/empty'>
-            <EmptyPostPage />
-          </Route>
-          <Route exact path='/edit'>
-            {user ? <EditPage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route exact path='/reset-password'>
-            <ResetPasswordPage />
-          </Route>
-          <Route path='/reset-password/:token'>
-            <NewPasswordPage />
-          </Route>
-          <Route exact={true} path='/liked-post'>
-            {user ? <LikedPostPage /> : <Redirect to='/signin' />}
-          </Route>
-          <Route exact={true} path='/saved-post'>
-            {user ? <SavedPostPage /> : <Redirect to='/signin' />}
-          </Route>
-        </Switch>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner size='large' />}>
+            <Switch>
+              <Route exact={true} path='/'>
+                {user ? <HomePage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route exact path='/signin'>
+                {user ? <Redirect to='/' /> : <SignInPage />}
+              </Route>
+              <Route exact path='/signup'>
+                {user ? <Redirect to='/' /> : <SignUpPage />}
+              </Route>
+              <Route exact path='/createpost'>
+                {user ? <CreatePostPage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route exact path='/profile'>
+                {user ? <ProfilePage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route path='/profile/:userId'>
+                <UserProfilePage />
+              </Route>
+              <Route path='/post/:postId'>
+                {user ? <PostPage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route exact path='/empty'>
+                <EmptyPostPage />
+              </Route>
+              <Route exact path='/edit'>
+                {user ? <EditPage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route exact path='/reset-password'>
+                <ResetPasswordPage />
+              </Route>
+              <Route path='/reset-password/:token'>
+                <NewPasswordPage />
+              </Route>
+              <Route exact={true} path='/liked-post'>
+                {user ? <LikedPostPage /> : <Redirect to='/signin' />}
+              </Route>
+              <Route exact={true} path='/saved-post'>
+                {user ? <SavedPostPage /> : <Redirect to='/signin' />}
+              </Route>
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </Router>
     </ModalProvider>
   );

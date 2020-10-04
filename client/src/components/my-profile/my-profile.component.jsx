@@ -33,7 +33,7 @@ const MyProfile = () => {
       }
       {myPosts.length 
         ? (blockDisplay ? <Gallery userPosts={myPosts} />  : <PersonalPosts userPosts={myPosts} />)
-        : <EmptyPost postOwner='You' />
+        : <EmptyPost postOwner="You don't" />
       }
     </div>
   );

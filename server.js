@@ -38,6 +38,15 @@ app.use(require('./routes/user'));
 // deploy to production
 if(process.env.NODE_ENV === 'production'){
     const path = require('path');
+    const compression = require("compression");
+    const enforce = require("express-sslify");
+
+    // for gzipping on heroku (add compress/gzip to server, for gzipping the build file size that sended from server)
+    app.use(compression());
+
+    // PWA - https (redirect http to https)
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
     // serve the static files(html, css, js) that inside client/build folder to express server 
     app.use(express.static('client/build'));
     // client side makes any req(hit all routes) > serve client with html in client/build folder 
@@ -48,4 +57,9 @@ if(process.env.NODE_ENV === 'production'){
 
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
+});
+
+// PWA - service worker
+app.get('/service-worker.js', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
 });

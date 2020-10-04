@@ -1,13 +1,14 @@
 # Silhouette - social media app
 
-Silhouette is an Instagram like social media app created with React.<p>
+Silhouette is an Instagram like social media app created with React and Node.js.<p>
 
 ### Features
 
 ---
 
 - Custom photo feed based on who you follow
-
+  - Liked posts
+  - Saved posts
 * Create posts with photos
   - Like posts
     - View all likes on a post
@@ -34,21 +35,28 @@ Created with:<br>
 - React
   - Context API / React Hook
   - react router
+  - performance optimization (react lazy, suspense, memo)
 - JWT authentication
+- PWA (serviceWorker, https, manifest)
 - MongoBD / mongoose
 - Node.js / express
 - SCSS
 <p>
-Logo is designed by Vexels.com<p>
+
+#### Image Credits
+
+The Logo is designed by Vexels.com<br>
+The Photos for testing are getting from Unsplash.<p>
 
 ### How to use
 
 ---
 
-1. `git clone`
+1. Fork & `git clone`
 2. `npm install`
 3. Create a _dev.js_ file in _config_ folder
-4. Add [MongoDB URI key](https://account.mongodb.com/account/login) to the _config/dev.js_ file
+4. Set up the _config/dev.js_ file<br>
+    [MongoDB URI key](https://account.mongodb.com/account/login)<br>
    ```js
    module.exports = {
      MONGO_URI: 'YOUR_MongoDB_URI_KEY',

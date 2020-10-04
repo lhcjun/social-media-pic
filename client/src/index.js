@@ -9,10 +9,10 @@ import './index.css';
 ReactDOM.render(
   <React.StrictMode>
     <Router>                                   {/* to access history obj in 'App' component */}
-      <Root />   
+      <Root /> 
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-serviceWorker.unregister();
+serviceWorker.register();  // PWA

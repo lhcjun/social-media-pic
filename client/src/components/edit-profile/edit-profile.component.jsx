@@ -62,6 +62,7 @@ const EditProfile = () => {
       formData.append('file', avatarImg);
       formData.append('upload_preset', 'social-media-pic'); // cloudinary
       formData.append('cloud_name', 'jl'); // cloudinary
+      formData.append('folder', 'silhouette');
 
       // upload img > return uploaded img url
       fetch(API_CALL.IMG_UPLOAD, {

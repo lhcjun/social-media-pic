@@ -65,6 +65,7 @@ const CreatePost = () => {
         formData.append('file', postImg);
         formData.append('upload_preset', 'social-media-pic');   // cloudinary
         formData.append('cloud_name', 'jl');                    // cloudinary
+        formData.append('folder', 'silhouette');
         
         if(!postImg){
             setShowSpinner(false);

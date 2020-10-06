@@ -31,7 +31,9 @@ Silhouette is an Instagram like social media app created with React and Node.js.
 
 ---
 
-Created with:<br>
+Silhouette is an Instagram like social media app created with React and Node.js.<p>
+
+#### Created with
 
 - React
   - Context API for state management

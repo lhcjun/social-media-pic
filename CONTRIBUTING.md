@@ -4,27 +4,43 @@
 
 ---
 
-1. Fork this repo to your Github account
-2. Clone the repo that you just forked<br>
+1. Fork this repo
+2. Clone the repo that you just forked to your Github account<br>
    ```
    git clone YOU_FORKED_REPO
    cd social-media-pic
    ```
 3. Install dependencies<br>
-   `npm i && cd client && npm i`
-4. Create a _dev.js_ file into _config_ folder
+   ```
+   npm i && cd client && npm i
+   ```
+4. Create a `dev.js` file into `config` folder
 5. Set up the _config/dev.js_ file<br>
    [MongoDB Connection String](https://docs.mongodb.com/guides/server/drivers/)<br>
+   [Create SendGrid API key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/#creating-an-api-key) (we select 'Full Access' here for now)<br>
    ```js
    module.exports = {
      MONGO_URI: 'YOUR_MongoDB_Connection_String',
      JWT_SECRET: 'YOUR_JWT_SECRET',
      SEND_GRID_API: 'YOUR_SEND_GRID_API',
      EMAIL_LINK: 'http://localhost:3000',
-     EMAIL_FROM: 'YOUR_EMAIL',
+     EMAIL_FROM: 'YOUR_EMAIL (requested by SendGrid)',
    };
    ```
-6. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the _components/create-post.component.jsx_<br>
+   ps. The email put in 'EMAIL_FROM' is requested to be verified by SendGrid before they help delivering an email to the user.<br>
+   &emsp;So if you're not using the Forget & Reset Password functionality(which will send an email), you could just leave it for now.<p>
+6. Run the project
+   ```
+   npm run dev
+   ```
+   <p>
+
+#### Optional
+
+Create your [Cloudinary API](https://cloudinary.com/documentation/upload_presets)
+
+1. Add Cloudinary `IMG_UPLOAD API` to _assets/api-call.js_
+2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the _components/create-post.component.jsx_<br>
    and _components/edit-profile.component.jsx_ file
 
    ```js
@@ -33,9 +49,7 @@
    formData.append('folder', 'YOUR_FOLDER_NAME');
    ```
 
-7. Add Cloudinary `IMG_UPLOAD API` to _assets/api-call.js_
-8. `npm run dev`
-<p>
+   <p>
 
 ### How to contribute
 

@@ -60,9 +60,19 @@ const EditProfile = () => {
       const formData = new FormData();
       // append data into formData obj (convert into a data format that can be sent to the backend)
       formData.append('file', avatarImg);
-      formData.append('upload_preset', 'social-media-pic'); // cloudinary
-      formData.append('cloud_name', 'jl'); // cloudinary
-      formData.append('folder', 'silhouette');
+      // formData.append('upload_preset', 'social-media-pic'); // cloudinary
+      // formData.append('cloud_name', 'jl'); // cloudinary
+      // formData.append('folder', 'silhouette');
+      formData.append('upload_preset', 'social-media-pic-dev');
+      formData.append('cloud_name', 'jl');
+      formData.append('folder', 'silhouette-test');
+      formData.append('quality', 'auto');
+      formData.append('fetch_format', 'auto');
+      formData.append('flags', 'lossy');
+      formData.append('height', 250);
+      formData.append('width', 250);
+      formData.append('aspectRatio', '1:1');
+      formData.append('crop', 'fill');
 
       // upload img > return uploaded img url
       fetch(API_CALL.IMG_UPLOAD, {

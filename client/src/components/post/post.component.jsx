@@ -52,7 +52,7 @@ const Post = ({ eachPost }) => {
         <PostDoMore eachPost={eachPost} />
       </div>
       <div className="post-img-container center">
-        <img id="post-img" src={eachPost.photo} alt="post-img" loading='lazy' />
+        <img className="post-img" src={eachPost.photo} alt="post-img" loading='lazy' />
       </div>
       <div className="icon">
         <LikeBtn eachPost={eachPost} />

@@ -78,8 +78,9 @@
     }
 
     .post-img-container {
-        .post-img {
+        #post-img {
             width: 100%;
+            min-height: 20rem; // for lazy loading
             max-height: 29.4rem;
             object-fit: contain; // object-fit (img, video tag)  vs  background-size (only bg-img)
             object-position: center;

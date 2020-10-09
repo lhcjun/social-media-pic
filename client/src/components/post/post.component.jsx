@@ -34,6 +34,7 @@ const Post = ({ eachPost }) => {
             className="user-img"
             src={eachPost.postedBy ? eachPost.postedBy.profileImg : null}
             alt="user"
+            loading='lazy'
           />
           <div className='name-area'>
             <Link
@@ -51,7 +52,7 @@ const Post = ({ eachPost }) => {
         <PostDoMore eachPost={eachPost} />
       </div>
       <div className="post-img-container center">
-        <img className="post-img" src={eachPost.photo} alt="post-img" />
+        <img id="post-img" src={eachPost.photo} alt="post-img" loading='lazy' />
       </div>
       <div className="icon">
         <LikeBtn eachPost={eachPost} />

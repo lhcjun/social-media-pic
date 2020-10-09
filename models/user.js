@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     profileImg: { 
         type: String, 
-        default: 'https://res.cloudinary.com/jl/image/upload/v1599417228/default_user_dcgcsm.png' 
+        default: 'https://res.cloudinary.com/jl/image/upload/f_auto,fl_lossy,q_auto/w_250,h_250,c_fit/v1599417228/default_user_dcgcsm.png' 
     },
     bio: { type: String },
     followers: [{ type: ObjectId, ref: 'User' }],

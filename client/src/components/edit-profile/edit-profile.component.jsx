@@ -28,6 +28,12 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (avatarUrl) {
+      // img performance optimize 
+      let startNum = avatarUrl.search('/image/upload') + 'image/upload/'.length;
+      let avatarUrlStart = avatarUrl.slice(0, startNum);
+      let avatarUrlEnd = avatarUrl.slice(startNum);
+      const optimized = '/f_auto,fl_lossy,q_auto/w_250,h_250,ar_1.0,c_fill,g_auto';
+      let optimizedAvatarUrl = avatarUrlStart.concat(optimized, avatarUrlEnd);
       // update avatar only after uploading img to cloudinary and getting back img url
       fetch('/update-avatar', {
         method: 'put',
@@ -35,7 +41,7 @@ const EditProfile = () => {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
         },
-        body: JSON.stringify({ profileImg: avatarUrl }),
+        body: JSON.stringify({ profileImg: optimizedAvatarUrl }),
       })
         .then((res) => res.json())
         .then((updatedUser) => {
@@ -60,19 +66,13 @@ const EditProfile = () => {
       const formData = new FormData();
       // append data into formData obj (convert into a data format that can be sent to the backend)
       formData.append('file', avatarImg);
-      // formData.append('upload_preset', 'social-media-pic'); // cloudinary
-      // formData.append('cloud_name', 'jl'); // cloudinary
-      // formData.append('folder', 'silhouette');
-      formData.append('upload_preset', 'social-media-pic-dev');
-      formData.append('cloud_name', 'jl');
-      formData.append('folder', 'silhouette-test');
-      formData.append('quality', 'auto');
-      formData.append('fetch_format', 'auto');
-      formData.append('flags', 'lossy');
-      formData.append('height', 250);
-      formData.append('width', 250);
-      formData.append('aspectRatio', '1:1');
-      formData.append('crop', 'fill');
+      formData.append('cloud_name', 'jl'); // cloudinary
+      // prod
+      formData.append('upload_preset', 'social-media-pic');
+      formData.append('folder', `silhouette-prod/${user._id}/avatar`);
+      // dev
+      // formData.append('upload_preset', 'social-media-pic-dev');
+      // formData.append('folder', `silhouette-test/${user._id}/avatar`);
 
       // upload img > return uploaded img url
       fetch(API_CALL.IMG_UPLOAD, {

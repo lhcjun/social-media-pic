@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useRouteMatch } from 'react-router';
+import UserContext from '../../contexts/user/user.context';
 import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import AddImgBtn from '../add-img-btn/add-img-btn.component';
@@ -19,6 +20,10 @@ const CreatePost = () => {
     const history = useHistory();
     let match = useRouteMatch();
     const path = match.path;
+    // sign in user
+    const { state } = useContext(UserContext); // nearest Context.Provide      r
+    const { user } = state;
+
 
     const [ title, setTitle ] = useState(''); 
     const [ content, setContent ] = useState(''); 
@@ -30,13 +35,20 @@ const CreatePost = () => {
     useEffect(() => {
         // upload post only when imgURL is changed
         if(imgURL){
+            // img performance optimize 
+            let startNum = imgURL.search('/image/upload') + 'image/upload/'.length;
+            let imgURLStart = imgURL.slice(0, startNum);
+            let imgURLEnd = imgURL.slice(startNum);
+            const optimized = '/f_auto,fl_lossy,q_auto/w_1300,h_1300,c_fit';
+            let optimizedImgURL = imgURLStart.concat(optimized, imgURLEnd);
+
             fetch('/createpost', {
                 method: 'post',
                 headers:{
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 },
-                body: JSON.stringify({ title, content, imgURL })
+                body: JSON.stringify({ title, content, imgURL: optimizedImgURL })
             })
               .then(res => res.json())
               .then(newPost => {
@@ -63,9 +75,13 @@ const CreatePost = () => {
         const formData = new FormData();
         // append data into formData obj (convert into a data format that can be sent to the backend)
         formData.append('file', postImg);
-        formData.append('upload_preset', 'social-media-pic');   // cloudinary
-        formData.append('cloud_name', 'jl');                    // cloudinary
-        formData.append('folder', 'silhouette');
+        formData.append('cloud_name', 'jl');   // cloudinary
+        // prod
+        formData.append('upload_preset', 'social-media-pic');
+        formData.append('folder', `silhouette-prod/${user._id}/post`);
+        // dev
+        // formData.append('upload_preset', 'social-media-pic-dev');
+        // formData.append('folder', `silhouette-test/${user._id}/post`);
         
         if(!postImg){
             setShowSpinner(false);

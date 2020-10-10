@@ -75,13 +75,14 @@ const CreatePost = () => {
         const formData = new FormData();
         // append data into formData obj (convert into a data format that can be sent to the backend)
         formData.append('file', postImg);
-        formData.append('cloud_name', 'jl');   // cloudinary
-        // prod
-        formData.append('upload_preset', 'social-media-pic');
-        formData.append('folder', `silhouette-prod/${user._id}/post`);
+        formData.append('cloud_name', 'jl');
+        /* make sure to use the dev one when in dev environment */
         // dev
-        // formData.append('upload_preset', 'social-media-pic-dev');
-        // formData.append('folder', `silhouette-test/${user._id}/post`);
+        formData.append('upload_preset', 'social-media-pic-dev');
+        formData.append('folder', `silhouette-test/${user._id}/post`);
+        // prod
+        // formData.append('upload_preset', 'social-media-pic');
+        // formData.append('folder', `silhouette-prod/${user._id}/post`);
         
         if(!postImg){
             setShowSpinner(false);

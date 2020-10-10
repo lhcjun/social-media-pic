@@ -29,7 +29,27 @@
    ```
    ps. The email put in 'EMAIL_FROM' is requested to be verified by SendGrid before they help delivering an email to the user.<br>
    &emsp;So if you're not using the Forget & Reset Password functionality(which will send an email), you could just leave it for now.<p>
-6. Run the project
+6. Change Cloudinary setting from prod to dev in the below 2 files.<br>
+
+   - _components/create-post.component.jsx_ file
+   - _components/edit-profile.component.jsx_ file<p>
+
+   Make sure to comment out the **prod** settings and use the **dev** ones like below.<br>
+
+   ```js
+   // dev
+   formData.append('upload_preset', 'social-media-pic-dev');
+   formData.append('folder', `silhouette-test/${user._id}/avatar`);
+
+   // prod
+   // formData.append('upload_preset', 'social-media-pic');
+   // formData.append('folder', `silhouette-prod/${user._id}/avatar`);
+   ```
+
+   ps. Or you could create your Cloudinary API and have the settings in these two file.<br>
+   &emsp;See [Optional](#optional)<p>
+
+7. Run the project
    ```
    npm run dev
    ```
@@ -37,11 +57,13 @@
 
 #### Optional
 
-Create your [Cloudinary API](https://cloudinary.com/documentation/upload_presets)
+Create your [Cloudinary API](https://cloudinary.com/documentation/upload_presets) & set up upload presets
 
 1. Add Cloudinary `IMG_UPLOAD API` to _assets/api-call.js_
-2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the _components/create-post.component.jsx_<br>
-   and _components/edit-profile.component.jsx_ file
+2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.
+
+   - _components/create-post.component.jsx_ file
+   - _components/edit-profile.component.jsx_ file
 
    ```js
    formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');

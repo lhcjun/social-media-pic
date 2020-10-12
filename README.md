@@ -6,37 +6,42 @@ Silhouette is an Instagram like social media app created with React and Node.js.
 
 ---
 
-- Custom photo feed based on who you follow
+- Custom post feed based on who you follow
+  - Following posts & My posts
   - Liked posts
   - Saved posts
-
-* Create posts with photos
-  - Like posts
-  - Comment on posts
-  - View all likes & comments on a post
-
-* Search for users
+- Create posts with photos  
+  * Like posts
+  * Comment on posts
+  * View all likes & comments on a post
+- Search for users  
   - Search based on names or usernames
-
-* Profile
+- Profile  
   - Follow / Unfollow Users
   - Change img view from grid layout to feed layout
   - Edit profile (profile img / name / bio)
   - Reset password
-
-* Sign in / Sign up
+- Sign in / Sign up  
   - Forgot / Reset Password
   <p>
 
 #### Demo
-
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/create%20post.gif" width="60%" height="auto"><p>
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/edit%20profile.gif" width="60%" height="auto"><p>
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/profile%20%2B%20comment.gif" width="60%" height="auto"><p>
-
+- Create post&ensp;&&ensp;Homepage  (custom post feed based on who you follow)<p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/create%20post.gif" width="80%" height="auto"><p>
+<p>
+  
+- Edit Profile (bio)&ensp;&&ensp;view following users<p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/edit%20profile.gif" width="80%" height="auto"><p>
+<p>
+  
+- Profile page (change grid layout to feed layout)<br>
+- Search user&ensp;&&ensp;Follow user&ensp;&&ensp;Like/Save/Comment on posts<p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/profile%20%2B%20comment.gif" width="80%" height="auto"><p>
+<p>
+  
 #### Phone
-
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20profile.png" width="40%" height="auto"><img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20post.png" width="40%" height="auto"><p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20profile.png" width="auto" height="600px"><img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20post.png" width="auto" height="600px" align="right">
+<p>
 
 ### Overview
 

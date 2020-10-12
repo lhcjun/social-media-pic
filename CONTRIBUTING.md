@@ -1,10 +1,6 @@
 # Contributing
 
-Thank you for considering contributing to this little project! 😄
-   - [Features you are encouraged to implement](#features-you-are-encouraged-to-implement)
-   - [Development Setup](#development-setup)
-   - [How to contribute](#how-to-contribute)
-<p>
+Thank you for considering contributing to this little project! ❤
 
 ### Features you are encouraged to implement
 
@@ -15,6 +11,7 @@ Thank you for considering contributing to this little project! 😄
 - Performance Optimized (ex. infinite scroll on post)
 - Notification
 - Tests
+- Others...
 
 To avoid conflict, please create an issue before you start, or leave a comment if there is already one.
 
@@ -22,10 +19,10 @@ To avoid conflict, please create an issue before you start, or leave a comment i
 
 ---
 
-1. Fork this repo
+1. Fork this repo (Click the Fork button in the top right of this page)
 2. Clone the repo that you just forked to your Github account<br>
    ```
-   git clone YOU_FORKED_REPO
+   git clone https://github.com/<your_username>/social-media-pic.git
    cd social-media-pic
    ```
 3. Install dependencies<br>
@@ -45,11 +42,13 @@ To avoid conflict, please create an issue before you start, or leave a comment i
      EMAIL_FROM: 'YOUR_EMAIL (requested by SendGrid)',
    };
    ```
-6. setting SendGrid API key
-   This API is used for Forget & Reset Password, so if you're not using the Forget & Reset Password functionality,<br>
-   you could just leave it(SEND_GRID_API, EMAIL_FROM) like above and comment out the **transporter** & **/reset-password route** in `routes/auth.js` like below.<p>
-
-   - routes/auth.js
+6. setting SendGrid API key<br>
+   This API is used for Forget & Reset Password,<br>
+   so if you're not using the Forget & Reset Password functionality,<br>
+   you could just leave it(SEND_GRID_API, EMAIL_FROM) like above<br>
+   and comment out the **transporter** & **/reset-password route** in `routes/auth.js` like below.<p>
+   
+   routes/auth.js
 
    ```js
    // const transporter = nodemailer.createTransport(
@@ -67,10 +66,10 @@ To avoid conflict, please create an issue before you start, or leave a comment i
    // });
    ```
 
-   &emsp;ps. Or you could create your own SendGrid API<br>
+   - Or you could create your own SendGrid API<br>
    &emsp;&emsp;[Create SendGrid API key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/#creating-an-api-key)<p>
 
-   - The email put in 'EMAIL_FROM' is requested to be verified by SendGrid before they help delivering an email to the user.<br>
+   - ps. The email put in 'EMAIL_FROM' is requested to be verified by SendGrid before they help delivering an email to the user.<br>
 
 7. Change Cloudinary setting from prod to dev in the below 2 files.<br>
 
@@ -116,19 +115,26 @@ Create your [Cloudinary API](https://cloudinary.com/documentation/fetch_remote_i
 
    <p>
 
-### How to contribute
+### Push & Pull Request
 
 ---
 
-1. Provide detailed description about the changes you have made and the expected outcome.
-2. Sync your clone with the original repo (get the latest updates)
+1. Sync your clone with the original repo (get the latest updates)
    ```
    git remote add upstream https://github.com/lhcjun/social-media-pic.git
    git pull upstream master
    ```
-3. Create a branch
+2. Create a branch
    ```
    git checkout -b <new_branch_name>
    ```
-4. Commit and push the code to your fork
-5. Create a pull request to have the changes merged from your fork into the origin
+3. Commit and push the code to your fork.
+   ```
+   git add .
+   git commit -m 'your update message'
+   git push origin <branch-name>
+   ```
+4. Create a pull request to have the changes merged from your fork into the origin.<br>
+   (Click the `New Pull Request` button located at the top of your repo)<p>
+   
+5. Provide detailed description about the changes you have made and the expected outcome.

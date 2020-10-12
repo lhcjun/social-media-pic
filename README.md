@@ -34,6 +34,7 @@ Silhouette is an Instagram like social media app created with React and Node.js.
 ### Overview
 
 ---
+
 Welcome to Silhouette, a simplified Instagram clone built with React, Node.js, Express and MongoDB.<p>
 
 #### Created with
@@ -62,4 +63,10 @@ The Photos for testing are getting from Unsplash.<p>
 
 ---
 
-Read [Contribution](./CONTRIBUTING.md)
+Star this repository if you had fun! 🌟<p>
+
+Feel free to create new issues & contribute for bugs / features you feel are missing.<p>
+
+Appreciate all valuable contributions - bugs fixing, new features, documentation and design enhancements, issues solving... to make it better and more convenient! 🤩<p>
+
+To begin contributing, have a look at the [Contribution guidelines](./CONTRIBUTING.md) over here.

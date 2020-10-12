@@ -11,17 +11,14 @@ Silhouette is an Instagram like social media app created with React and Node.js.
   - Saved posts
 
 * Create posts with photos
-
   - Like posts
   - Comment on posts
   - View all likes & comments on a post
 
 * Search for users
-
   - Search based on names or usernames
 
 * Profile
-
   - Follow / Unfollow Users
   - Change img view from grid layout to feed layout
   - Edit profile (profile img / name / bio)
@@ -30,6 +27,16 @@ Silhouette is an Instagram like social media app created with React and Node.js.
 * Sign in / Sign up
   - Forgot / Reset Password
   <p>
+
+#### Demo
+
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/create%20post.gif" width="60%" height="auto"><p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/edit%20profile.gif" width="60%" height="auto"><p>
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/profile%20%2B%20comment.gif" width="60%" height="auto"><p>
+
+#### Phone
+
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20profile.png" width="40%" height="auto"><img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20post.png" width="40%" height="auto"><p>
 
 ### Overview
 
@@ -63,7 +70,7 @@ The Photos for testing are getting from Unsplash.<p>
 
 ---
 
-Star this repository if you had fun! 🌟<p>
+Star this repository if you had fun! ⭐<p>
 
 Feel free to create new issues & contribute for bugs / features you feel are missing.<p>
 

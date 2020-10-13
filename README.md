@@ -26,22 +26,37 @@ Silhouette is an Instagram like social media app created with React and Node.js.
   <p>
 
 #### Demo
-- Create post&ensp;&&ensp;Homepage  (custom post feed based on who you follow)<p>
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/create%20post.gif" width="80%" height="auto"><p>
-<p>
-  
-- Edit Profile (bio)&ensp;&&ensp;view following users<p>
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/edit%20profile.gif" width="80%" height="auto"><p>
-<p>
-  
-- Profile page (change grid layout to feed layout)<br>
-- Search user&ensp;&&ensp;Follow user&ensp;&&ensp;Like/Save/Comment on posts<p>
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/profile%20%2B%20comment.gif" width="80%" height="auto"><p>
-<p>
+🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto,q_auto/w_1100,h_900,c_fit/v1602604406/demo/Silhouette-demo_ehp1sz.mp4)**
+
+
+- Post page<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/each-post.png" width="700px" height="auto">
+  <p>
+- Profile page&ensp;(change img view from grid layout to feed layout)<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/profile-page.png" width="700px" height="auto">
+  <p>
+- Search user&ensp;(search based on names or usernames)<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/search.png" width="700px" height="auto">
+  <p>
+- Homepage&ensp;(custom post feed based on who you follow)<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/homepage.png" width="700px" height="auto">
+  <p>
+- Setting page&ensp;(update porfile & reset pasword)<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/edit.png" width="700px" height="auto">
+  <p>
+- Reset password page<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/reset-password.png" width="700px" height="auto">
+  <p>
+- Sign in page<br>
+  <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/sign-in.png" width="700px" height="auto">
+  <p>
   
 #### Phone
-<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20profile.png" width="auto" height="600px"><img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone%20-%20post.png" width="auto" height="600px" align="right">
+<img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone-version.jpg" width="550px" height="auto">
 <p>
+
+🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto,q_auto/w_1100,h_900,c_fit/v1602604406/demo/Silhouette-demo_ehp1sz.mp4)**
+
 
 ### Overview
 

@@ -26,7 +26,7 @@ Silhouette is an Instagram like social media app created with React and Node.js.
   <p>
 
 #### Demo
-🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto,q_auto/w_1100,h_900,c_fit/v1602604406/demo/Silhouette-demo_ehp1sz.mp4)**
+🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto/w_1000,h_850,c_fit/v1602612390/demo/Silhouette-demo_ku6kbq.mov)**
 
 
 - Post page<br>
@@ -55,7 +55,7 @@ Silhouette is an Instagram like social media app created with React and Node.js.
 <img src="https://github.com/lhcjun/demo/blob/master/Silhouette/phone-version.jpg" width="550px" height="auto">
 <p>
 
-🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto,q_auto/w_1100,h_900,c_fit/v1602604406/demo/Silhouette-demo_ehp1sz.mp4)**
+🔶 **[Watch Live Demo 🎬](https://res.cloudinary.com/jl/video/upload/f_auto/w_1000,h_850,c_fit/v1602612390/demo/Silhouette-demo_ku6kbq.mov)**
 
 
 ### Overview

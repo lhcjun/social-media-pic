@@ -47,7 +47,7 @@ To avoid conflict, please create an issue before you start, or leave a comment i
    so if you're not using the Forget & Reset Password functionality,<br>
    you could just leave it(SEND_GRID_API, EMAIL_FROM) like above<br>
    and comment out the **transporter** & **/reset-password route** in `routes/auth.js` like below.<p>
-   
+
    routes/auth.js
 
    ```js
@@ -67,52 +67,54 @@ To avoid conflict, please create an issue before you start, or leave a comment i
    ```
 
    - Or you could create your own SendGrid API<br>
-   &emsp;&emsp;[Create SendGrid API key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/#creating-an-api-key)<p>
+     &emsp;&emsp;[Create SendGrid API key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/#creating-an-api-key)<p>
 
    - ps. The email put in 'EMAIL_FROM' is requested to be verified by SendGrid before they help delivering an email to the user.<br>
 
-7. Change Cloudinary setting from prod to dev in the below 2 files.<br>
+7. Setting Cloudinary<br>
+   This API is for image upload,<br>
+   here are 2 ways for setting Cloudinary, you could use one of them:
 
-   - `components/create-post.component.jsx` file
-   - `components/edit-profile.component.jsx` file<p>
+   - Method 1
+     Create your [Cloudinary API](https://cloudinary.com/documentation/fetch_remote_images) & set up [upload presets](https://cloudinary.com/documentation/upload_presets)
 
-   Make sure to comment out the **prod** settings and use the **dev** ones like below.<br>
+     1. Add Cloudinary `IMG_UPLOAD_URL` to `assets/api-call.js`
+     2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.
 
-   ```js
-   // dev
-   formData.append('upload_preset', 'social-media-pic-dev');
-   formData.append('folder', `silhouette-test/${user._id}/avatar`);
+        - `components/create-post.component.jsx` file
+        - `components/edit-profile.component.jsx` file
 
-   // prod
-   // formData.append('upload_preset', 'social-media-pic');
-   // formData.append('folder', `silhouette-prod/${user._id}/avatar`);
-   ```
+        ```js
+        formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
+        formData.append('cloud_name', 'YOUR_CLOUD_NAME');
+        formData.append('folder', 'silhouette-test');
+        ```
 
-   &emsp;ps. Or you could create your own Cloudinary API and have the settings in these two file.<br>
-   &emsp;&emsp;&emsp;See [Optional](#optional)<p>
+   - Method 2
+     If you are only doing some simple testing,<br>
+     you could just change the existing Cloudinary setting from prod to dev in the below 2 files.<br>
+
+     - `components/create-post.component.jsx` file
+     - `components/edit-profile.component.jsx` file<p>
+
+     Make sure to comment out the **prod** settings and use the **dev** ones like below.<br>
+
+     ```js
+     // dev
+     formData.append('upload_preset', 'social-media-pic-dev');
+     formData.append('folder', `silhouette-test/${user._id}/avatar`);
+
+     // prod
+     // formData.append('upload_preset', 'social-media-pic');
+     // formData.append('folder', `silhouette-prod/${user._id}/avatar`);
+     ```
+     ps. Since there are some limitations in storage, once the limit is reached, the img files uploaded by this method will be deleted or the upload API will be destroyed.
+      <p>
 
 8. Run the project
    ```
    npm run dev
    ```
-   <p>
-
-#### Optional
-
-Create your [Cloudinary API](https://cloudinary.com/documentation/fetch_remote_images) & set up [upload presets](https://cloudinary.com/documentation/upload_presets)
-
-1. Add Cloudinary `IMG_UPLOAD_URL` to `assets/api-call.js`
-2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.
-
-   - `components/create-post.component.jsx` file
-   - `components/edit-profile.component.jsx` file
-
-   ```js
-   formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
-   formData.append('cloud_name', 'YOUR_CLOUD_NAME');
-   formData.append('folder', 'silhouette-test');
-   ```
-
    <p>
 
 ### Push & Pull Request
@@ -136,5 +138,4 @@ Create your [Cloudinary API](https://cloudinary.com/documentation/fetch_remote_i
    ```
 4. Create a pull request to have the changes merged from your fork into the origin.<br>
    (Click the `New Pull Request` button located at the top of your repo)<p>
-   
 5. Provide detailed description about the changes you have made and the expected outcome.

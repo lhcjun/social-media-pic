@@ -75,22 +75,20 @@ To avoid conflict, please create an issue before you start, or leave a comment i
    This API is for image upload,<br>
    here are 2 ways for setting Cloudinary, you could use one of them:
 
-   - Method 1
+   - Method 1<br>
      Create your [Cloudinary API](https://cloudinary.com/documentation/fetch_remote_images) & set up [upload presets](https://cloudinary.com/documentation/upload_presets)
 
-     1. Add Cloudinary `IMG_UPLOAD_URL` to `assets/api-call.js`
-     2. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.
-
+     a. Add Cloudinary `IMG_UPLOAD_URL` to `assets/api-call.js`<br>
+     b. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.<br>
         - `components/create-post.component.jsx` file
         - `components/edit-profile.component.jsx` file
+           ```js
+           formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
+           formData.append('cloud_name', 'YOUR_CLOUD_NAME');
+           formData.append('folder', 'silhouette-test');
+           ```
 
-        ```js
-        formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
-        formData.append('cloud_name', 'YOUR_CLOUD_NAME');
-        formData.append('folder', 'silhouette-test');
-        ```
-
-   - Method 2
+   - Method 2<br>
      If you are only doing some simple testing,<br>
      you could just change the existing Cloudinary setting from prod to dev in the below 2 files.<br>
 

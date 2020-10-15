@@ -8,9 +8,10 @@ Thank you for considering contributing to this little project! ❤
 
 - Chat with another user
 - Private account (only followers can see the posts)
-- Performance Optimized (ex. infinite scroll on post)
+- Performance optimized (ex. infinite scroll on post)
 - Notification
 - Tests
+- Dark mode
 - Others...
 
 To avoid conflict, please create an issue before you start, or leave a comment if there is already one.
@@ -80,13 +81,14 @@ To avoid conflict, please create an issue before you start, or leave a comment i
 
      a. Add Cloudinary `IMG_UPLOAD_URL` to `assets/api-call.js`<br>
      b. Add [Cloudinary](https://cloudinary.com/users/login) `upload_preset` & `cloud_name` to the below 2 files.<br>
-        - `components/create-post.component.jsx` file
-        - `components/edit-profile.component.jsx` file
-           ```js
-           formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
-           formData.append('cloud_name', 'YOUR_CLOUD_NAME');
-           formData.append('folder', 'silhouette-test');
-           ```
+
+     - `components/create-post.component.jsx` file
+     - `components/edit-profile.component.jsx` file
+       ```js
+       formData.append('upload_preset', 'YOUR_UPLOAD_PRESETS_NAME');
+       formData.append('cloud_name', 'YOUR_CLOUD_NAME');
+       formData.append('folder', 'silhouette-test');
+       ```
 
    - Method 2<br>
      If you are only doing some simple testing,<br>
@@ -106,6 +108,7 @@ To avoid conflict, please create an issue before you start, or leave a comment i
      // formData.append('upload_preset', 'social-media-pic');
      // formData.append('folder', `silhouette-prod/${user._id}/avatar`);
      ```
+
      ps. Since there are some limitations in storage, once the limit is reached, the img files uploaded by this method will be deleted or the upload API will be destroyed.
       <p>
 
